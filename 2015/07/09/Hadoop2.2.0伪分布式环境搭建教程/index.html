@@ -4,22 +4,28 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>龙子奕</title>
+    <title>Hadoop2.2.0伪分布式环境搭建教程 | 龙子奕</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang88">
     
 
     
-    <meta name="description" content="不忘初心，才能始终">
-<meta property="og:type" content="website">
-<meta property="og:title" content="龙子奕">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop
+Linux环境准备，建议使用VMware +CentOS：1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop2.2.0伪分布式环境搭建教程">
+<meta property="og:url" content="http://yoursite.com/2015/07/09/Hadoop2.2.0伪分布式环境搭建教程/index.html">
 <meta property="og:site_name" content="龙子奕">
-<meta property="og:description" content="不忘初心，才能始终">
+<meta property="og:description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop
+Linux环境准备，建议使用VMware +CentOS：1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/1.png">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/2.png">
+<meta property="og:updated_time" content="2015-07-09T14:36:34.906Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="龙子奕">
-<meta name="twitter:description" content="不忘初心，才能始终">
+<meta name="twitter:title" content="Hadoop2.2.0伪分布式环境搭建教程">
+<meta name="twitter:description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop
+Linux环境准备，建议使用VMware +CentOS：1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的">
 
     
     <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
@@ -69,12 +75,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2015/07/09/Hadoop2.2.0伪分布式环境搭建教程/" title="Hadoop2.2.0伪分布式环境搭建教程" itemprop="url">Hadoop2.2.0伪分布式环境搭建教程</a>
@@ -88,9 +92,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h1 id="Hadoop2-2-0伪分布式环境搭建教程">Hadoop2.2.0伪分布式环境搭建教程</h1><p>安装并运行Hadoop：（伪分布式安装步奏）<br>安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop</p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop2-2-0伪分布式环境搭建教程"><span class="toc-number">1.</span> <span class="toc-text">Hadoop2.2.0伪分布式环境搭建教程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux环境准备，建议使用VMware_+CentOS："><span class="toc-number">2.</span> <span class="toc-text">Linux环境准备，建议使用VMware +CentOS：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装JDK："><span class="toc-number">3.</span> <span class="toc-text">安装JDK：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Hadoop："><span class="toc-number">4.</span> <span class="toc-text">安装Hadoop：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#至此，所有Hadoop环境搭建和配置工作全部完成。"><span class="toc-number">5.</span> <span class="toc-text">至此，所有Hadoop环境搭建和配置工作全部完成。</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="Hadoop2-2-0伪分布式环境搭建教程">Hadoop2.2.0伪分布式环境搭建教程</h1><p>安装并运行Hadoop：（伪分布式安装步奏）<br>安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop</p>
 <h1 id="Linux环境准备，建议使用VMware_+CentOS：">Linux环境准备，建议使用VMware +CentOS：</h1><p>1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的情况下Windows和虚拟机之前进行通讯，VMnet0为桥接模式，VMnet8为NAT模式，两者模式都需要计算机连接到网络才可以。<br>选择VMnet1，将IP地址修改成如下图（可以根据具体情况修改IP地址）：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/1.png" alt="ddd"></p>
 <p>然后点击网络连接，选择VWnet1的VMware Virtual Ethernet Adapter for VMnet1协议版本4中IP地址改成192.168.8.100<br>此IP地址是Windows的IP，以后Windows和VMware直接进行通讯使用的就是这个IP地址。</p>
 <p>1.2、接下来修改Linux的IP地址：修改Linux的IP地址改成手动获取（Manual）192.168.8.88。IP地址可以自定义，但是一定要保证Linux和Windows的IP地址在同一个网段，但注意两者不能一模一样，因为两者要进行通讯，修改方式有多种，可以图形界面的形式进行修改<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/2.png" alt="ddd"><br>或者直接使用命令修改：vim /etc/sysconfig/network-scripts/ifcfg-eth0，注意将BOOTPROTO修改成static、IPADDR为192.158.1.88、NETMASK=“255.255.255.0”GATEWA为192.192.1.1</p>
@@ -106,14 +117,9 @@
 <p>4、—————-到此Hadoop的安装和配置已经完成，但是Hadoop仍然不能正常运行，需要进行以下操作<br>4.1 将Hadoop添加到环境变量，这样可以在任何目录下都能运行Hadoop<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile &#28155;&#21152;HADOOP_HOME&#21644;PATH&#10;export HADOOP_HOME=/itcast/hadoop-2.2.0&#10;export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure></p>
 <p>刷新配置  source /etc/profile<br>4.2 初始化HDFS（格式化文件系统）<br>直接执行hdfs namenode -format  如果出现 /name has been successfully formatted说明格式化成功。<br>此时在hadoop目录下会多出一个tem文件夹<br>4.3启动HDFS和YARN<br>在sbin目录下有多个命令，执行 start-dfs.sh start-yarn.sh来启动，启动成功之后<br>可以通过浏览的方式进行验证：<br><a href="http://192.168.8.88:50070（hdfs的管理界面）" target="_blank" rel="external">http://192.168.8.88:50070（hdfs的管理界面）</a><br><a href="http://192.168.8.88:8088（yarn的管理界面）" target="_blank" rel="external">http://192.168.8.88:8088（yarn的管理界面）</a><br>需要在Windows中添加Linux主机名和IP地址的映射关系，修改c:\Windows\System32\drivers\etc中的hosts<br>在最后添加 192.168.8.88 longlong01<br>4.4测试hdfs<br>上传文件到hdfs：hadoop fs -put /root/test hdfs://longlong01:9000/mytest<br>从hdfs下载文件：hadoop fs -gethdfs://longlong01:9000/mytest /root/test<br>4.5测试mapreduce<br>/itcast/hadoop-2.2.0/share/hadoop/mapreduce 中许多可以运行的小例子</p>
 <p>5、—————-配置ssh免密码登陆<br>进入主目录 cd ~ 进入.ssh<br>执行ssh-keygen -t rsa 命令，一直回车生成一个公钥，一个私钥，两者采用非对称加密方式<br>将公钥拷贝到目录authorized_keys中：cp id_rsa.pub authorized_keys 即可，再启动HDFS和YARN时不需要输入密码</p>
-<h1 id="至此，所有Hadoop环境搭建和配置工作全部完成。">至此，所有Hadoop环境搭建和配置工作全部完成。</h1>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+<h1 id="至此，所有Hadoop环境搭建和配置工作全部完成。">至此，所有Hadoop环境搭建和配置工作全部完成。</h1>  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
@@ -121,24 +127,30 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-</div>
+	  <div data-url="http://yoursite.com/2015/07/09/Hadoop2.2.0伪分布式环境搭建教程/" data-title="Hadoop2.2.0伪分布式环境搭建教程 | 龙子奕" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
 
 </footer>
 
+   	       
+	</article>
+	
+	
 
-    </article>
-
-
-
-
-
-
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop2-2-0伪分布式环境搭建教程"><span class="toc-number">1.</span> <span class="toc-text">Hadoop2.2.0伪分布式环境搭建教程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux环境准备，建议使用VMware_+CentOS："><span class="toc-number">2.</span> <span class="toc-text">Linux环境准备，建议使用VMware +CentOS：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装JDK："><span class="toc-number">3.</span> <span class="toc-text">安装JDK：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Hadoop："><span class="toc-number">4.</span> <span class="toc-text">安装Hadoop：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#至此，所有Hadoop环境搭建和配置工作全部完成。"><span class="toc-number">5.</span> <span class="toc-text">至此，所有Hadoop环境搭建和配置工作全部完成。</span></a></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -258,12 +270,89 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -324,4 +413,4 @@ $(document).ready(function(){
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
