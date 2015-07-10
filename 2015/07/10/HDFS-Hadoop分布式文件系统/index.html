@@ -1,0 +1,450 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>HDFS-Hadoop分布式文件系统 | 龙子奕</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="longliqiang88">
+    
+
+    
+    <meta name="description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS-Hadoop分布式文件系统">
+<meta property="og:url" content="http://yoursite.com/2015/07/10/HDFS-Hadoop分布式文件系统/index.html">
+<meta property="og:site_name" content="龙子奕">
+<meta property="og:description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/4.jpg">
+<meta property="og:updated_time" content="2015-07-10T15:38:37.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HDFS-Hadoop分布式文件系统">
+<meta name="twitter:description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="龙子奕">龙子奕</a></h1>
+				<h2 class="blog-motto">总结自己是为了更好的出发。            不忘初心，才能始终</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/10/HDFS-Hadoop分布式文件系统/" title="HDFS-Hadoop分布式文件系统" itemprop="url">HDFS-Hadoop分布式文件系统</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-10T04:44:55.000Z" itemprop="datePublished"> 发表于 2015-07-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS-Hadoop分布式文件系统"><span class="toc-number">1.</span> <span class="toc-text">HDFS-Hadoop分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是分布式文件系统"><span class="toc-number">2.</span> <span class="toc-text">什么是分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS概念"><span class="toc-number">3.</span> <span class="toc-text">HDFS概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS架构"><span class="toc-number">4.</span> <span class="toc-text">HDFS架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NameNode和DataNode"><span class="toc-number">4.1.</span> <span class="toc-text">NameNode和DataNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元数据存储细节"><span class="toc-number">4.2.</span> <span class="toc-text">元数据存储细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS_Shell常用命令"><span class="toc-number">5.</span> <span class="toc-text">HDFS Shell常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Java接口操作HDFS"><span class="toc-number">6.</span> <span class="toc-text">使用Java接口操作HDFS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RPC-远程过程调用协议"><span class="toc-number">7.</span> <span class="toc-text">RPC-远程过程调用协议</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="HDFS-Hadoop分布式文件系统">HDFS-Hadoop分布式文件系统</h1><h1 id="什么是分布式文件系统">什么是分布式文件系统</h1><p>数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。<br><a id="more"></a></p>
+<h1 id="HDFS概念">HDFS概念</h1><p>HDFS是Hadoop Distribute File System 的简称，也就是Hadoop的一个分布式文件系统。HDFS设计理念之一就是让它能运行在普通的硬件之上，即便硬件出现故障，也可以通过容错策略来保证数据的可用。</p>
+<h1 id="HDFS架构">HDFS架构</h1><h2 id="NameNode和DataNode">NameNode和DataNode</h2><p>NameNode是整个文件系统的管理节点。它维护着整个文件系统的文件目录树，文件/目录的元信息和每个文件对应的数据块列表。同是接收用户的请求。<br>文件包括：<br>fsimage：元数据镜像文件。存储某一时段NameNode内存元数据信息。<br>edits：操作日志文件。<br>fstime：保存最近一次checkpoint的时间。<br>以上这些文件都是保存的Linux文件系统中。</p>
+<p>DataNode提供真实数据的存储服务。<br>文件块（block）：最基本的存储单位，在Hadoop2中HDFS的默认大小是128M，不同于普通文件系统的是，HDFS中，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间。</p>
+<p>HDFS架构图如下：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/4.jpg" alt="ddd"></p>
+<p>首先客户端（client）和namenode进行通讯，获取一些元数据信息，然后namenode查询相应的元数据信息返回给客户端（注意：元数据信息保存在内存和磁盘中各有一份，即安全又快速）；</p>
+<p>然后客户端开始读取数据，注意在读取时依次读取，不会同时读取（会采用数据就近原则）；</p>
+<p>同时namanode会给dataname一些信息，datanode会进行数据的水平复制。</p>
+<h2 id="元数据存储细节">元数据存储细节</h2><p>元数据的存储格式如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NameNode(FileName,replicas,block-ids,id2host...)</span><br></pre></td></tr></table></figure></p>
+<p>举例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/test/a.log,3,&#123;blk_1,blk_2&#125;,[&#123;blk_1:[h0,h1,h3]&#125;,&#123;blk_2:[h0,h2,h4]&#125;]</span><br></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<p>  a.log存放了3个副本，文件被切分成了三块，分别是：blk_1,blk_2，第一块存放在h0,h1,h3三台机器上，第二块存放在h0,h2,h4上。</p>
+<h1 id="HDFS_Shell常用命令">HDFS Shell常用命令</h1><p>调用文件系统(FS)Shell命令应使用 bin/hadoop fs 的形式。</p>
+<p>所有的FS shell命令使用URI路径作为参数。</p>
+<p>URI格式是scheme://authority/path。HDFS的scheme是hdfs，对本地文件系统，scheme是file。其中scheme和authority参数都是可选的，如果未加指定，就会使用配置中指定的默认scheme。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -cat hdfs://host1:port1/file1 hdfs://host2:port2/file2</span><br></pre></td></tr></table></figure></p>
+<p>将路径指定文件的内容输出到指定文件中；<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -cp /user/hadoop/file1 /user/hadoop/file2</span><br></pre></td></tr></table></figure></p>
+<p>将文件从源路径复制到目标路径。这个命令允许有多个源路径，此时目标路径必须是一个目录；<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -get /user/hadoop/file localfile</span><br></pre></td></tr></table></figure></p>
+<p>复制文件到本地文件系统；<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -put localfile /user/hadoop/hadoopfile</span><br></pre></td></tr></table></figure></p>
+<p>从本地文件系统中复制单个或多个源路径到目标文件系统。</p>
+<h1 id="使用Java接口操作HDFS">使用Java接口操作HDFS</h1><p>新建Java项目之后要添加相应的jar，和HDFS相关的jar文件在/share/hadoop/common和/share/hadoop/common/lib和/share/hadoop/hdfs，如果使用maven不需要一个个导入。</p>
+<p>由于Hadoop是由Java写的，通过Java API可以调用所有Hadoop文件系统的交互操作。FileSystem类来提供文件系统的操作。<br>使用FileSystem以标准输出来下载HDFS中的文件，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FileSystem fs = FileSystem.get(<span class="keyword">new</span> URI(<span class="string">"hdfs://longlong01:9000"</span>), <span class="keyword">new</span> Configuration());<span class="comment">//指定namenode</span></span><br><span class="line">InputStream in = fs.open(<span class="keyword">new</span> Path(<span class="string">"/hellohdfs.txt"</span>));<span class="comment">//hdfs上的文件</span></span><br><span class="line">FileOutputStream out = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"/root/myfile"</span>));<span class="comment">//打印到root下面的myfile</span></span><br><span class="line">IOUtils.copyBytes(in, out, <span class="number">4096</span>, <span class="keyword">true</span>);<span class="comment">//将in中的内容复制到out中</span></span><br></pre></td></tr></table></figure></p>
+<p>读取本地文件上传到hdfs中，代码如下：<br>FSDataOutputStream out = fs.create(new Path(“/words.txt”));<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FileInputStream in = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"c:/w.txt"</span>));<span class="comment">//读取本地系统的文件</span></span><br><span class="line">FSDataOutputStream out = fs.create(<span class="keyword">new</span> Path(<span class="string">"/words.txt"</span>));</span><br><span class="line">IOUtils.copyBytes(in, out, <span class="number">2048</span>, <span class="keyword">true</span>);</span><br><span class="line">```	</span><br><span class="line">如果上传不成功，显示没有权限，可以使用</span><br><span class="line">```java</span><br><span class="line">fs = FileSystem.get(<span class="keyword">new</span> URI(<span class="string">"hdfs://longlong01:9000"</span>), <span class="keyword">new</span> Configuration(),<span class="string">"root"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>将当前用户伪装成root用户，可以解决没有权限的问题。</p>
+<p>删除hdfs中的一个文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> flag = fs.delete(<span class="keyword">new</span> Path(<span class="string">"/hellohdfs.txt"</span>), <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
+<p>在hdfs中新建一个文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> flag = fs.mkdirs(<span class="keyword">new</span> Path(<span class="string">"/root/hellohdfs"</span>));</span><br></pre></td></tr></table></figure></p>
+<h1 id="RPC-远程过程调用协议">RPC-远程过程调用协议</h1><p>RPC指的是Remote Procedure Call，远程过程调用协议，是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。</p>
+<p>RPC采用客户机/服务器模式。请求程序就是一个客户机，服务提供程序就是一个服务器。首先，客户机调用进程发送一个有进程参数的调用信息到服务进程，然后等待应答信息。在服务器端。进程保持休眠状态直到调用信息到达为止。当一个调用信息到达，服务器获得进程参数，计算结果，发送答复信息，然后等待下一个调用信息。最后，客户端调用进程接受答复信息，获得进程结果，然后调用继续执行。</p>
+<p>Hadoop整个体系结果就是构建在RPC之上的。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/07/10/HDFS-Hadoop分布式文件系统/" data-title="HDFS-Hadoop分布式文件系统 | 龙子奕" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/07/10/Manven学习总结/" title="Manven学习总结">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Manven学习总结</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/09/Hadoop2.2.0伪分布式环境搭建教程/"  title="Hadoop2.2.0伪分布式环境搭建教程">
+ <strong>下一篇：</strong><br/> 
+ <span>Hadoop2.2.0伪分布式环境搭建教程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS-Hadoop分布式文件系统"><span class="toc-number">1.</span> <span class="toc-text">HDFS-Hadoop分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是分布式文件系统"><span class="toc-number">2.</span> <span class="toc-text">什么是分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS概念"><span class="toc-number">3.</span> <span class="toc-text">HDFS概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS架构"><span class="toc-number">4.</span> <span class="toc-text">HDFS架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NameNode和DataNode"><span class="toc-number">4.1.</span> <span class="toc-text">NameNode和DataNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元数据存储细节"><span class="toc-number">4.2.</span> <span class="toc-text">元数据存储细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS_Shell常用命令"><span class="toc-number">5.</span> <span class="toc-text">HDFS Shell常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Java接口操作HDFS"><span class="toc-number">6.</span> <span class="toc-text">使用Java接口操作HDFS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RPC-远程过程调用协议"><span class="toc-number">7.</span> <span class="toc-text">RPC-远程过程调用协议</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://github.com/" target="_blank" title="Github官网">Github官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN官网">CSDN官网</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m a programmer Longliqiang. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="longliqiang88">longliqiang88</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
