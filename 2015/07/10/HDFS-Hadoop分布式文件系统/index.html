@@ -11,20 +11,17 @@
     
 
     
-    <meta name="description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。
-HDFS概念HDFS是Hadoop Distribute File System">
+    <meta name="description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HDFS-Hadoop分布式文件系统">
 <meta property="og:url" content="http://yoursite.com/2015/07/10/HDFS-Hadoop分布式文件系统/index.html">
 <meta property="og:site_name" content="龙子奕">
-<meta property="og:description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。
-HDFS概念HDFS是Hadoop Distribute File System">
+<meta property="og:description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/4.jpg">
-<meta property="og:updated_time" content="2015-07-10T06:27:34.112Z">
+<meta property="og:updated_time" content="2015-07-10T06:29:24.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDFS-Hadoop分布式文件系统">
-<meta name="twitter:description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。
-HDFS概念HDFS是Hadoop Distribute File System">
+<meta name="twitter:description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
 
     
     <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
@@ -100,11 +97,12 @@ HDFS概念HDFS是Hadoop Distribute File System">
 		
 		</div>
 		
-		<h1 id="HDFS-Hadoop分布式文件系统">HDFS-Hadoop分布式文件系统</h1><h1 id="什么是分布式文件系统">什么是分布式文件系统</h1><p>数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。</p>
+		<h1 id="HDFS-Hadoop分布式文件系统">HDFS-Hadoop分布式文件系统</h1><h1 id="什么是分布式文件系统">什么是分布式文件系统</h1><p>数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。<br><a id="more"></a></p>
 <h1 id="HDFS概念">HDFS概念</h1><p>HDFS是Hadoop Distribute File System 的简称，也就是Hadoop的一个分布式文件系统。HDFS设计理念之一就是让它能运行在普通的硬件之上，即便硬件出现故障，也可以通过容错策略来保证数据的可用。</p>
 <h1 id="HDFS架构">HDFS架构</h1><h2 id="NameNode和DataNode">NameNode和DataNode</h2><p>NameNode是整个文件系统的管理节点。它维护着整个文件系统的文件目录树，文件/目录的元信息和每个文件对应的数据块列表。同是接收用户的请求。<br>文件包括：<br>fsimage：元数据镜像文件。存储某一时段NameNode内存元数据信息。<br>edits：操作日志文件。<br>fstime：保存最近一次checkpoint的时间。<br>以上这些文件都是保存的Linux文件系统中。</p>
 <p>DataNode提供真实数据的存储服务。<br>文件块（block）：最基本的存储单位，在Hadoop2中HDFS的默认大小是128M，不同于普通文件系统的是，HDFS中，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间。</p>
-<p>HDFS架构图如下：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/4.jpg" alt="ddd"><br><a id="more"></a><br>首先客户端（client）和namenode进行通讯，获取一些元数据信息，然后namenode查询相应的元数据信息返回给客户端（注意：元数据信息保存在内存和磁盘中各有一份，即安全又快速）；</p>
+<p>HDFS架构图如下：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/4.jpg" alt="ddd"></p>
+<p>首先客户端（client）和namenode进行通讯，获取一些元数据信息，然后namenode查询相应的元数据信息返回给客户端（注意：元数据信息保存在内存和磁盘中各有一份，即安全又快速）；</p>
 <p>然后客户端开始读取数据，注意在读取时依次读取，不会同时读取（会采用数据就近原则）；</p>
 <p>同时namanode会给dataname一些信息，datanode会进行数据的水平复制。</p>
 <h2 id="元数据存储细节">元数据存储细节</h2><p>元数据的存储格式如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NameNode(FileName,replicas,block-ids,id2host...)</span><br></pre></td></tr></table></figure></p>

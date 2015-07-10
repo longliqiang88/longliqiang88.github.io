@@ -11,21 +11,18 @@
     
 
     
-    <meta name="description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop
-Linux环境准备，建议使用VMware +CentOS：1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的">
+    <meta name="description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop2.2.0伪分布式环境搭建教程">
 <meta property="og:url" content="http://yoursite.com/2015/07/09/Hadoop2.2.0伪分布式环境搭建教程/index.html">
 <meta property="og:site_name" content="龙子奕">
-<meta property="og:description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop
-Linux环境准备，建议使用VMware +CentOS：1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的">
+<meta property="og:description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/1.png">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/2.png">
-<meta property="og:updated_time" content="2015-07-09T14:39:23.091Z">
+<meta property="og:updated_time" content="2015-07-10T06:29:06.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop2.2.0伪分布式环境搭建教程">
-<meta name="twitter:description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop
-Linux环境准备，建议使用VMware +CentOS：1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的">
+<meta name="twitter:description" content="Hadoop2.2.0伪分布式环境搭建教程安装并运行Hadoop：（伪分布式安装步奏）安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop">
 
     
     <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
@@ -101,8 +98,9 @@ Linux环境准备，建议使用VMware +CentOS：1.1、点击VMware Workstation�
 		
 		</div>
 		
-		<h1 id="Hadoop2-2-0伪分布式环境搭建教程">Hadoop2.2.0伪分布式环境搭建教程</h1><p>安装并运行Hadoop：（伪分布式安装步奏）<br>安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop</p>
-<h1 id="Linux环境准备，建议使用VMware_+CentOS：">Linux环境准备，建议使用VMware +CentOS：</h1><p>1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的情况下Windows和虚拟机之前进行通讯，VMnet0为桥接模式，VMnet8为NAT模式，两者模式都需要计算机连接到网络才可以。<br>选择VMnet1，将IP地址修改成如下图（可以根据具体情况修改IP地址）：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/1.png" alt="ddd"><br><a id="more"></a><br>然后点击网络连接，选择VWnet1的VMware Virtual Ethernet Adapter for VMnet1协议版本4中IP地址改成192.168.8.100<br>此IP地址是Windows的IP，以后Windows和VMware直接进行通讯使用的就是这个IP地址。</p>
+		<h1 id="Hadoop2-2-0伪分布式环境搭建教程">Hadoop2.2.0伪分布式环境搭建教程</h1><p>安装并运行Hadoop：（伪分布式安装步奏）<br>安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop<br><a id="more"></a></p>
+<h1 id="Linux环境准备，建议使用VMware_+CentOS：">Linux环境准备，建议使用VMware +CentOS：</h1><p>1.1、点击VMware Workstation所在目录中，点击vmnetcf进行配置。建议选用VMnet1（仅主机模式），仅主机模式可以使在没有网络的情况下Windows和虚拟机之前进行通讯，VMnet0为桥接模式，VMnet8为NAT模式，两者模式都需要计算机连接到网络才可以。<br>选择VMnet1，将IP地址修改成如下图（可以根据具体情况修改IP地址）：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/1.png" alt="ddd"></p>
+<p>然后点击网络连接，选择VWnet1的VMware Virtual Ethernet Adapter for VMnet1协议版本4中IP地址改成192.168.8.100<br>此IP地址是Windows的IP，以后Windows和VMware直接进行通讯使用的就是这个IP地址。</p>
 <p>1.2、接下来修改Linux的IP地址：修改Linux的IP地址改成手动获取（Manual）192.168.8.88。IP地址可以自定义，但是一定要保证Linux和Windows的IP地址在同一个网段，但注意两者不能一模一样，因为两者要进行通讯，修改方式有多种，可以图形界面的形式进行修改<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/2.png" alt="ddd"><br>或者直接使用命令修改：vim /etc/sysconfig/network-scripts/ifcfg-eth0，注意将BOOTPROTO修改成static、IPADDR为192.158.1.88、NETMASK=“255.255.255.0”GATEWA为192.192.1.1</p>
 <p>1.3、修改主机名和IP的映射关系<br>修改主机名：vim /etc/sysconfig/network、将localhost.localdomain修改成自己的主机名<br> 修改主机名和IP的映射关系（相当于配置了一个本地的DNS）：vim /etc/hosts 在文件最后一行换行加上192.168.88 longlong01（longlong01为上面自己去的主机名）</p>
 <p>1.4、关闭防火墙<br>service iptables stop命令关闭防火墙、关闭之后可使用service iptables status当前防火墙的状态，如果成功关闭之后会提示Firewall is not running。<br>但需要注意的是，防火墙关闭之后，重启系统之后防火墙又会打开，需要用以下命令关闭开机自启动<br>chkconfig iptables off，关闭之后使用chkconfig iptables —list查看状态，显示都是off即可</p>
