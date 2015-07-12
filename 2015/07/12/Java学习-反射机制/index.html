@@ -11,19 +11,16 @@
     
 
     
-    <meta name="description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()
-这就是反射，现在很多开框架都用到反射机制，hibernate、struts">
+    <meta name="description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java学习-反射机制">
 <meta property="og:url" content="http://yoursite.com/2015/07/12/Java学习-反射机制/index.html">
 <meta property="og:site_name" content="龙子奕">
-<meta property="og:description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()
-这就是反射，现在很多开框架都用到反射机制，hibernate、struts">
-<meta property="og:updated_time" content="2015-07-12T13:02:00.795Z">
+<meta property="og:description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()">
+<meta property="og:updated_time" content="2015-07-12T13:05:27.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习-反射机制">
-<meta name="twitter:description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()
-这就是反射，现在很多开框架都用到反射机制，hibernate、struts">
+<meta name="twitter:description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()">
 
     
     <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
@@ -100,6 +97,7 @@
 		</div>
 		
 		<h1 id="什么是反射？">什么是反射？</h1><p>反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver.class"</span>).newInstance()</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>这就是反射，现在很多开框架都用到反射机制，hibernate、struts都是用反射机制实现的。 </p>
 <p>反射是java中一种强大的工具，能够使我们很方便的创建灵活的代码，这些代码可以再运行时装配，无需在组件之间进行源代码链接。但是反射使用不当会成本很高！</p>
 <h1 id="反射机制的作用：">反射机制的作用：</h1><ol>
