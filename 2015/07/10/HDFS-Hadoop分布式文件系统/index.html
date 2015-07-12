@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
+    <meta name="description" content="什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HDFS-Hadoop分布式文件系统">
 <meta property="og:url" content="http://yoursite.com/2015/07/10/HDFS-Hadoop分布式文件系统/index.html">
 <meta property="og:site_name" content="龙子奕">
-<meta property="og:description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
+<meta property="og:description" content="什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/4.jpg">
-<meta property="og:updated_time" content="2015-07-10T15:38:37.700Z">
+<meta property="og:updated_time" content="2015-07-12T13:02:48.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDFS-Hadoop分布式文件系统">
-<meta name="twitter:description" content="HDFS-Hadoop分布式文件系统什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
+<meta name="twitter:description" content="什么是分布式文件系统数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。">
 
     
     <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
@@ -43,7 +43,7 @@
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="龙子奕">龙子奕</a></h1>
-				<h2 class="blog-motto">总结自己是为了更好的出发。            不忘初心，才能始终</h2>
+				<h2 class="blog-motto">总结自己是为了更好的出发。  --不忘初心，才能始终。</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
@@ -93,11 +93,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS-Hadoop分布式文件系统"><span class="toc-number">1.</span> <span class="toc-text">HDFS-Hadoop分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是分布式文件系统"><span class="toc-number">2.</span> <span class="toc-text">什么是分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS概念"><span class="toc-number">3.</span> <span class="toc-text">HDFS概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS架构"><span class="toc-number">4.</span> <span class="toc-text">HDFS架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NameNode和DataNode"><span class="toc-number">4.1.</span> <span class="toc-text">NameNode和DataNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元数据存储细节"><span class="toc-number">4.2.</span> <span class="toc-text">元数据存储细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS_Shell常用命令"><span class="toc-number">5.</span> <span class="toc-text">HDFS Shell常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Java接口操作HDFS"><span class="toc-number">6.</span> <span class="toc-text">使用Java接口操作HDFS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RPC-远程过程调用协议"><span class="toc-number">7.</span> <span class="toc-text">RPC-远程过程调用协议</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是分布式文件系统"><span class="toc-number">1.</span> <span class="toc-text">什么是分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS概念"><span class="toc-number">2.</span> <span class="toc-text">HDFS概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS架构"><span class="toc-number">3.</span> <span class="toc-text">HDFS架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NameNode和DataNode"><span class="toc-number">3.1.</span> <span class="toc-text">NameNode和DataNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元数据存储细节"><span class="toc-number">3.2.</span> <span class="toc-text">元数据存储细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS_Shell常用命令"><span class="toc-number">4.</span> <span class="toc-text">HDFS Shell常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Java接口操作HDFS"><span class="toc-number">5.</span> <span class="toc-text">使用Java接口操作HDFS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RPC-远程过程调用协议"><span class="toc-number">6.</span> <span class="toc-text">RPC-远程过程调用协议</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="HDFS-Hadoop分布式文件系统">HDFS-Hadoop分布式文件系统</h1><h1 id="什么是分布式文件系统">什么是分布式文件系统</h1><p>数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。<br><a id="more"></a></p>
+		<h1 id="什么是分布式文件系统">什么是分布式文件系统</h1><p>数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。<br><a id="more"></a></p>
 <h1 id="HDFS概念">HDFS概念</h1><p>HDFS是Hadoop Distribute File System 的简称，也就是Hadoop的一个分布式文件系统。HDFS设计理念之一就是让它能运行在普通的硬件之上，即便硬件出现故障，也可以通过容错策略来保证数据的可用。</p>
 <h1 id="HDFS架构">HDFS架构</h1><h2 id="NameNode和DataNode">NameNode和DataNode</h2><p>NameNode是整个文件系统的管理节点。它维护着整个文件系统的文件目录树，文件/目录的元信息和每个文件对应的数据块列表。同是接收用户的请求。<br>文件包括：<br>fsimage：元数据镜像文件。存储某一时段NameNode内存元数据信息。<br>edits：操作日志文件。<br>fstime：保存最近一次checkpoint的时间。<br>以上这些文件都是保存的Linux文件系统中。</p>
 <p>DataNode提供真实数据的存储服务。<br>文件块（block）：最基本的存储单位，在Hadoop2中HDFS的默认大小是128M，不同于普通文件系统的是，HDFS中，如果一个文件小于一个数据块的大小，并不占用整个数据块存储空间。</p>
@@ -177,7 +177,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS-Hadoop分布式文件系统"><span class="toc-number">1.</span> <span class="toc-text">HDFS-Hadoop分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是分布式文件系统"><span class="toc-number">2.</span> <span class="toc-text">什么是分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS概念"><span class="toc-number">3.</span> <span class="toc-text">HDFS概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS架构"><span class="toc-number">4.</span> <span class="toc-text">HDFS架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NameNode和DataNode"><span class="toc-number">4.1.</span> <span class="toc-text">NameNode和DataNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元数据存储细节"><span class="toc-number">4.2.</span> <span class="toc-text">元数据存储细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS_Shell常用命令"><span class="toc-number">5.</span> <span class="toc-text">HDFS Shell常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Java接口操作HDFS"><span class="toc-number">6.</span> <span class="toc-text">使用Java接口操作HDFS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RPC-远程过程调用协议"><span class="toc-number">7.</span> <span class="toc-text">RPC-远程过程调用协议</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是分布式文件系统"><span class="toc-number">1.</span> <span class="toc-text">什么是分布式文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS概念"><span class="toc-number">2.</span> <span class="toc-text">HDFS概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS架构"><span class="toc-number">3.</span> <span class="toc-text">HDFS架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NameNode和DataNode"><span class="toc-number">3.1.</span> <span class="toc-text">NameNode和DataNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元数据存储细节"><span class="toc-number">3.2.</span> <span class="toc-text">元数据存储细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HDFS_Shell常用命令"><span class="toc-number">4.</span> <span class="toc-text">HDFS Shell常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Java接口操作HDFS"><span class="toc-number">5.</span> <span class="toc-text">使用Java接口操作HDFS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RPC-远程过程调用协议"><span class="toc-number">6.</span> <span class="toc-text">RPC-远程过程调用协议</span></a></li></ol>
  
   </div>
 

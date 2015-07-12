@@ -4,22 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>龙子奕</title>
+    <title>Java学习-反射机制 | 龙子奕</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang88">
     
 
     
-    <meta name="description" content="不忘初心，才能始终">
-<meta property="og:type" content="website">
-<meta property="og:title" content="龙子奕">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()
+这就是反射，现在很多开框架都用到反射机制，hibernate、struts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习-反射机制">
+<meta property="og:url" content="http://yoursite.com/2015/07/12/Java学习-反射机制/index.html">
 <meta property="og:site_name" content="龙子奕">
-<meta property="og:description" content="不忘初心，才能始终">
+<meta property="og:description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()
+这就是反射，现在很多开框架都用到反射机制，hibernate、struts">
+<meta property="og:updated_time" content="2015-07-12T13:02:00.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="龙子奕">
-<meta name="twitter:description" content="不忘初心，才能始终">
+<meta name="twitter:title" content="Java学习-反射机制">
+<meta name="twitter:description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()
+这就是反射，现在很多开框架都用到反射机制，hibernate、struts">
 
     
     <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
@@ -69,12 +73,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2015/07/12/Java学习-反射机制/" title="Java学习-反射机制" itemprop="url">Java学习-反射机制</a>
@@ -88,9 +90,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h1 id="什么是反射？">什么是反射？</h1><p>反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver.class"</span>).newInstance()</span><br></pre></td></tr></table></figure></p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是反射？"><span class="toc-number">1.</span> <span class="toc-text">什么是反射？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#反射机制的作用："><span class="toc-number">2.</span> <span class="toc-text">反射机制的作用：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Class类"><span class="toc-number">3.</span> <span class="toc-text">Class类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#反射例子"><span class="toc-number">4.</span> <span class="toc-text">反射例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过一个对象获得完整的包名和类名"><span class="toc-number">4.1.</span> <span class="toc-text">通过一个对象获得完整的包名和类名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例化Class类对象"><span class="toc-number">4.2.</span> <span class="toc-text">实例化Class类对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Class调用其他类中的构造函数"><span class="toc-number">4.3.</span> <span class="toc-text">通过Class调用其他类中的构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过反射调用其他类中的方法："><span class="toc-number">4.4.</span> <span class="toc-text">通过反射调用其他类中的方法：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一些常用的方法："><span class="toc-number">5.</span> <span class="toc-text">一些常用的方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获得构造函数的方法"><span class="toc-number">5.1.</span> <span class="toc-text">获得构造函数的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获得类方法的方法"><span class="toc-number">5.2.</span> <span class="toc-text">获得类方法的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获得类中属性的方法"><span class="toc-number">5.3.</span> <span class="toc-text">获得类中属性的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="什么是反射？">什么是反射？</h1><p>反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver.class"</span>).newInstance()</span><br></pre></td></tr></table></figure></p>
 <p>这就是反射，现在很多开框架都用到反射机制，hibernate、struts都是用反射机制实现的。 </p>
 <p>反射是java中一种强大的工具，能够使我们很方便的创建灵活的代码，这些代码可以再运行时装配，无需在组件之间进行源代码链接。但是反射使用不当会成本很高！</p>
 <h1 id="反射机制的作用：">反射机制的作用：</h1><ol>
@@ -123,14 +132,9 @@
 <h2 id="获得类方法的方法">获得类方法的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Method <span class="title">getMethod</span><span class="params">(String name, Class[] params)</span>,根据方法名，参数类型获得方法</span><br><span class="line">Method[] <span class="title">getMethods</span><span class="params">()</span><span class="comment">//获得所有的public方法，包括从父类继承而来的</span></span><br><span class="line">Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class[] params)</span><span class="comment">//根据方法名和参数类型，获得public和非public的方法</span></span><br><span class="line">Method[] <span class="title">getDeclaredMethods</span><span class="params">()</span><span class="comment">//获得所以的public和非public方法</span></span></span><br></pre></td></tr></table></figure>
 <h2 id="获得类中属性的方法">获得类中属性的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Field <span class="title">getField</span><span class="params">(String name)</span><span class="comment">//根据变量名得到相应的public变量</span></span><br><span class="line">Field[] <span class="title">getFields</span><span class="params">()</span><span class="comment">//获得类中所有的变量</span></span><br><span class="line">Field <span class="title">getDeclaredField</span><span class="params">(String name)</span><span class="comment">//根据方法名获得public和非public变量</span></span><br><span class="line">Field[] <span class="title">getDeclaredFields</span><span class="params">()</span><span class="comment">//获得类中所有的public和非public变量 </span></span><br><span class="line">String <span class="title">getName</span><span class="params">()</span><span class="comment">//获得该对象的名字</span></span></span><br></pre></td></tr></table></figure>
 <h1 id="总结">总结</h1><p>java反射机制是一个很好用的东西，用它可以解决很多死的东西，因为反射机制的灵活行很大。可以很大的减少开发时间，而且代码的可读性好。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 
@@ -138,178 +142,43 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-</div>
+	  <div data-url="http://yoursite.com/2015/07/12/Java学习-反射机制/" data-title="Java学习-反射机制 | 龙子奕" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/10/Maven学习总结/" title="Maven学习总结" itemprop="url">Maven学习总结</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-10T12:46:47.000Z" itemprop="datePublished"> 发表于 2015-07-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Maven概念">Maven概念</h1><p>Maven是一种基于项目对象模型（POM），可以通过一小段描述信息来管理项目的构建、报告和文档的软件项目管理工具。ps：个人使用心得，maven使用起来最方便的就是管理jar文件。</p>
-<h1 id="Maven安装">Maven安装</h1><p>下载maven，配置环境变量，可通过mvn -v来测试maven安装是否成功。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/10/Maven学习总结/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/07/10/Maven学习总结/"  title="Maven学习总结">
+ <strong>下一篇：</strong><br/> 
+ <span>Maven学习总结
+</span>
+</a>
 </div>
 
-</footer>
+</nav>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/10/HDFS-Hadoop分布式文件系统/" title="HDFS-Hadoop分布式文件系统" itemprop="url">HDFS-Hadoop分布式文件系统</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-10T04:44:55.000Z" itemprop="datePublished"> 发表于 2015-07-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是分布式文件系统">什么是分布式文件系统</h1><p>数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/10/HDFS-Hadoop分布式文件系统/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
 	
-</div>
 
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/09/Hadoop2.2.0伪分布式环境搭建教程/" title="Hadoop2.2.0伪分布式环境搭建教程" itemprop="url">Hadoop2.2.0伪分布式环境搭建教程</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-09T14:18:48.000Z" itemprop="datePublished"> 发表于 2015-07-09</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>安装并运行Hadoop：（伪分布式安装步奏）<br>安装步奏：关闭防火墙、修改ip、修改hostname、设置ssh自动登录、安装jdk、安装Hadoop<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/09/Hadoop2.2.0伪分布式环境搭建教程/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是反射？"><span class="toc-number">1.</span> <span class="toc-text">什么是反射？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#反射机制的作用："><span class="toc-number">2.</span> <span class="toc-text">反射机制的作用：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Class类"><span class="toc-number">3.</span> <span class="toc-text">Class类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#反射例子"><span class="toc-number">4.</span> <span class="toc-text">反射例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过一个对象获得完整的包名和类名"><span class="toc-number">4.1.</span> <span class="toc-text">通过一个对象获得完整的包名和类名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例化Class类对象"><span class="toc-number">4.2.</span> <span class="toc-text">实例化Class类对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Class调用其他类中的构造函数"><span class="toc-number">4.3.</span> <span class="toc-text">通过Class调用其他类中的构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过反射调用其他类中的方法："><span class="toc-number">4.4.</span> <span class="toc-text">通过反射调用其他类中的方法：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一些常用的方法："><span class="toc-number">5.</span> <span class="toc-text">一些常用的方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获得构造函数的方法"><span class="toc-number">5.1.</span> <span class="toc-text">获得构造函数的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获得类方法的方法"><span class="toc-number">5.2.</span> <span class="toc-text">获得类方法的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获得类中属性的方法"><span class="toc-number">5.3.</span> <span class="toc-text">获得类中属性的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -429,12 +298,89 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -500,4 +446,4 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
