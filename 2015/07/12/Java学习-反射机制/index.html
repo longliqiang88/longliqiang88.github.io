@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/07/12/Java学习-反射机制/index.html">
 <meta property="og:site_name" content="龙子奕">
 <meta property="og:description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()">
-<meta property="og:updated_time" content="2015-07-12T13:05:27.600Z">
+<meta property="og:updated_time" content="2015-07-12T13:07:37.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习-反射机制">
 <meta name="twitter:description" content="什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver.class&quot;).newInstance()">
@@ -127,7 +127,7 @@
 <p>hello</p>
 <p>Tom  20</p>
 <h1 id="一些常用的方法：">一些常用的方法：</h1><h2 id="获得构造函数的方法">获得构造函数的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Constructor <span class="title">getConstructor</span><span class="params">(Class[] params)</span><span class="comment">//根据指定参数获得public构造器</span></span><br><span class="line">Constructor[] <span class="title">getConstructors</span><span class="params">()</span><span class="comment">//获得public的所有构造器</span></span><br><span class="line">Constructor <span class="title">getDeclaredConstructor</span><span class="params">(Class[] params)</span><span class="comment">//根据指定参数获得public和非public的构造器</span></span><br><span class="line">Constructor[] <span class="title">getDeclaredConstructors</span><span class="params">()</span><span class="comment">//获得public的所有构造器</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="获得类方法的方法">获得类方法的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Method <span class="title">getMethod</span><span class="params">(String name, Class[] params)</span>,根据方法名，参数类型获得方法</span><br><span class="line">Method[] <span class="title">getMethods</span><span class="params">()</span><span class="comment">//获得所有的public方法，包括从父类继承而来的</span></span><br><span class="line">Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class[] params)</span><span class="comment">//根据方法名和参数类型，获得public和非public的方法</span></span><br><span class="line">Method[] <span class="title">getDeclaredMethods</span><span class="params">()</span><span class="comment">//获得所以的public和非public方法</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="获得类方法的方法">获得类方法的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Method <span class="title">getMethod</span><span class="params">(String name, Class[] params)</span><span class="comment">//根据方法名，参数类型获得方法</span></span><br><span class="line">Method[] <span class="title">getMethods</span><span class="params">()</span><span class="comment">//获得所有的public方法，包括从父类继承而来的</span></span><br><span class="line">Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class[] params)</span><span class="comment">//根据方法名和参数类型，获得public和非public的方法</span></span><br><span class="line">Method[] <span class="title">getDeclaredMethods</span><span class="params">()</span><span class="comment">//获得所以的public和非public方法</span></span></span><br></pre></td></tr></table></figure>
 <h2 id="获得类中属性的方法">获得类中属性的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Field <span class="title">getField</span><span class="params">(String name)</span><span class="comment">//根据变量名得到相应的public变量</span></span><br><span class="line">Field[] <span class="title">getFields</span><span class="params">()</span><span class="comment">//获得类中所有的变量</span></span><br><span class="line">Field <span class="title">getDeclaredField</span><span class="params">(String name)</span><span class="comment">//根据方法名获得public和非public变量</span></span><br><span class="line">Field[] <span class="title">getDeclaredFields</span><span class="params">()</span><span class="comment">//获得类中所有的public和非public变量 </span></span><br><span class="line">String <span class="title">getName</span><span class="params">()</span><span class="comment">//获得该对象的名字</span></span></span><br></pre></td></tr></table></figure>
 <h1 id="总结">总结</h1><p>java反射机制是一个很好用的东西，用它可以解决很多死的东西，因为反射机制的灵活行很大。可以很大的减少开发时间，而且代码的可读性好。</p>
   
@@ -155,6 +155,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/07/12/Java学习-Socket编程/" title="Java学习-Socket编程">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Java学习-Socket编程</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/07/10/Maven学习总结/"  title="Maven学习总结">
