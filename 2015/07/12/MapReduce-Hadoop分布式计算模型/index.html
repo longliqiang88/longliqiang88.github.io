@@ -11,16 +11,24 @@
     
 
     
-    <meta name="description" content="不忘初心，才能始终">
+    <meta name="description" content="MapReduce概述MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。
+MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()两个函数，即可实现分布式计算，非常简单。这两个函数的形参是key、value对，表示函数的输入信息。
+MapReduce实现原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MapReduce-Hadoop分布式计算模型">
 <meta property="og:url" content="http://yoursite.com/2015/07/12/MapReduce-Hadoop分布式计算模型/index.html">
 <meta property="og:site_name" content="龙子奕">
-<meta property="og:description" content="不忘初心，才能始终">
-<meta property="og:updated_time" content="2015-07-12T13:39:25.491Z">
+<meta property="og:description" content="MapReduce概述MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。
+MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()两个函数，即可实现分布式计算，非常简单。这两个函数的形参是key、value对，表示函数的输入信息。
+MapReduce实现原理">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/MapReduce01.jpg">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/MapReduce02.jpg">
+<meta property="og:updated_time" content="2015-07-13T07:15:33.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MapReduce-Hadoop分布式计算模型">
-<meta name="twitter:description" content="不忘初心，才能始终">
+<meta name="twitter:description" content="MapReduce概述MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。
+MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()两个函数，即可实现分布式计算，非常简单。这两个函数的形参是key、value对，表示函数的输入信息。
+MapReduce实现原理">
 
     
     <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
@@ -92,11 +100,59 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MapReduce概述"><span class="toc-number">1.</span> <span class="toc-text">MapReduce概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MapReduce实现原理"><span class="toc-number">2.</span> <span class="toc-text">MapReduce实现原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#序列化"><span class="toc-number">3.</span> <span class="toc-text">序列化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hadoop中的Partitioner分区"><span class="toc-number">4.</span> <span class="toc-text">hadoop中的Partitioner分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MapReduce中的Combiners编程"><span class="toc-number">5.</span> <span class="toc-text">MapReduce中的Combiners编程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shuffle-MapReduce的核心"><span class="toc-number">6.</span> <span class="toc-text">Shuffle-MapReduce的核心</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<h1 id="MapReduce概述">MapReduce概述</h1><p>MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。</p>
+<p>MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()两个函数，即可实现分布式计算，非常简单。这两个函数的形参是key、value对，表示函数的输入信息。</p>
+<h1 id="MapReduce实现原理">MapReduce实现原理</h1><a id="more"></a>
+<p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/MapReduce01.jpg" alt="ddd"><br>执行步骤：<br>1.map任务处理</p>
+<p>1.1 读取输入文件内容，解析成key、value对。对输入文件的每一行，解析成key、value对。每一个键值对调用次map函数。</p>
+<p>1.2 写自己的逻辑，对输入的key、value处理，转换成新的key、value输出。</p>
+<p>1.3 对输出的key、value进行分区。</p>
+<p>1.4 对不同分区的数据，按照key进行排序、分组。相同key的value放到一个集合中。</p>
+<p>1.5 (可选)分组后的数据进行归约。</p>
+<p>2.reduce任务处理</p>
+<p>2.1 对多个map任务的输出，按照不同的分区，通过网络copy到不同的reduce节点。</p>
+<p>2.2 对多个map任务的输出进行合并、排序。写reduce函数自己的逻辑，对输入的key、value处理，转换成新的key、value输出。</p>
+<p>2.3 把reduce的输出保存到文件中。</p>
+<h1 id="序列化">序列化</h1><p>在MapReduce中，序列化是一个很重要的步骤。</p>
+<p>序列化就是把结构化的对象转化为字节流。</p>
+<p>反序列化就是把字节流转回结构化对象。</p>
+<h1 id="hadoop中的Partitioner分区">hadoop中的Partitioner分区</h1><p>Hadoop中的MapReduce支持对key进行分区，从而可以使map出来的数据均匀分布在reduce上。<br>框架自带了一个默认的分区类，HashPartitioner，先看看这个类，就知道怎么自定义key分区了，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashPartitioner</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">Partitioner</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123; </span><br><span class="line"></span><br><span class="line">  <span class="comment">/** Use &#123;<span class="doctag">@link</span> Object#hashCode()&#125; to partition. */</span> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPartition</span><span class="params">(K key, V value, </span><br><span class="line">                          <span class="keyword">int</span> numReduceTasks)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> (key.hashCode() &amp; Integer.MAX_VALUE) % numReduceTasks; </span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>先解释一下这个HashPartitioner做的事情,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(key.hashCode() &amp; Integer.MAX_VALUE) % numReduceTasks;</span><br></pre></td></tr></table></figure></p>
+<p>将key均匀分布在ReduceTasks上，举例如果Key为Text的话，Text的hashcode方法跟String的基本一致，都是采用的Horner公式计算，得到一个int，string太大的话这个int值可能会溢出变成负数，所以与上Integer.MAX_VALUE（即0111111111111111），然后再对reduce个数取余，这样就可以让key均匀分布在reduce上。 </p>
+<p>实现分区的步骤：</p>
+<ol>
+<li>先分析一下具体的业务逻辑，确定大概有多少个分区</li>
+<li>首先书写一个类，它要继承org.apache.hadoop.mapreduce.Partitioner这个类</li>
+<li>重写public int getPartition这个方法，根据具体逻辑，读数据库或者配置返回相同的数字</li>
+<li>在main方法中设置Partioner的类，job.setPartitionerClass(DataPartitioner.class);</li>
+<li>设置Reducer的数量，job.setNumReduceTasks(6);</li>
+</ol>
+<p>举例，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ProviderPartitioner</span> <span class="keyword">extends</span> <span class="title">Partitioner</span>&lt;<span class="title">Text</span>, <span class="title">DataBean</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="annotation">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPartition</span><span class="params">(Text key, DataBean value, <span class="keyword">int</span> arg2)</span> </span>&#123;</span><br><span class="line">			</span><br><span class="line">			String account = key.toString();</span><br><span class="line">			String sub_acc = account.substring(<span class="number">0</span>,<span class="number">3</span>);</span><br><span class="line">			Integer code = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">if</span>(sub_acc.equals(<span class="string">"aaa"</span>))&#123;</span><br><span class="line">				</span><br><span class="line">				code = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> code;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="MapReduce中的Combiners编程">MapReduce中的Combiners编程</h1><p>每一个map可能会产生大量的输出，combiner的作用就是在map端对输出先做一次合并，以减少传输到reducer的数据量。</p>
+<p>combiner最基本是实现本地key的归并，combiner具有类似本地的reduce功能。</p>
+<p>如果不用combiner，那么，所有的结果都是reduce完成，效率会相对低下。使用combiner，先完成的map会在本地聚合，提升速度。</p>
+<p>注意：Combiner的输出是Reducer的输入，如果Combiner是可插拔的，添加Combiner绝不能改变最终的计算结果。所以Combiner只应该用于那种Reduce的输入key/value与输出key/value类型完全一致，且不影响最终结果的场景。比如累加，最大值等。<br>举例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Combine</span> <span class="keyword">extends</span> <span class="title">Reducer</span>&lt;<span class="title">Text</span>,<span class="title">Text</span>,<span class="title">Text</span>,<span class="title">Text</span>&gt; </span>&#123;  </span><br><span class="line">         </span><br><span class="line">       <span class="comment">// Reduce Method  </span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reduce</span><span class="params">(Text key, Iterable&lt;Text&gt; values, Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;  </span><br><span class="line">           <span class="keyword">double</span> sum = <span class="number">0</span>;  </span><br><span class="line">           <span class="keyword">int</span> count = <span class="number">0</span>;  </span><br><span class="line">           <span class="keyword">for</span> (Text value : values) &#123;  </span><br><span class="line">               String fields[] = value.toString().split(<span class="string">","</span>);  </span><br><span class="line">               sum += Double.parseDouble(fields[<span class="number">0</span>]);  </span><br><span class="line">               count += Integer.parseInt(fields[<span class="number">1</span>]);  </span><br><span class="line">           &#125;  </span><br><span class="line">           context.write(key, <span class="keyword">new</span> Text(sum+<span class="string">","</span>+count));  </span><br><span class="line">       &#125;  </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在main方法中设置Combiner的类，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">job.setCombinerClass(Combine.class);</span><br></pre></td></tr></table></figure></p>
+<h1 id="Shuffle-MapReduce的核心">Shuffle-MapReduce的核心</h1><p>首先让我们看一下下面这张图，<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/MapReduce02.jpg" alt="ddd"><br>Mapper处理过程：</p>
+<ol>
+<li>一个输入切片对应一个Mapper， 也就是一个Mapper任务读取文件的一部分；</li>
+<li>每一个Mapper都会对应一个环形缓冲区，用来存储Mapper的输出，默认大小100MB（io.sort.mb属性），一旦达到阀值0.8（io.sort.spill.percent）,一个后台线程把内容写到(spill)磁盘的指定目录（mapred.local.dir）下的新建的一个溢出写文件；</li>
+<li>在写入磁盘之前要对数据进行分区、排序；</li>
+<li>等最后记录写完，合并全部溢出写文件为一个分区且排序的文件。</li>
+</ol>
+<p>Reducer处理过程：</p>
+<ol>
+<li>Reducer通过Http方式得到输出文件的分区，每个Reducer会取相对应分区的数据；</li>
+<li>Reducer取到数据之后，首先会进行排序，之后合并过的数据会再一此进行排序；</li>
+<li>排序阶段合并map输出，然后走Reduce阶段。</li>
+</ol>
+<h1 id="总结">总结</h1><p>MapReduce是一种编程模型，用于大规模数据集（大于1TB）的并行运算。它极大地方便了编程人员在不会分布式并行编程的情况下，将自己的程序运行在分布式系统上。</p>
+<p>以上就是本人对MapReduce的浅薄见解，欢迎指正批评！</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -140,7 +196,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MapReduce概述"><span class="toc-number">1.</span> <span class="toc-text">MapReduce概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MapReduce实现原理"><span class="toc-number">2.</span> <span class="toc-text">MapReduce实现原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#序列化"><span class="toc-number">3.</span> <span class="toc-text">序列化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hadoop中的Partitioner分区"><span class="toc-number">4.</span> <span class="toc-text">hadoop中的Partitioner分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MapReduce中的Combiners编程"><span class="toc-number">5.</span> <span class="toc-text">MapReduce中的Combiners编程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shuffle-MapReduce的核心"><span class="toc-number">6.</span> <span class="toc-text">Shuffle-MapReduce的核心</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
  
   </div>
 
