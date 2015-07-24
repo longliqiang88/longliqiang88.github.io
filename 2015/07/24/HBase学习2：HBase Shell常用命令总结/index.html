@@ -1,0 +1,445 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>HBase学习2：HBase Shell常用命令总结 | 龙子奕</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="longliqiang88">
+    
+
+    
+    <meta name="description" content="进入hbase命令行1./hbase shell
+显示hbase中的表1list
+创建user表，包含info、data两个列族12create &apos;user&apos;, &apos;info&apos;, &apos;data&apos;create &apos;user&apos;, &amp;#123;NAME =&amp;gt; &apos;info&apos;, VERSIONS =&amp;gt; &apos;3&apos;&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HBase学习2：HBase Shell常用命令总结">
+<meta property="og:url" content="http://yoursite.com/2015/07/24/HBase学习2：HBase Shell常用命令总结/index.html">
+<meta property="og:site_name" content="龙子奕">
+<meta property="og:description" content="进入hbase命令行1./hbase shell
+显示hbase中的表1list
+创建user表，包含info、data两个列族12create &apos;user&apos;, &apos;info&apos;, &apos;data&apos;create &apos;user&apos;, &amp;#123;NAME =&amp;gt; &apos;info&apos;, VERSIONS =&amp;gt; &apos;3&apos;&amp;#125;">
+<meta property="og:updated_time" content="2015-07-24T06:33:00.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HBase学习2：HBase Shell常用命令总结">
+<meta name="twitter:description" content="进入hbase命令行1./hbase shell
+显示hbase中的表1list
+创建user表，包含info、data两个列族12create &apos;user&apos;, &apos;info&apos;, &apos;data&apos;create &apos;user&apos;, &amp;#123;NAME =&amp;gt; &apos;info&apos;, VERSIONS =&amp;gt; &apos;3&apos;&amp;#125;">
+
+    
+    <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="龙子奕">龙子奕</a></h1>
+				<h2 class="blog-motto">总结自己是为了更好的出发。  --不忘初心，才能始终。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/" title="HBase学习2：HBase Shell常用命令总结" itemprop="url">HBase学习2：HBase Shell常用命令总结</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-24T06:15:54.000Z" itemprop="datePublished"> 发表于 2015-07-24</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>进入hbase命令行<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./hbase shell</span><br></pre></td></tr></table></figure></p>
+<p>显示hbase中的表<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list</span><br></pre></td></tr></table></figure></p>
+<p>创建user表，包含info、data两个列族<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create 'user', 'info', 'data'</span><br><span class="line">create 'user', &#123;NAME =&gt; 'info', VERSIONS =&gt; '3'&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>向user表中插入信息，row key为rk0001，列族info中添加name列标示符，值为zhangsan<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put 'user', 'rk0001', 'info:name', 'zhangsan'</span><br></pre></td></tr></table></figure></p>
+<p>向user表中插入信息，row key为rk0001，列族info中添加gender列标示符，值为female<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put 'user', 'rk0001', 'info:gender', 'female'</span><br></pre></td></tr></table></figure></p>
+<p>向user表中插入信息，row key为rk0001，列族info中添加age列标示符，值为20<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put 'user', 'rk0001', 'info:age', 20</span><br></pre></td></tr></table></figure></p>
+<p>向user表中插入信息，row key为rk0001，列族data中添加pic列标示符，值为picture<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put 'user', 'rk0001', 'data:pic', 'picture'</span><br></pre></td></tr></table></figure></p>
+<p>获取user表中row key为rk0001的所有信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get 'user', 'rk0001'</span><br></pre></td></tr></table></figure></p>
+<p>获取user表中row key为rk0001，info列族的所有信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get 'user', 'rk0001', 'info'</span><br></pre></td></tr></table></figure></p>
+<p>获取user表中row key为rk0001，info列族的name、age列标示符的信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get 'user', 'rk0001', 'info:name', 'info:age'</span><br></pre></td></tr></table></figure></p>
+<p>获取user表中row key为rk0001，info、data列族的信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get 'user', 'rk0001', 'info', 'data'</span><br><span class="line">get 'user', 'rk0001', &#123;COLUMN =&gt; ['info', 'data']&#125;</span><br></pre></td></tr></table></figure></p>
+<p>获取user表中row key为rk0001，列族为info，版本号最新5个的信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get 'user', 'rk0002', &#123;COLUMN =&gt; 'info', VERSIONS =&gt; 2&#125;</span><br></pre></td></tr></table></figure></p>
+<p>获取user表中row key为rk0001，列标示符中含有a的信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get 'user', 'rk0001', &#123;FILTER =&gt; "(QualifierFilter(=,'substring:a'))"&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查询user表中的所有信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scan 'user'</span><br></pre></td></tr></table></figure></p>
+<p>查询user表中列族为info和data且列标示符中含有a字符的信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scan 'user', &#123;COLUMNS =&gt; ['info', 'data'], FILTER =&gt; "(QualifierFilter(=,'substring:a'))"&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查询user表中列族为info，rk范围是[rk0001, rk0003)的数据<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scan 'user', &#123;COLUMNS =&gt; 'info', STARTROW =&gt; 'rk0001', ENDROW =&gt; 'rk0003'&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查询user表中row key以rk字符开头的<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scan 'user',&#123;FILTER=&gt;"PrefixFilter('rk')"&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查询user表中指定范围的数据<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scan 'user', &#123;TIMERANGE =&gt; [1392368783980, 1392380169184]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>删除user表row key为rk0001，列标示符为info:name的数据<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete 'user', 'rk0001', 'info:name'</span><br></pre></td></tr></table></figure></p>
+<p>删除user表row key为rk0001，列标示符为info:name，timestamp为1392383705316的数据<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete 'user', 'rk0001', 'info:name', 1392383705316</span><br></pre></td></tr></table></figure></p>
+<p>清空user表中的数据<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truncate 'user'</span><br></pre></td></tr></table></figure></p>
+<p>修改表结构<br>首先停用user表<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disable 'user'</span><br></pre></td></tr></table></figure></p>
+<p>添加两个列族f1和f2<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter 'user', NAME =&gt; 'f1'</span><br><span class="line">alter 'user', NAME =&gt; 'f2'</span><br></pre></td></tr></table></figure></p>
+<p>启用表<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enable 'user'</span><br></pre></td></tr></table></figure></p>
+<p>删除表<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">disable 'user'</span><br><span class="line">drop 'user'</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/07/24/HBase学习2：HBase Shell常用命令总结/" data-title="HBase学习2：HBase Shell常用命令总结 | 龙子奕" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/07/24/HBase学习1：单节点安装部署教程/"  title="HBase学习1：单节点安装部署教程">
+ <strong>下一篇：</strong><br/> 
+ <span>HBase学习1：单节点安装部署教程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://github.com/" target="_blank" title="Github官网">Github官网</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.csdn.net/" target="_blank" title="CSDN官网">CSDN官网</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 爱篮球爱健身的码农一枚。 <br/>
+			什么也阻挡不了我们前行的脚步，即便已经夕阳日暮。</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="longliqiang88">longliqiang88</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
