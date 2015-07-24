@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="龙子奕">
 <meta property="og:description" content="什么是HBaseHBase – Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统，利用HBase技术可在廉价PC Server上搭建起大规模结构化存储集群。HBase利用Hadoop HDFS作为其文件存储系统，利用Hadoop MapReduce来处理HBase中的海量数据，利用Zookeeper作为协调工具。
 注意：HDFS不同于普通的关系型数据库，HDF">
-<meta property="og:updated_time" content="2015-07-24T02:04:12.467Z">
+<meta property="og:updated_time" content="2015-07-24T06:02:44.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase学习1：单节点安装部署教程">
 <meta name="twitter:description" content="什么是HBaseHBase – Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统，利用HBase技术可在廉价PC Server上搭建起大规模结构化存储集群。HBase利用Hadoop HDFS作为其文件存储系统，利用Hadoop MapReduce来处理HBase中的海量数据，利用Zookeeper作为协调工具。
@@ -105,10 +105,11 @@
 <ol>
 <li>通过单个row key访问</li>
 <li>通过row key中的range访问</li>
-<li>全表扫描</li>
+<li>全表扫描<br>Row key行键 (Row key)可以是任意字符串(最大长度是 64KB，实际应用中长度一般为 10-100bytes)，在hbase内部，row key保存为字节数组。<br>存储时，数据按照Row key的字典序(byte order)排序存储。设计key时，要充分排序存储这个特性，将经常一起读取的行存储放到一起。(位置相关性)<br>注意：<br>字典序对int排序的结果是1,10,100,11,12,13,14,15,16,17,18,19,2,20,21,…,9,91,92,93,94,95,96,97,98,99。要保持整形的自然序，行键必须用0作左填充。<br>行的一次读写是原子操作 (不论一次读写多少列)。这个设计决策能够使用户很容易的理解程序在对同一个行进行并发更新操作时的行为。</li>
 </ol>
-<p>列族：Column Family<br>列族在创建表的时候声明，一个列族可以 包含多个列，列中的数据都是以二进制的形式存在的，没有数据类型。列族可以动态指定，可以存放任意大的数据。</p>
-<p>时间戳： timestamp<br>Hbase通过rows和columns确定的唯一一个存储单元叫做cell，每一个cell都保存着同一数据的多个版本，版本通过时间戳来索引。</p>
+<p>列族：Column Family<br>hbase表中的每个列，都归属与某个列族。列族是表的chema的一部分(而列不是)，必须在使用表之前定义。列名都以列族作为前缀。例如courses:history ， courses:math 都属于 courses 这个列族。<br>访问控制、磁盘和内存的使用统计都是在列族层面进行的。实际应用中，列族上的控制权限能 帮助我们管理不同类型的应用：我们允许一些应用可以添加新的基本数据、一些应用可以读取基本数据并创建继承的列族、一些应用则只允许浏览数据（甚至可能因 为隐私的原因不能浏览所有数据）。</p>
+<p>时间戳： timestamp<br>Hbase通过rows和columns确定的唯一一个存储单元叫做cell，每一个cell都保存着同一数据的多个版本，版本通过时间戳来索引。时间戳的类型是 64位整型。时间戳可以由hbase(在数据写入时自动 )赋值，此时时间戳是精确到毫秒的当前系统时间。时间戳也可以由客户显式赋值。如果应用程序要避免数据版本冲突，就必须自己生成具有唯一性的时间戳。每个 cell中，不同版本的数据按照时间倒序排序，即最新的数据排在最前面。<br>为了避免数据存在过多版本造成的的管理 (包括存贮和索引)负担，hbase提供了两种数据版本回收方式。一是保存数据的最后n个版本，二是保存最近一段时间内的版本（比如最近七天）。用户可以针对每个列族进行设置。</p>
+<p>Cell<br>由{row key, column( =<family> + <label>), version} 唯一确定的单元。cell中的数据是没有类型的，全部是字节码形式存贮。</label></family></p>
 <h1 id="部署HBase">部署HBase</h1><h2 id="下载HBase">下载HBase</h2><p>以hbase-0.96.2-hadoop2-bin.tar.gz部署单节点为例。</p>
 <h2 id="安装HBase">安装HBase</h2><p>解压到hbase文件夹下：tar -zvxf hbase-0.96.2-hadoop2-bin.tar.gz -C /hbase/ </p>
 <p>为了部署单节点，需要修改配置文件/hbase/hbase-0.96.2/conf<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hbase-env.sh</span><br></pre></td></tr></table></figure></p>
