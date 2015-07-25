@@ -5,39 +5,28 @@
   <meta charset="UTF-8">
   
     <title>龙子奕</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="longliqiang88">
     
-
-    
     <meta name="description" content="不忘初心，才能始终">
-<meta property="og:type" content="website">
-<meta property="og:title" content="龙子奕">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="龙子奕">
-<meta property="og:description" content="不忘初心，才能始终">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="龙子奕">
-<meta name="twitter:description" content="不忘初心，才能始终">
-
     
-    <link rel="alternative" href="/atom.xml" title="龙子奕" type="application/atom+xml">
+    
+    
     
     
     <link rel="icon" href="/img/favicon.ico">
     
     
-    <link rel="apple-touch-icon" href="/img/jacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
   <body>
     <header>
-      
-<div>
+      <div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="龙子奕">龙子奕</a></h1>
@@ -47,19 +36,20 @@
 			</a></div>
 			<nav class="animated">
 				<ul>
-					<ul>
-					 
+					
 						<li><a href="/">首页</a></li>
 					
-						<li><a href="/archives">归档</a></li>
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/categories">分类</a></li>
 					
 						<li><a href="/about">关于</a></li>
 					
 					<li>
- 					
+					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -67,538 +57,161 @@
 				</ul>
 			</nav>			
 </div>
+
     </header>
     <div id="container">
       <div id="main">
 
-   
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理" itemprop="url">
+  
+    <h1 itemprop="name">HBase学习3：综合梳理</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+       <p itemprop="description" >Hbase特点：HBase介于nosql和RDBMS之间，仅能通过主键(row key)和主键的range来检索数据，仅支持单行事务(可通过hive支持来实现多表join等复杂操作)。主要用来存储非结构化和半结构化的松散数据。与hadoop一样，Hbase目标主要依靠横向扩展，通</p>
+      
     
-      <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理" itemprop="url">HBase学习3：综合梳理</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-25T08:25:27.000Z" itemprop="datePublished"> 发表于 2015-07-25</time>
+    <time datetime="2015-07-25T08:25:27.000Z" itemprop="datePublished">2015-07-25</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/" title="CloudFoundry学习1：单节点部署CloudFoundry" itemprop="url">
+  
+    <h1 itemprop="name">CloudFoundry学习1：单节点部署CloudFoundry</h1>
     
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Hbase特点：">Hbase特点：</h1><p>HBase介于nosql和RDBMS之间，仅能通过主键(row key)和主键的range来检索数据，仅支持单行事务(可通过hive支持来实现多表join等复杂操作)。主要用来存储非结构化和半结构化的松散数据。与hadoop一样，Hbase目标主要依靠横向扩展，通过不断增加廉价的商用服务器，来增加计算和存储能力。</p>
-<p>HBase中的表一般有这样的特点：</p>
-<ol>
-<li>大：一个表可以有上亿行，上百万列</li>
-<li>面向列:面向列(族)的存储和权限控制，列(族)独立检索。</li>
-<li>稀疏:对于为空(null)的列，并不占用存储空间，因此，表可以设计的非常稀疏。
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/25/HBase学习3：综合梳理/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+     
+       <p itemprop="description" >Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
+环境要求</p>
+      
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+    <time datetime="2015-07-24T06:53:55.000Z" itemprop="datePublished">2015-07-24</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/" title="HBase学习2：HBase Shell常用命令总结" itemprop="url">
+  
+    <h1 itemprop="name">HBase学习2：HBase Shell常用命令总结</h1>
     
-      <a href="/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/" title="CloudFoundry学习1：单节点部署CloudFoundry" itemprop="url">CloudFoundry学习1：单节点部署CloudFoundry</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-24T06:53:55.000Z" itemprop="datePublished"> 发表于 2015-07-24</time>
+     
+       <p itemprop="description" >进入hbase命令行1./hbase shell
+显示hbase中的表1list
+创建user表，包含info、data两个列族12create &#39;user&#39;, &#39;info&#39;, &#39;data&#39;create &#39;user&#39;, &amp;#123;NAME =&amp;gt; &#39;info&#39;, VERSI</p>
+      
     
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Cloud_Foundry">Cloud Foundry</h1><p>Cloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。</p>
-<h1 id="环境要求">环境要求</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+    <time datetime="2015-07-24T06:15:54.000Z" itemprop="datePublished">2015-07-24</time>
+  </a>
+</section>
 
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/24/HBase学习1：单节点安装部署教程/" title="HBase学习1：单节点安装部署教程" itemprop="url">
+  
+    <h1 itemprop="name">HBase学习1：单节点安装部署教程</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+       <p itemprop="description" >什么是HBaseHBase – Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统，利用HBase技术可在廉价PC Server上搭建起大规模结构化存储集群。HBase利用Hadoop HDFS作为其文件存储系统，利用Hadoop MapRed</p>
+      
     
-      <a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/" title="HBase学习2：HBase Shell常用命令总结" itemprop="url">HBase学习2：HBase Shell常用命令总结</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-24T06:15:54.000Z" itemprop="datePublished"> 发表于 2015-07-24</time>
+    <time datetime="2015-07-24T04:44:55.000Z" itemprop="datePublished">2015-07-24</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/23/Java学习-注解/" title="Java学习-注解" itemprop="url">
+  
+    <h1 itemprop="name">Java学习-注解</h1>
     
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>进入hbase命令行<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./hbase shell</span><br></pre></td></tr></table></figure></p>
-<p>显示hbase中的表<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list</span><br></pre></td></tr></table></figure></p>
-<p>创建user表，包含info、data两个列族<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create 'user', 'info', 'data'</span><br><span class="line">create 'user', &#123;NAME =&gt; 'info', VERSIONS =&gt; '3'&#125;</span><br></pre></td></tr></table></figure></p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+     
+       <p itemprop="description" >注解相当于一种标记，在程序中加入注解就是为程序打上了某种标记。加入标记后，Java编译器可以利用反射机制来了解类和各种元素上有无任何标记，然后根据标记去做相应的事情。标记可以加在包、类、字段、方法、方法的参数以及局部变量上。
+定义一个最简单的注解：1public @interfa</p>
+      
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+    <time datetime="2015-07-23T13:47:08.000Z" itemprop="datePublished">2015-07-23</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/17/ZooKeeper-Hadoop分布式协调服务/" title="ZooKeeper-Hadoop分布式协调服务" itemprop="url">
+  
+    <h1 itemprop="name">ZooKeeper-Hadoop分布式协调服务</h1>
     
-      <a href="/2015/07/24/HBase学习1：单节点安装部署教程/" title="HBase学习1：单节点安装部署教程" itemprop="url">HBase学习1：单节点安装部署教程</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-24T04:44:55.000Z" itemprop="datePublished"> 发表于 2015-07-24</time>
+     
+       <p itemprop="description" >什么是ZooKeeperZookeeper是Google的Chubby的一个开源实现，是Hadoop的分布式协调服务。Zookeeper包含了一个简单的原语集，分布式应用程序可以基于它实现同步服务，配置维护和命令服务等。Zookeeper可以提供一组工具，使你在构建分布式应用时能</p>
+      
     
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是HBase">什么是HBase</h1><p>HBase – Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统，利用HBase技术可在廉价PC Server上搭建起大规模结构化存储集群。HBase利用Hadoop HDFS作为其文件存储系统，利用Hadoop MapReduce来处理HBase中的海量数据，利用Zookeeper作为协调工具。</p>
-<p>注意：HDFS不同于普通的关系型数据库，HDFS中的数据没有任何数据类型，都是已二进制的形式存在的。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/24/HBase学习1：单节点安装部署教程/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+    <time datetime="2015-07-17T03:42:46.000Z" itemprop="datePublished">2015-07-17</time>
+  </a>
+</section>
 
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/13/利用MapReduce实现倒排索引/" title="利用MapReduce实现倒排索引" itemprop="url">
+  
+    <h1 itemprop="name">利用MapReduce实现倒排索引</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+       <p itemprop="description" >什么是倒排索引倒排索引源于实际应用中需要根据属性的值来查找记录。这种索引表中的每一项都包括一个属性值和具有该属性值的各记录的地址。
+倒排索引简单地就是：根据单词，返回它在哪个文件中出现过，而且频率是多少的结果。这就像百度里的搜索，你输入一个关键字，那么百度引擎就迅速的在它的服务器</p>
+      
     
-      <a href="/2015/07/23/Java学习-注解/" title="Java学习-注解" itemprop="url">Java学习-注解</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-23T13:47:08.000Z" itemprop="datePublished"> 发表于 2015-07-23</time>
+    <time datetime="2015-07-13T07:36:24.000Z" itemprop="datePublished">2015-07-13</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/12/MapReduce-Hadoop分布式计算模型/" title="MapReduce-Hadoop分布式计算模型" itemprop="url">
+  
+    <h1 itemprop="name">MapReduce-Hadoop分布式计算模型</h1>
     
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="注解">注解</h1><p>相当于一种标记，在程序中加入注解就是为程序打上了某种标记。加入标记后，Java编译器可以利用反射机制来了解类和各种元素上有无任何标记，然后根据标记去做相应的事情。标记可以加在包、类、字段、方法、方法的参数以及局部变量上。</p>
-<p>定义一个最简单的注解：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="annotation">@interface</span> MyAnnotation&#123;  ...   &#125;</span><br></pre></td></tr></table></figure></p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/23/Java学习-注解/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+     
+       <p itemprop="description" >MapReduce概述MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。
+MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()两个函数，即可实现分布式计算，非常简单。这两个函数的形参是key、va</p>
+      
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+    <time datetime="2015-07-12T13:38:42.000Z" itemprop="datePublished">2015-07-12</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/12/Java学习-Socket编程/" title="Java学习-Socket编程" itemprop="url">
+  
+    <h1 itemprop="name">Java学习-Socket编程</h1>
     
-      <a href="/2015/07/17/ZooKeeper-Hadoop分布式协调服务/" title="ZooKeeper-Hadoop分布式协调服务" itemprop="url">ZooKeeper-Hadoop分布式协调服务</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-17T03:42:46.000Z" itemprop="datePublished"> 发表于 2015-07-17</time>
+     
+       <p itemprop="description" >什么是SocketJava中的Socket编程其实就是网络编程，一般使用基于TCP/IP协议的Socket编程。所有关于Socket编程的API都在Java.net包里，一般实现客户端和服务器端之间的通讯。
+Socket通讯的过程Server端Listen(监听)某个端口是否有连</p>
+      
     
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是ZooKeeper">什么是ZooKeeper</h1><p>Zookeeper是Google的Chubby的一个开源实现，是Hadoop的分布式协调服务。Zookeeper包含了一个简单的原语集，分布式应用程序可以基于它实现同步服务，配置维护和命令服务等。Zookeeper可以提供一组工具，使你在构建分布式应用时能够对部分失败进行正确处理。</p>
-<h1 id="为什么要使用Zookeeper？">为什么要使用Zookeeper？</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/17/ZooKeeper-Hadoop分布式协调服务/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+    <time datetime="2015-07-12T13:08:40.000Z" itemprop="datePublished">2015-07-12</time>
+  </a>
+</section>
 
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2015/07/12/Java学习-反射机制/" title="Java学习-反射机制" itemprop="url">
+  
+    <h1 itemprop="name">Java学习-反射机制</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+       <p itemprop="description" >什么是反射？反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，1Class.forName(&quot;com.mysql.jdbc.Driver</p>
+      
     
-      <a href="/2015/07/13/利用MapReduce实现倒排索引/" title="利用MapReduce实现倒排索引" itemprop="url">利用MapReduce实现倒排索引</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-13T07:36:24.000Z" itemprop="datePublished"> 发表于 2015-07-13</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是倒排索引">什么是倒排索引</h1><p>倒排索引源于实际应用中需要根据属性的值来查找记录。这种索引表中的每一项都包括一个属性值和具有该属性值的各记录的地址。</p>
-<p>倒排索引简单地就是：根据单词，返回它在哪个文件中出现过，而且频率是多少的结果。这就像百度里的搜索，你输入一个关键字，那么百度引擎就迅速的在它的服务器里找到有该关键字的文件，并根据频率和其他一些策略（如页面点击投票率）等来给你返回结果。这个过程中，倒排索引就起到很关键的作用。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/13/利用MapReduce实现倒排索引/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/12/MapReduce-Hadoop分布式计算模型/" title="MapReduce-Hadoop分布式计算模型" itemprop="url">MapReduce-Hadoop分布式计算模型</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-12T13:38:42.000Z" itemprop="datePublished"> 发表于 2015-07-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="MapReduce概述">MapReduce概述</h1><p>MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。</p>
-<p>MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()两个函数，即可实现分布式计算，非常简单。这两个函数的形参是key、value对，表示函数的输入信息。</p>
-<h1 id="MapReduce实现原理">MapReduce实现原理</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/12/MapReduce-Hadoop分布式计算模型/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/12/Java学习-Socket编程/" title="Java学习-Socket编程" itemprop="url">Java学习-Socket编程</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-12T13:08:40.000Z" itemprop="datePublished"> 发表于 2015-07-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是Socket">什么是Socket</h1><p>Java中的Socket编程其实就是网络编程，一般使用基于TCP/IP协议的Socket编程。所有关于Socket编程的API都在Java.net包里，一般实现客户端和服务器端之间的通讯。</p>
-<h1 id="Socket通讯的过程">Socket通讯的过程</h1><p>Server端Listen(监听)某个端口是否有连接请求，Client端向Server 端发出Connect(连接)请求，Server端向Client端发回Accept（接受）消息。一个连接就建立起来了。Server端和Client 端都可以通过Send，Write等方法与对方通信。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/12/Java学习-Socket编程/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/12/Java学习-反射机制/" title="Java学习-反射机制" itemprop="url">Java学习-反射机制</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang88" target="_blank" itemprop="author">longliqiang88</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-12T08:00:55.000Z" itemprop="datePublished"> 发表于 2015-07-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是反射？">什么是反射？</h1><p>反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver.class"</span>).newInstance()</span><br></pre></td></tr></table></figure></p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/12/Java学习-反射机制/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
+    <time datetime="2015-07-12T08:00:55.000Z" itemprop="datePublished">2015-07-12</time>
+  </a>
+</section>
 
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </div>
@@ -615,27 +228,14 @@
   <div class="linkslist">
   <p class="asidetitle">友情链接</p>
     <ul>
-        
-          <li>
-            
-            	<a href="https://github.com/" target="_blank" title="Github官网">Github官网</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://www.csdn.net/" target="_blank" title="CSDN官网">CSDN官网</a>
-            
-          </li>
-        
+      <li><a href="http://yangjian.me" target="_blank" title="YangJian">Alimon's Blog</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
     </ul>
 </div>
 
-  
-
 
   <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
 </aside>
@@ -649,40 +249,23 @@
 	</div>
 	
 	
-	<section class="info">
-		<p> 爱篮球爱健身的码农一枚。 <br/>
-			什么也阻挡不了我们前行的脚步，即便已经夕阳日暮。</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
+	<div class="social-font clearfix">
 		
-		
-		
-		
-		
+		<a href="http://weibo.com/http://weibo.com/u/2643661235" target="_blank" title="weibo"></a>
 		
 		
 		
 		
 		
 	</div>
-			
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
 		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
-		
-		<a href="/about" target="_blank" title="longliqiang88">longliqiang88</a>
-		
+		<a href="http://yoursite.com" target="_blank" title="longliqiang88">longliqiang88</a>
 		
 		</p>
 </div>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
-
+    <script src="/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){ 
   $('.navbar').click(function(){
@@ -700,6 +283,18 @@ $(document).ready(function(){
       a = $('#asidepart'),
       c = $('.closeaside'),
       o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
   c.click(function(){
     a.addClass('fadeOut').css('display', 'none');
     o.css('display', 'block').addClass('fadeIn');
@@ -713,18 +308,6 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-        
-    }
-  });
 });
 </script>
 
@@ -733,64 +316,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
-
-
-
-<!-- Analytics Begin -->
-
-
-
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-
-
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
 
   </body>
  </html>
