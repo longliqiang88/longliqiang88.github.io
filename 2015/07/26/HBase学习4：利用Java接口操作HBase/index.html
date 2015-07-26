@@ -1,0 +1,489 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>HBase学习4：利用Java接口操作HBase | llq`s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="longliqiang">
+    
+
+    
+    <meta name="description" content="多余不赘述，直接上代码（记得项目中一定要添加必须的Jar文件）
+创建表1234567891011public void testCreate() throws Exception		Configuration conf = HBaseConfiguration.create();		conf.set(&quot;hbase.zookeeper.quorum&quot;,&quot;hadoop01,hadoop02,hadoo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HBase学习4：利用Java接口操作HBase">
+<meta property="og:url" content="http://yoursite.com/2015/07/26/HBase学习4：利用Java接口操作HBase/index.html">
+<meta property="og:site_name" content="llq`s blog">
+<meta property="og:description" content="多余不赘述，直接上代码（记得项目中一定要添加必须的Jar文件）
+创建表1234567891011public void testCreate() throws Exception		Configuration conf = HBaseConfiguration.create();		conf.set(&quot;hbase.zookeeper.quorum&quot;,&quot;hadoop01,hadoop02,hadoo">
+<meta property="og:updated_time" content="2015-07-26T07:52:34.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HBase学习4：利用Java接口操作HBase">
+<meta name="twitter:description" content="多余不赘述，直接上代码（记得项目中一定要添加必须的Jar文件）
+创建表1234567891011public void testCreate() throws Exception		Configuration conf = HBaseConfiguration.create();		conf.set(&quot;hbase.zookeeper.quorum&quot;,&quot;hadoop01,hadoop02,hadoo">
+
+    
+    <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/11.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="llq`s blog" title="llq`s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="llq`s blog">llq`s blog</a></h1>
+				<h2 class="blog-motto">Summary is for a better start.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/" title="HBase学习4：利用Java接口操作HBase" itemprop="url">HBase学习4：利用Java接口操作HBase</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-26T07:41:50.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#创建表"><span class="toc-number">1.</span> <span class="toc-text">创建表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查询数据"><span class="toc-number">2.</span> <span class="toc-text">查询数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查询一个值"><span class="toc-number">2.1.</span> <span class="toc-text">查询一个值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询多个值"><span class="toc-number">2.2.</span> <span class="toc-text">查询多个值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#插入数据"><span class="toc-number">3.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除数据"><span class="toc-number">4.</span> <span class="toc-text">删除数据</span></a></li></ol>
+		
+		</div>
+		
+		<p>多余不赘述，直接上代码（记得项目中一定要添加必须的Jar文件）</p>
+<h1 id="创建表">创建表</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreate</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span><br><span class="line">		Configuration conf </span>= HBaseConfiguration.create();</span><br><span class="line">		conf.set(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"hadoop01,hadoop02,hadoop03"</span>);<span class="comment">//制定zookeeper的地址</span></span><br><span class="line">		HBaseAdmin admin = <span class="keyword">new</span> HBaseAdmin(conf);<span class="comment">//指定要操作的HBase集群</span></span><br><span class="line">		HTableDescriptor td = <span class="keyword">new</span> HTableDescriptor(<span class="string">"user"</span>);<span class="comment">//设定表名字</span></span><br><span class="line">		HColumnDescriptor cd = <span class="keyword">new</span> HColumnDescriptor(<span class="string">"info"</span>);<span class="comment">//设定列族,可以指定多个列族</span></span><br><span class="line">		cd.setMaxVersions(<span class="number">10</span>);</span><br><span class="line">		td.addFamily(cd);</span><br><span class="line">		admin.createTable(td);</span><br><span class="line">		admin.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="查询数据">查询数据</h1><h2 id="查询一个值">查询一个值</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGet</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;	</span><br><span class="line">		HTable table = <span class="keyword">new</span> HTable(conf, <span class="string">"user"</span>);</span><br><span class="line">		Get get = <span class="keyword">new</span> Get(Bytes.toBytes(<span class="string">"rk0001"</span>));<span class="comment">//取表中行键为rk0001的行</span></span><br><span class="line">		get.setMaxVersions(<span class="number">5</span>);</span><br><span class="line">		Result result = table.get(get);</span><br><span class="line">		String r = Bytes.toString(result.getValue(Bytes.toBytes(<span class="string">"info"</span>),Bytes.toBytes(<span class="string">"money"</span>)));<span class="comment">//指定列族和列的详细标识</span></span><br><span class="line">		System.out.println(r);	</span><br><span class="line">		table.close();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="查询多个值">查询多个值</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testScan</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		HTable table = <span class="keyword">new</span> HTable(conf, <span class="string">"user"</span>);</span><br><span class="line">		Scan scan = <span class="keyword">new</span> Scan(Bytes.toBytes(<span class="string">"rk0001"</span>), Bytes.toBytes(<span class="string">"rk0002"</span>));<span class="comment">//指定行键的一个范围</span></span><br><span class="line">		scan.addFamily(Bytes.toBytes(<span class="string">"info"</span>));</span><br><span class="line">		ResultScanner scanner = table.getScanner(scan);</span><br><span class="line">		<span class="keyword">for</span>(Result r : scanner)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(KeyValue kv : r.list())&#123;<span class="comment">//同时输出列族和列的详细标识</span></span><br><span class="line">				String family = <span class="keyword">new</span> String(kv.getFamily());</span><br><span class="line">				System.out.println(family);</span><br><span class="line">				String qualifier = <span class="keyword">new</span> String(kv.getQualifier());</span><br><span class="line">				System.out.println(qualifier);</span><br><span class="line">				System.out.println(<span class="keyword">new</span> String(kv.getValue()));</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	    table.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="插入数据">插入数据</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPut</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		HTable table = <span class="keyword">new</span> HTable(conf, <span class="string">"user"</span>);</span><br><span class="line">		Put put = <span class="keyword">new</span> Put(Bytes.toBytes(<span class="string">"rk0003"</span>));<span class="comment">//指定行键</span></span><br><span class="line">		<span class="comment">//三个参数的分别代表：列族，列的详细标识，value，也有四个参数的方法，第四个参数指的是时间戳</span></span><br><span class="line">		put.add(Bytes.toBytes(<span class="string">"info"</span>), Bytes.toBytes(<span class="string">"name"</span>), Bytes.toBytes(<span class="string">"liuyan"</span>));</span><br><span class="line">		table.put(put);</span><br><span class="line">		table.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="删除数据">删除数据</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDel</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		HTable table = <span class="keyword">new</span> HTable(conf, <span class="string">"user"</span>);</span><br><span class="line">		Delete del = <span class="keyword">new</span> Delete(Bytes.toBytes(<span class="string">"rk0001"</span>));<span class="comment">//指定行键</span></span><br><span class="line">		del.deleteColumn(Bytes.toBytes(<span class="string">"data"</span>), Bytes.toBytes(<span class="string">"pic"</span>));<span class="comment">//如果不执行改方法，会将这整行全部删除</span></span><br><span class="line">		table.delete(del);</span><br><span class="line">		table.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HBase/">HBase</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/07/26/HBase学习4：利用Java接口操作HBase/" data-title="HBase学习4：利用Java接口操作HBase | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/07/25/HBase学习3：综合梳理/"  title="HBase学习3：综合梳理">
+ <strong>下一篇：</strong><br/> 
+ <span>HBase学习3：综合梳理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#创建表"><span class="toc-number">1.</span> <span class="toc-text">创建表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查询数据"><span class="toc-number">2.</span> <span class="toc-text">查询数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查询一个值"><span class="toc-number">2.1.</span> <span class="toc-text">查询一个值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询多个值"><span class="toc-number">2.2.</span> <span class="toc-text">查询多个值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#插入数据"><span class="toc-number">3.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删除数据"><span class="toc-number">4.</span> <span class="toc-text">删除数据</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MapReduce/" title="MapReduce">MapReduce<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2643661235&verifier=891f03cc&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> A programmer,love basketball and fitness <br/>
+			You cannot improve your past, but you can improve your future. Once time is wasted, life is wasted.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2643661235" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="longliqiang">longliqiang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

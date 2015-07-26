@@ -81,6 +81,68 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/" title="HBase学习4：利用Java接口操作HBase" itemprop="url">HBase学习4：利用Java接口操作HBase</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-26T07:41:50.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>多余不赘述，直接上代码（记得项目中一定要添加必须的Jar文件）</p>
+<h1 id="创建表">创建表</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreate</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span><br><span class="line">		Configuration conf </span>= HBaseConfiguration.create();</span><br><span class="line">		conf.set(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"hadoop01,hadoop02,hadoop03"</span>);<span class="comment">//制定zookeeper的地址</span></span><br><span class="line">		HBaseAdmin admin = <span class="keyword">new</span> HBaseAdmin(conf);<span class="comment">//指定要操作的HBase集群</span></span><br><span class="line">		HTableDescriptor td = <span class="keyword">new</span> HTableDescriptor(<span class="string">"user"</span>);<span class="comment">//设定表名字</span></span><br><span class="line">		HColumnDescriptor cd = <span class="keyword">new</span> HColumnDescriptor(<span class="string">"info"</span>);<span class="comment">//设定列族,可以指定多个列族</span></span><br><span class="line">		cd.setMaxVersions(<span class="number">10</span>);</span><br><span class="line">		td.addFamily(cd);</span><br><span class="line">		admin.createTable(td);</span><br><span class="line">		admin.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HBase/">HBase</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理" itemprop="url">HBase学习3：综合梳理</a>
   </h1>
   <p class="article-author">By
@@ -639,67 +701,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/12/Java学习-反射机制/" title="Java学习-反射机制" itemprop="url">Java学习-反射机制</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-12T08:00:55.000Z" itemprop="datePublished"> 发表于 2015-07-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是反射？">什么是反射？</h1><p>反射就是程序在运行时能够获取自身的信息。只要知道类的名字，就可以通过反射机制来获取类的所有信息。通过反射可以实现动态创建对象和编译，体现出很大的灵活性。举个例子来说，在学jdbc时用过一行代码，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver.class"</span>).newInstance()</span><br></pre></td></tr></table></figure></p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/12/Java学习-反射机制/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Java/">Java</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/反射/">反射</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -722,7 +723,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>6</sup></a></li>
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>7</sup></a></li>
 		  
 		
 		  
@@ -747,11 +748,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HBase/" title="HBase">HBase<sup>3</sup></a></li>
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
 			
 		
 			
