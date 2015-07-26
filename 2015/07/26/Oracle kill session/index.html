@@ -4,26 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>CloudFoundry学习1：单节点部署CloudFoundry | llq`s blog</title>
+    <title>Oracle kill session | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
+    <meta name="description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CloudFoundry学习1：单节点部署CloudFoundry">
-<meta property="og:url" content="http://yoursite.com/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/index.html">
+<meta property="og:title" content="Oracle kill session">
+<meta property="og:url" content="http://yoursite.com/2015/07/26/Oracle kill session/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
-<meta property="og:updated_time" content="2015-07-26T03:31:25.615Z">
+<meta property="og:description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
+<meta property="og:updated_time" content="2015-07-26T13:32:09.577Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CloudFoundry学习1：单节点部署CloudFoundry">
-<meta name="twitter:description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
+<meta name="twitter:title" content="Oracle kill session">
+<meta name="twitter:description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -83,14 +80,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/" title="CloudFoundry学习1：单节点部署CloudFoundry" itemprop="url">CloudFoundry学习1：单节点部署CloudFoundry</a>
+      <a href="/2015/07/26/Oracle kill session/" title="Oracle kill session" itemprop="url">Oracle kill session</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-24T06:53:55.000Z" itemprop="datePublished"> 发表于 2015-07-24</time>
+    <time datetime="2015-07-26T13:28:07.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
     
   </p>
 </header>
@@ -99,17 +96,15 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cloud_Foundry"><span class="toc-number">1.</span> <span class="toc-text">Cloud Foundry</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#环境要求"><span class="toc-number">2.</span> <span class="toc-text">环境要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">3.</span> <span class="toc-text">安装步骤</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h1 id="Cloud_Foundry">Cloud Foundry</h1><p>Cloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。</p>
-<h1 id="环境要求">环境要求</h1><a id="more"></a>
-<p>以Ubuntu 10.04 Server 64-bit为例，记住一定要是64位的，因为CF是构建在64位架构上。一个Ubuntu环境就够了，接下来就是按照文档来单节点部署一个实例，事实上在生产环境就是应该多节点安装，每个模块可以分别安装在不同的VM上面，但是开发和实验环境为了方便，就安装在一台VM上就足够了。</p>
-<h1 id="安装步骤">安装步骤</h1><p>安装前最好更新一下源<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></p>
-<p>安装curl工具：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install curl</span><br></pre></td></tr></table></figure></p>
-<p>接下来执行：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt; &lt;(curl -s -k -B  https://raw.github.com/cloudfoundry/vcap/master/dev_setup/bin/vcap_dev_setup)</span><br></pre></td></tr></table></figure></p>
-<p>系统会自动开始download所需的一切，中间会遇到一些地方需要输入密码，所以在安装开始后，需要经常盯着，不过这个安装过程比较耗时，下载完还有很多需要编译的东西。</p>
+		<p>有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。<br>可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。<br>用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.object_id, a.session_id, b.object_name, c.*  </span><br><span class="line">  FROM v$locked_object a, dba_objects b, v$session c  </span><br><span class="line">WHERE a.object_id = b.object_id  </span><br><span class="line">   AND a.SESSION_ID = c.sid(+)</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>杀Seesion的SQL语句语法如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter system kill session 'sid, serial#'</span><br></pre></td></tr></table></figure></p>
+<p>如上面查出来的一条记录的sid是53, serial#为663,就执行以下的语句<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter system kill session '53,663'</span><br></pre></td></tr></table></figure></p>
+<p>如果要一次性杀死多个会话，一个一个填写sid和serial#十分的繁琐，应该在查询被锁对象的同时拼凑出多条的杀会话语句，以分号分隔，一起复制下来，然后就可以批量的执行了。<br>拼凑kill语句的方式如下，下面加了一个过滤条件和一个排序，杀除真正关心的表，并且着重注意超时时间过长的会话。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT'alter system kill session '''|| c.sid ||''||','|| c.serial# ||''';',a.object_id, a.session_id, b.object_name, c.*</span><br><span class="line">FROMv$locked_object a, dba_objects b, v$session c WHEREa.object_id = b.object_id ANDa.SESSION_ID = c.sid(+) ANDschemaname ='Unmi' ORDERBYlogon_time</span><br></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -117,13 +112,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CloudFoundry/">CloudFoundry</a>
+  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/环境部署/">环境部署</a>
+  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
   </div>
 
 </div>
@@ -132,7 +127,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/" data-title="CloudFoundry学习1：单节点部署CloudFoundry | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/07/26/Oracle kill session/" data-title="Oracle kill session | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -146,18 +141,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理">
+ <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/" title="Oracle 11g导入DMP文件步骤">
   <strong>上一篇：</strong><br/>
   <span>
-  HBase学习3：综合梳理</span>
+  Oracle 11g导入DMP文件步骤</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/"  title="HBase学习2：HBase Shell常用命令总结">
+<a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/"  title="HBase学习4：利用Java接口操作HBase">
  <strong>下一篇：</strong><br/> 
- <span>HBase学习2：HBase Shell常用命令总结
+ <span>HBase学习4：利用Java接口操作HBase
 </span>
 </a>
 </div>
@@ -172,7 +167,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cloud_Foundry"><span class="toc-number">1.</span> <span class="toc-text">Cloud Foundry</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#环境要求"><span class="toc-number">2.</span> <span class="toc-text">环境要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">3.</span> <span class="toc-text">安装步骤</span></a></li></ol>
+ 
  
   </div>
 

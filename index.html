@@ -81,6 +81,131 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/" title="Oracle 11g导入DMP文件步骤" itemprop="url">Oracle 11g导入DMP文件步骤</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-26T13:28:15.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>可以使用sql plus 也可以使用 plsql</p>
+<h1 id="开启Oracle服务">开启Oracle服务</h1><p>使用管理员账户登录</p>
+<h1 id="创建表空间">创建表空间</h1><p>在sql窗口中输入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create tablespace test datafile 'D:\test.ora' size 1000m</span><br></pre></td></tr></table></figure></p>
+<p>这里的test为表空间名称，路径自己来命名。然后点执行按钮。<br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/26/Oracle kill session/" title="Oracle kill session" itemprop="url">Oracle kill session</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-26T13:28:07.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。<br>可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。<br>用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.object_id, a.session_id, b.object_name, c.*  </span><br><span class="line">  FROM v$locked_object a, dba_objects b, v$session c  </span><br><span class="line">WHERE a.object_id = b.object_id  </span><br><span class="line">   AND a.SESSION_ID = c.sid(+)</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/26/Oracle kill session/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/" title="HBase学习4：利用Java接口操作HBase" itemprop="url">HBase学习4：利用Java接口操作HBase</a>
   </h1>
   <p class="article-author">By
@@ -576,131 +701,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/12/MapReduce-Hadoop分布式计算模型/" title="MapReduce-Hadoop分布式计算模型" itemprop="url">MapReduce-Hadoop分布式计算模型</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-12T13:38:42.000Z" itemprop="datePublished"> 发表于 2015-07-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="MapReduce概述">MapReduce概述</h1><p>MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。</p>
-<p>MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()两个函数，即可实现分布式计算，非常简单。这两个函数的形参是key、value对，表示函数的输入信息。</p>
-<h1 id="MapReduce实现原理">MapReduce实现原理</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/12/MapReduce-Hadoop分布式计算模型/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/MapReduce/">MapReduce</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Hadoop/">Hadoop</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/12/Java学习-Socket编程/" title="Java学习-Socket编程" itemprop="url">Java学习-Socket编程</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-12T13:08:40.000Z" itemprop="datePublished"> 发表于 2015-07-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是Socket">什么是Socket</h1><p>Java中的Socket编程其实就是网络编程，一般使用基于TCP/IP协议的Socket编程。所有关于Socket编程的API都在Java.net包里，一般实现客户端和服务器端之间的通讯。</p>
-<h1 id="Socket通讯的过程">Socket通讯的过程</h1><p>Server端Listen(监听)某个端口是否有连接请求，Client端向Server 端发出Connect(连接)请求，Server端向Client端发回Accept（接受）消息。一个连接就建立起来了。Server端和Client 端都可以通过Send，Write等方法与对方通信。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/12/Java学习-Socket编程/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Java/">Java</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Socket/">Socket</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -738,6 +738,10 @@
 			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 		  
 		
+		  
+			<li><a href="/categories/Oracle/" title="Oracle">Oracle<sup>2</sup></a></li>
+		  
+		
 		</ul>
 </div>
 
@@ -757,6 +761,10 @@
 		
 			
 				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
 			
 		
 			

@@ -4,26 +4,32 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>CloudFoundry学习1：单节点部署CloudFoundry | llq`s blog</title>
+    <title>Oracle 11g导入DMP文件步骤 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
+    <meta name="description" content="可以使用sql plus 也可以使用 plsql
+开启Oracle服务使用管理员账户登录
+创建表空间在sql窗口中输入1create tablespace test datafile &apos;D:\test.ora&apos; size 1000m
+这里的test为表空间名称，路径自己来命名。然后点执行按钮。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CloudFoundry学习1：单节点部署CloudFoundry">
-<meta property="og:url" content="http://yoursite.com/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/index.html">
+<meta property="og:title" content="Oracle 11g导入DMP文件步骤">
+<meta property="og:url" content="http://yoursite.com/2015/07/26/Oracle 11g导入DMP文件步骤/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
-<meta property="og:updated_time" content="2015-07-26T03:31:25.615Z">
+<meta property="og:description" content="可以使用sql plus 也可以使用 plsql
+开启Oracle服务使用管理员账户登录
+创建表空间在sql窗口中输入1create tablespace test datafile &apos;D:\test.ora&apos; size 1000m
+这里的test为表空间名称，路径自己来命名。然后点执行按钮。">
+<meta property="og:updated_time" content="2015-07-26T13:35:35.204Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CloudFoundry学习1：单节点部署CloudFoundry">
-<meta name="twitter:description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
+<meta name="twitter:title" content="Oracle 11g导入DMP文件步骤">
+<meta name="twitter:description" content="可以使用sql plus 也可以使用 plsql
+开启Oracle服务使用管理员账户登录
+创建表空间在sql窗口中输入1create tablespace test datafile &apos;D:\test.ora&apos; size 1000m
+这里的test为表空间名称，路径自己来命名。然后点执行按钮。">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -83,14 +89,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/" title="CloudFoundry学习1：单节点部署CloudFoundry" itemprop="url">CloudFoundry学习1：单节点部署CloudFoundry</a>
+      <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/" title="Oracle 11g导入DMP文件步骤" itemprop="url">Oracle 11g导入DMP文件步骤</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-24T06:53:55.000Z" itemprop="datePublished"> 发表于 2015-07-24</time>
+    <time datetime="2015-07-26T13:28:15.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
     
   </p>
 </header>
@@ -99,17 +105,21 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cloud_Foundry"><span class="toc-number">1.</span> <span class="toc-text">Cloud Foundry</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#环境要求"><span class="toc-number">2.</span> <span class="toc-text">环境要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">3.</span> <span class="toc-text">安装步骤</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开启Oracle服务"><span class="toc-number">1.</span> <span class="toc-text">开启Oracle服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建表空间"><span class="toc-number">2.</span> <span class="toc-text">创建表空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户"><span class="toc-number">3.</span> <span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#授权"><span class="toc-number">4.</span> <span class="toc-text">授权</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查找字段查询到DATA_PUMP_DIR的路径所在的路径"><span class="toc-number">5.</span> <span class="toc-text">查找字段查询到DATA_PUMP_DIR的路径所在的路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#执行导入语句"><span class="toc-number">6.</span> <span class="toc-text">执行导入语句</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="Cloud_Foundry">Cloud Foundry</h1><p>Cloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。</p>
-<h1 id="环境要求">环境要求</h1><a id="more"></a>
-<p>以Ubuntu 10.04 Server 64-bit为例，记住一定要是64位的，因为CF是构建在64位架构上。一个Ubuntu环境就够了，接下来就是按照文档来单节点部署一个实例，事实上在生产环境就是应该多节点安装，每个模块可以分别安装在不同的VM上面，但是开发和实验环境为了方便，就安装在一台VM上就足够了。</p>
-<h1 id="安装步骤">安装步骤</h1><p>安装前最好更新一下源<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></p>
-<p>安装curl工具：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install curl</span><br></pre></td></tr></table></figure></p>
-<p>接下来执行：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt; &lt;(curl -s -k -B  https://raw.github.com/cloudfoundry/vcap/master/dev_setup/bin/vcap_dev_setup)</span><br></pre></td></tr></table></figure></p>
-<p>系统会自动开始download所需的一切，中间会遇到一些地方需要输入密码，所以在安装开始后，需要经常盯着，不过这个安装过程比较耗时，下载完还有很多需要编译的东西。</p>
+		<p>可以使用sql plus 也可以使用 plsql</p>
+<h1 id="开启Oracle服务">开启Oracle服务</h1><p>使用管理员账户登录</p>
+<h1 id="创建表空间">创建表空间</h1><p>在sql窗口中输入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create tablespace test datafile 'D:\test.ora' size 1000m</span><br></pre></td></tr></table></figure></p>
+<p>这里的test为表空间名称，路径自己来命名。然后点执行按钮。<br><a id="more"></a></p>
+<h1 id="创建用户">创建用户</h1><p>输入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user demo identified by demo default tablespace test quota 500m on users;</span><br></pre></td></tr></table></figure></p>
+<p>这里第一个demo 为用户名，第二个demo 为密码，test为表空间名。</p>
+<h1 id="授权">授权</h1><p>给这个用户受dba权限 输入grant dba to demo执行</p>
+<h1 id="查找字段查询到DATA_PUMP_DIR的路径所在的路径">查找字段查询到DATA_PUMP_DIR的路径所在的路径</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from dba_directories</span><br></pre></td></tr></table></figure>
+<p>然后把把文件ppm_20141210.dmp放到该路径下</p>
+<h1 id="执行导入语句">执行导入语句</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">impdp userid='demo/demo' remap_schema=ppm:demo directory=DATA_PUMP_DIR dumpfile=ppm_20141210.dmp remap_tablespace=TS_PPM:test</span><br></pre></td></tr></table></figure>
+<p>最后执行即可导入。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -117,13 +127,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CloudFoundry/">CloudFoundry</a>
+  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/环境部署/">环境部署</a>
+  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
   </div>
 
 </div>
@@ -132,7 +142,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/24/CloudFoundry学习1：单节点部署CloudFoundry/" data-title="CloudFoundry学习1：单节点部署CloudFoundry | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/07/26/Oracle 11g导入DMP文件步骤/" data-title="Oracle 11g导入DMP文件步骤 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -145,19 +155,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理">
-  <strong>上一篇：</strong><br/>
-  <span>
-  HBase学习3：综合梳理</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/"  title="HBase学习2：HBase Shell常用命令总结">
+<a href="/2015/07/26/Oracle kill session/"  title="Oracle kill session">
  <strong>下一篇：</strong><br/> 
- <span>HBase学习2：HBase Shell常用命令总结
+ <span>Oracle kill session
 </span>
 </a>
 </div>
@@ -172,7 +174,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cloud_Foundry"><span class="toc-number">1.</span> <span class="toc-text">Cloud Foundry</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#环境要求"><span class="toc-number">2.</span> <span class="toc-text">环境要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">3.</span> <span class="toc-text">安装步骤</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开启Oracle服务"><span class="toc-number">1.</span> <span class="toc-text">开启Oracle服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建表空间"><span class="toc-number">2.</span> <span class="toc-text">创建表空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户"><span class="toc-number">3.</span> <span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#授权"><span class="toc-number">4.</span> <span class="toc-text">授权</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查找字段查询到DATA_PUMP_DIR的路径所在的路径"><span class="toc-number">5.</span> <span class="toc-text">查找字段查询到DATA_PUMP_DIR的路径所在的路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#执行导入语句"><span class="toc-number">6.</span> <span class="toc-text">执行导入语句</span></a></li></ol>
  
   </div>
 
