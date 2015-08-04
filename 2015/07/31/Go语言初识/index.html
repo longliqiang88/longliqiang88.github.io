@@ -1,0 +1,537 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Go语言初识 | llq`s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="longliqiang">
+    
+
+    
+    <meta name="description" content="为了CloudFoundry项目需要，学习了一下Go语言，下面是个人学习Go语言的总结。
+语言特点软件工程的思想指导了go语言的设计清晰简洁的依赖性管理清晰的语法清晰的语义– 无指针运算– 没有隐式的数字类型转换– 数组边界检查– 没有类型别名重组合轻继承更加简单的编程模式（垃圾回收，并发）简单易用的编程辅助工具（go, gofmt, godoc, gofix）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言初识">
+<meta property="og:url" content="http://yoursite.com/2015/07/31/Go语言初识/index.html">
+<meta property="og:site_name" content="llq`s blog">
+<meta property="og:description" content="为了CloudFoundry项目需要，学习了一下Go语言，下面是个人学习Go语言的总结。
+语言特点软件工程的思想指导了go语言的设计清晰简洁的依赖性管理清晰的语法清晰的语义– 无指针运算– 没有隐式的数字类型转换– 数组边界检查– 没有类型别名重组合轻继承更加简单的编程模式（垃圾回收，并发）简单易用的编程辅助工具（go, gofmt, godoc, gofix）">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/go01.png">
+<meta property="og:updated_time" content="2015-08-04T01:47:44.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言初识">
+<meta name="twitter:description" content="为了CloudFoundry项目需要，学习了一下Go语言，下面是个人学习Go语言的总结。
+语言特点软件工程的思想指导了go语言的设计清晰简洁的依赖性管理清晰的语法清晰的语义– 无指针运算– 没有隐式的数字类型转换– 数组边界检查– 没有类型别名重组合轻继承更加简单的编程模式（垃圾回收，并发）简单易用的编程辅助工具（go, gofmt, godoc, gofix）">
+
+    
+    <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/11.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="llq`s blog" title="llq`s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="llq`s blog">llq`s blog</a></h1>
+				<h2 class="blog-motto">Summary is for a better start.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">目录</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/31/Go语言初识/" title="Go语言初识" itemprop="url">Go语言初识</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-31T01:56:04.000Z" itemprop="datePublished"> 发表于 2015-07-31</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#语言特点"><span class="toc-number">1.</span> <span class="toc-text">语言特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变量的声明"><span class="toc-number">2.</span> <span class="toc-text">变量的声明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的赋值需要注意："><span class="toc-number">2.1.</span> <span class="toc-text">数组的赋值需要注意：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#map类型"><span class="toc-number">3.</span> <span class="toc-text">map类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#声明："><span class="toc-number">3.1.</span> <span class="toc-text">声明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列举几种定义方式"><span class="toc-number">3.2.</span> <span class="toc-text">列举几种定义方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用案例"><span class="toc-number">3.3.</span> <span class="toc-text">使用案例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数声明"><span class="toc-number">4.</span> <span class="toc-text">函数声明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义函数"><span class="toc-number">4.1.</span> <span class="toc-text">定义函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接口声明"><span class="toc-number">5.</span> <span class="toc-text">接口声明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常量声明"><span class="toc-number">6.</span> <span class="toc-text">常量声明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#声明变量"><span class="toc-number">7.</span> <span class="toc-text">声明变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针"><span class="toc-number">8.</span> <span class="toc-text">指针</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#声明指针"><span class="toc-number">8.1.</span> <span class="toc-text">声明指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#举例"><span class="toc-number">8.2.</span> <span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结构体"><span class="toc-number">9.</span> <span class="toc-text">结构体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#赋值语句（Assignments）"><span class="toc-number">10.</span> <span class="toc-text">赋值语句（Assignments）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#循环语句"><span class="toc-number">11.</span> <span class="toc-text">循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#for循环"><span class="toc-number">11.1.</span> <span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#continue"><span class="toc-number">11.2.</span> <span class="toc-text">continue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goto"><span class="toc-number">11.3.</span> <span class="toc-text">goto</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>为了CloudFoundry项目需要，学习了一下Go语言，下面是个人学习Go语言的总结。</p>
+<h1 id="语言特点">语言特点</h1><p>软件工程的思想指导了go语言的设计<br>清晰简洁的依赖性管理<br>清晰的语法<br>清晰的语义<br>– 无指针运算<br>– 没有隐式的数字类型转换<br>– 数组边界检查<br>– 没有类型别名<br>重组合轻继承<br>更加简单的编程模式（垃圾回收，并发）<br>简单易用的编程辅助工具（go, gofmt, godoc, gofix）<br><a id="more"></a><br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/go01.png" alt="程序基本结构"></p>
+<h1 id="变量的声明">变量的声明</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str string</span><br><span class="line">var arr [<span class="number">4</span>]string </span><br><span class="line">arr arr = [<span class="number">4</span>]string&#123;<span class="string">"joshua"</span>, <span class="string">"zhang"</span>, <span class="string">"hello"</span>, <span class="string">"world"</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数组的赋值需要注意：">数组的赋值需要注意：</h2><pre><code>每个赋值的元素都需要相应的整数索引 
+常量表达式可以用作索引 
+没有索引的元素使用前置元素的索引值加一最为当前元素的索引值 
+数组中未赋值的元素，设为零值 
+如果用于赋值的元素数量超过数组的最大长度，将产生错误，代码样例如下：
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">buffer :=[<span class="number">10</span>]string&#123;&#125;    <span class="comment">//len(buffer) == 10</span></span><br><span class="line">intSet :=[<span class="number">6</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;    <span class="comment">//len(intSet) == 6</span></span><br><span class="line">days :=[...]string&#123;<span class="string">"Sat"</span>,<span class="string">"Sun"</span>&#125;  <span class="comment">//len(days)  == 2</span></span><br></pre></td></tr></table></figure>
+<h1 id="map类型">map类型</h1><pre><code>由（键:元素值）对构成的无序组对，作为索引值的键必须唯一。键和元素值的类型可以不同 
+未初始化的映射值为<span class="keyword">nil</span> 
+键的类型不能是函数，映射，切片，如果键的类型是接口，比较操作符必须针对动态键值实现相应的比较方法 
+</code></pre><h2 id="声明：">声明：</h2><pre><code>映射=map[键类型]元素类型 
+<span class="function"><span class="title">Len</span><span class="params">(map)</span></span>获取长度；索引获取元素 
+通过赋值添加元素；<span class="function"><span class="title">delete</span><span class="params">()</span></span>删除元素 
+用<span class="function"><span class="title">make</span><span class="params">()</span></span>获取新的空映射 
+映射的初始容量设定不会限制它的长度 
+映射会根据存储元素的数量自动调整，nil映射除外 
+</code></pre><h2 id="列举几种定义方式">列举几种定义方式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">filter := [<span class="number">10</span>]float32&#123;-<span class="number">1</span>, <span class="number">4</span>:-<span class="number">0.1</span>, -<span class="number">0.1</span>, <span class="number">9</span>:-<span class="number">1</span>&#125;</span><br><span class="line">note := map[string]float32&#123;</span><br><span class="line">    <span class="string">"GO"</span>: <span class="number">16.35</span>, <span class="string">"DO"</span> :<span class="number">18.35</span>, </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用案例">使用案例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">func main &#123;</span><br><span class="line">   var coutryCapitalMap map[string]string</span><br><span class="line">   <span class="comment">/* create a map*/</span></span><br><span class="line">   coutryCapitalMap = make(map[string]string)</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/* insert key-value pairs in the map*/</span></span><br><span class="line">   countryCapitalMap[<span class="string">"France"</span>] = <span class="string">"Paris"</span></span><br><span class="line">   countryCapitalMap[<span class="string">"Italy"</span>] = <span class="string">"Rome"</span></span><br><span class="line">   countryCapitalMap[<span class="string">"Japan"</span>] = <span class="string">"Tokyo"</span></span><br><span class="line">   countryCapitalMap[<span class="string">"India"</span>] = <span class="string">"New Delhi"</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">/* print map using keys*/</span></span><br><span class="line">   <span class="keyword">for</span> country := range countryCapitalMap &#123;</span><br><span class="line">      fmt.Println(<span class="string">"Capital of"</span>,country,<span class="string">"is"</span>,countryCapitalMap[country])</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/* test if entry is present in the map or not*/</span></span><br><span class="line">   captial, ok := countryCapitalMap[<span class="string">"United States"</span>]</span><br><span class="line">   <span class="comment">/* if ok is true, entry is present otherwise entry is absent*/</span></span><br><span class="line">   <span class="keyword">if</span>(ok)&#123;</span><br><span class="line">      fmt.Println(<span class="string">"Capital of United States is"</span>, capital)  </span><br><span class="line">   &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      fmt.Println(<span class="string">"Capital of United States is not present"</span>) </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="函数声明">函数声明</h1><pre><code>绑定标识符、函数名 
+声明了结果参数的函数，函数体语句一定要返回结果 
+一个函数声明可以没有函数体。函数体的实现可以在Go语言之外 
+每Go程序具有至少一个函数，它一般是<span class="function"><span class="title">main</span><span class="params">()</span></span>，以及所有的最琐碎程序可以定义附加函数
+</code></pre><h2 id="定义函数">定义函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">max</span><span class="params">(num1, num2 <span class="keyword">int</span>)</span> <span class="keyword">int</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="function">result <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">   <span class="title">if</span> <span class="params">(num1 &gt; num2)</span> </span>&#123;</span><br><span class="line">      result = num1</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result = num2</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> result </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="接口声明">接口声明</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 声明一个接口 */</span></span><br><span class="line">type Shape <span class="class"><span class="keyword">interface</span> </span>&#123;</span><br><span class="line">   area() float64</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 声明一个结构体circle */</span></span><br><span class="line">type Circle struct &#123;</span><br><span class="line">   x,y,radius float64</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 定义一个方法 (implementation of Shape.area())*/</span></span><br><span class="line">func(circle Circle) area() float64 &#123;</span><br><span class="line">   <span class="keyword">return</span> math.Pi * circle.radius * circle.radius</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* define a method for shape */</span></span><br><span class="line"><span class="function">func <span class="title">getArea</span><span class="params">(shape Shape)</span> float64 </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> shape.area()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 主函数调用*/</span></span><br><span class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   circle := Circle&#123;x:<span class="number">0</span>,y:<span class="number">0</span>,radius:<span class="number">5</span>&#125;</span><br><span class="line">   fmt.Printf(<span class="string">"Circle area: %f\n"</span>,getArea(circle))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="常量声明">常量声明</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Pi float64 = <span class="number">301418926</span> </span><br><span class="line"><span class="keyword">const</span> zero = <span class="number">0.0</span></span><br><span class="line"><span class="keyword">const</span>(</span><br><span class="line">      size int64 = <span class="number">1024</span></span><br><span class="line">      eof = -<span class="number">1</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> a, b, c = <span class="number">3</span>, <span class="number">4</span>, <span class="string">"ff"</span>  <span class="comment">// a = 3,  b = 4, c = ff,</span></span><br><span class="line"><span class="keyword">const</span> u, v float32 = <span class="number">0</span>,<span class="number">3</span>  <span class="comment">//u=0.0  v=3.0</span></span><br></pre></td></tr></table></figure>
+<h1 id="声明变量">声明变量</h1><pre><code>如果指定类型，每个变量都是指定类型    
+如果没有指定类型，变量类型通过表达式赋值推断 
+函数体内不能声明从未使用的变量 
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span>(</span><br><span class="line">    i    <span class="keyword">int</span></span><br><span class="line">    u, v, s = <span class="number">2.1</span> ,<span class="number">3.0</span>, <span class="string">"bar"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> a, b, c = <span class="number">3</span>, <span class="number">4</span>, <span class="string">"ff"</span>  <span class="comment">// a = 3,  b = 4, c = ff,</span></span><br><span class="line"><span class="keyword">const</span> u, v float32 = <span class="number">0</span>,<span class="number">3</span>  <span class="comment">//u=0.0  v=3.0</span></span><br></pre></td></tr></table></figure>
+<h1 id="指针">指针</h1><h2 id="声明指针">声明指针</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ip *<span class="keyword">int</span>        <span class="comment">/* pointer to an integer */</span></span><br><span class="line">var fp *float32    <span class="comment">/* pointer to a float */</span></span><br></pre></td></tr></table></figure>
+<h2 id="举例">举例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   var a <span class="keyword">int</span>= <span class="number">20</span></span><br><span class="line">   var ip *<span class="keyword">int</span>        <span class="comment">/* 声明一个指针 */</span></span><br><span class="line">   ip = &amp;a  <span class="comment">/* 给指针赋值 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"Address of a variable: %x\n"</span>, &amp;a  ) <span class="comment">/* 输出为：10328000 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"Address stored in ip variable: %x\n"</span>, ip ) <span class="comment">/* 输出为：10328000 */</span></span><br><span class="line">   fmt.Printf(<span class="string">"Value of *ip variable: %d\n"</span>, *ip ) <span class="comment">/* 输出为：20 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="结构体">结构体</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Books struct &#123;</span><br><span class="line">   title string</span><br><span class="line">   author string</span><br><span class="line">   subject string</span><br><span class="line">   book_id <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="赋值语句（Assignments）">赋值语句（Assignments）</h1><pre><code>左侧操作数必须是可寻址的，或是空操作符
+<span class="type">X</span> <span class="keyword">op</span> y  &lt;=&gt;  x= x <span class="keyword">op</span> y  
+</code></pre><p>多元赋值 （一次向左侧赋多个值）<br>    空标识符的赋值，忽略右侧的具体值 </p>
+<p>赋值执行的两个阶段：<br>    左侧由索引表达式和指针转向产生操作数，和右侧 的表达式以通常的顺序执行<br>    赋值以从左到右的顺序执行 </p>
+<h1 id="循环语句">循环语句</h1><h2 id="for循环">for循环</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">For x &lt;<span class="number">100</span>&#123; &#125; </span><br><span class="line">For <span class="keyword">int</span> i:=<span class="number">0</span>;i&lt;<span class="number">20</span>;i++&#123;&#125; </span><br><span class="line">For I,v :=range arr &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="continue">continue</h2><h2 id="goto">goto</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LOOP: <span class="keyword">for</span> a &lt; <span class="number">20</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> a == <span class="number">15</span> &#123;</span><br><span class="line">         <span class="comment">/* skip the iteration */</span></span><br><span class="line">         a = a + <span class="number">1</span></span><br><span class="line">         goto LOOP</span><br><span class="line">      &#125;</span><br><span class="line">      fmt.Printf(<span class="string">"value of a: %d\n"</span>, a)</span><br><span class="line">      a++     </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/CloudFoundry/">CloudFoundry</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Go语言/">Go语言</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/07/31/Go语言初识/" data-title="Go语言初识 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/07/30/单节点部署CloudFoundry V2/"  title="单节点部署CloudFoundry v2">
+ <strong>下一篇：</strong><br/> 
+ <span>单节点部署CloudFoundry v2
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#语言特点"><span class="toc-number">1.</span> <span class="toc-text">语言特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变量的声明"><span class="toc-number">2.</span> <span class="toc-text">变量的声明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的赋值需要注意："><span class="toc-number">2.1.</span> <span class="toc-text">数组的赋值需要注意：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#map类型"><span class="toc-number">3.</span> <span class="toc-text">map类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#声明："><span class="toc-number">3.1.</span> <span class="toc-text">声明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列举几种定义方式"><span class="toc-number">3.2.</span> <span class="toc-text">列举几种定义方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用案例"><span class="toc-number">3.3.</span> <span class="toc-text">使用案例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数声明"><span class="toc-number">4.</span> <span class="toc-text">函数声明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义函数"><span class="toc-number">4.1.</span> <span class="toc-text">定义函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接口声明"><span class="toc-number">5.</span> <span class="toc-text">接口声明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常量声明"><span class="toc-number">6.</span> <span class="toc-text">常量声明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#声明变量"><span class="toc-number">7.</span> <span class="toc-text">声明变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针"><span class="toc-number">8.</span> <span class="toc-text">指针</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#声明指针"><span class="toc-number">8.1.</span> <span class="toc-text">声明指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#举例"><span class="toc-number">8.2.</span> <span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结构体"><span class="toc-number">9.</span> <span class="toc-text">结构体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#赋值语句（Assignments）"><span class="toc-number">10.</span> <span class="toc-text">赋值语句（Assignments）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#循环语句"><span class="toc-number">11.</span> <span class="toc-text">循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#for循环"><span class="toc-number">11.1.</span> <span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#continue"><span class="toc-number">11.2.</span> <span class="toc-text">continue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goto"><span class="toc-number">11.3.</span> <span class="toc-text">goto</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MapReduce/" title="MapReduce">MapReduce<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Oracle/" title="Oracle">Oracle<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2643661235&verifier=891f03cc&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> A programmer,love basketball and fitness <br/>
+			You cannot improve your past, but you can improve your future. Once time is wasted, life is wasted.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2643661235" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:facingfuture@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="longliqiang">longliqiang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
