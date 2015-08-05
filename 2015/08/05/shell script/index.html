@@ -1,0 +1,529 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>shell script | llq`s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="longliqiang">
+    
+
+    
+    <meta name="description" content="Shell SCript是一种纯文本文件，帮助我们一次执行多个命令，或者是利用一些逻辑判断帮助我们实现某些功能。(本文适合初学者)
+编写第一个script12345#!/bin/bashPATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/binexport PATHecho -e &quot;Hello World! \a\n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell script">
+<meta property="og:url" content="http://yoursite.com/2015/08/05/shell script/index.html">
+<meta property="og:site_name" content="llq`s blog">
+<meta property="og:description" content="Shell SCript是一种纯文本文件，帮助我们一次执行多个命令，或者是利用一些逻辑判断帮助我们实现某些功能。(本文适合初学者)
+编写第一个script12345#!/bin/bashPATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/binexport PATHecho -e &quot;Hello World! \a\n">
+<meta property="og:updated_time" content="2015-08-05T13:34:17.672Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell script">
+<meta name="twitter:description" content="Shell SCript是一种纯文本文件，帮助我们一次执行多个命令，或者是利用一些逻辑判断帮助我们实现某些功能。(本文适合初学者)
+编写第一个script12345#!/bin/bashPATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/binexport PATHecho -e &quot;Hello World! \a\n">
+
+    
+    <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/11.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="llq`s blog" title="llq`s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="llq`s blog">llq`s blog</a></h1>
+				<h2 class="blog-motto">Summary is for a better start.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">目录</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/05/shell script/" title="shell script" itemprop="url">shell script</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-05T06:37:56.000Z" itemprop="datePublished"> 发表于 2015-08-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#编写第一个script"><span class="toc-number">1.</span> <span class="toc-text">编写第一个script</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现范例1"><span class="toc-number">2.</span> <span class="toc-text">实现范例1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现范例2"><span class="toc-number">3.</span> <span class="toc-text">实现范例2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#script执行方式的区别"><span class="toc-number">4.</span> <span class="toc-text">script执行方式的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shell中的判断式"><span class="toc-number">5.</span> <span class="toc-text">shell中的判断式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试功能_test"><span class="toc-number">5.1.</span> <span class="toc-text">测试功能 test</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#判断符号[]"><span class="toc-number">5.2.</span> <span class="toc-text">判断符号[]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell_script中的默认变量"><span class="toc-number">5.3.</span> <span class="toc-text">shell script中的默认变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#条件判断式"><span class="toc-number">6.</span> <span class="toc-text">条件判断式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#if…then"><span class="toc-number">6.1.</span> <span class="toc-text">if…then</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#case…esca"><span class="toc-number">6.2.</span> <span class="toc-text">case…esca</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数function"><span class="toc-number">6.3.</span> <span class="toc-text">函数function</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#循环"><span class="toc-number">7.</span> <span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#while_do_done,until_do_done（不定循环）"><span class="toc-number">7.1.</span> <span class="toc-text">while do done,until do done（不定循环）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for…do…done（固定循环）"><span class="toc-number">7.2.</span> <span class="toc-text">for…do…done（固定循环）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for…do…done的数值处理"><span class="toc-number">7.3.</span> <span class="toc-text">for…do…done的数值处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shell_script的追踪调试"><span class="toc-number">8.</span> <span class="toc-text">shell script的追踪调试</span></a></li></ol>
+		
+		</div>
+		
+		<p>Shell SCript是一种纯文本文件，帮助我们一次执行多个命令，或者是利用一些逻辑判断帮助我们实现某些功能。(本文适合初学者)</p>
+<h1 id="编写第一个script">编写第一个script</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line">echo -e "Hello World! \a\n"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>说明：</p>
+<ol>
+<li>第一行#!/bin/bash声明script使用的shell名称</li>
+<li>整个script除了第一行的#！用来声明shell的之外，其他都是注释作用</li>
+<li>务必将一些重要的环境变量设置好，这样可以使我们的程序在进行时可以直接执行外部的一些命令，而不必写绝对路径<h1 id="实现范例1">实现范例1</h1></li>
+</ol>
+<p>读取姓、名然后出输出<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line">read -p "Please input your first name: " firstname</span><br><span class="line">read -p "Please input your last name: " lastname</span><br><span class="line">echo -e "\nYour name is:" $firstname $lastname</span><br></pre></td></tr></table></figure></p>
+<h1 id="实现范例2">实现范例2</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line">read -p "first num: " firstnum</span><br><span class="line">read -p "second num: " secondnum</span><br><span class="line">total=$(($firstnum*$secondnum))</span><br><span class="line">echo -e "\nThe result is $total"</span><br></pre></td></tr></table></figure>
+<h1 id="script执行方式的区别">script执行方式的区别</h1><ol>
+<li>使用sh或者 . 来执行script时，该script都会使用一个新的bash环境来执行脚本中的命令。就是说使用这种方式执行时，script是在子进程中执行的，所以子进程的各项变量和操作不会传回到父进程中。例如在子进程中有两个变量a b，使用这种方式执行script之后，echo $a $b 是没有值的。</li>
+<li>使用source来执行script时，不会开启新的进程来执行，只会在该进程执行，所以echo $a $b 是可以获取到值的。<h1 id="shell中的判断式">shell中的判断式</h1><h2 id="测试功能_test">测试功能 test</h2>利用test -e 来判断某一个文件是否存在<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test -e /filename &amp;&amp; echo "exit" || echo "Not exit"</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>test常用指令：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test -e 该文件名是否存在</span><br><span class="line">test -f 该文件名是否存在且为文件</span><br><span class="line">test -d 该文件名是否存在且为目录</span><br></pre></td></tr></table></figure></p>
+<p>举例：判断一个文件是否存在，给出提示信息，不存在就中断程序，如果存在判断是文件还是目录，并判断执行者对它拥有的权限。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim testfile.sh</span><br><span class="line">#!/bin/bash</span><br><span class="line">read -p "Input a filename: " filename</span><br><span class="line">test -z $filename &amp;&amp; echo "You must input a filename" &amp;&amp; exit 0 #判断输入的是否是字符串</span><br><span class="line">test ! -e $filename &amp;&amp; echo "The filename '$filename' do not exit" &amp;&amp; exit 0 #判断文件是否存在</span><br><span class="line">echo -e "\nThe result is $total"</span><br><span class="line">#判断文件的类型和属性</span><br><span class="line">test -f $filename &amp;&amp; filetype="file"</span><br><span class="line">test -d $filename &amp;&amp; filetype="directory"</span><br><span class="line">test -r $filename &amp;&amp; perm="readable"</span><br><span class="line">test -w $filename &amp;&amp; perm="$perm writable" </span><br><span class="line">test -x $filename &amp;&amp; perm="$perm executable"</span><br><span class="line">echo -e "\nThe filename: $file is a $filetype"</span><br><span class="line">echo -e "\nThe filename: $file permissions are: $perm"</span><br></pre></td></tr></table></figure></p>
+<h2 id="判断符号[]">判断符号[]</h2><p>[ “$HOME”==”$MAIL” ] 用来判断$HOME和$MAIL是否相同。<br>举例：当执行一个程序的时候，程序会让用户来选择输入Y继续执行还是输入N停止运行<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">read -p "Please input (y/n): " yn</span><br><span class="line">[ "$yn"=="Y" -o "$yn"=="y" ] &amp;&amp; ehco "continue" &amp;&amp; exit 0</span><br><span class="line">[ "$yn"=="N" -o "$yn"=="n" ] &amp;&amp; ehco "interrupt" &amp;&amp; exit 0</span><br><span class="line">echo -e "\nThe result is $total"</span><br></pre></td></tr></table></figure></p>
+<h2 id="shell_script中的默认变量">shell script中的默认变量</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">echo "The script name is $0"</span><br><span class="line">echo "The parameter number is $#"</span><br><span class="line">echo "The Whole paratemeter is '$@'"</span><br><span class="line">echo "The 1st paratemeter is $1"</span><br><span class="line">echo "The 2nd paratemeter is $2"</span><br></pre></td></tr></table></figure>
+<p>执行上面脚本，要传递参数<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh test.sh aa bb</span><br></pre></td></tr></table></figure></p>
+<p>执行结果为：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The script name is test</span><br><span class="line">The parameter number is 2</span><br><span class="line">The Whole paratemeter is 'aa bb'</span><br><span class="line">The 1st paratemeter is aa</span><br><span class="line">The 2nd paratemeter is bb</span><br></pre></td></tr></table></figure></p>
+<h1 id="条件判断式">条件判断式</h1><h2 id="if…then">if…then</h2><p>基本格式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if[ ... ];then</span><br><span class="line"> ...</span><br><span class="line">elif[ ... ];then</span><br><span class="line"> ...</span><br><span class="line">else</span><br><span class="line"> ...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
+<p>举例：检测本机中80端口是否启动<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">testing=$(netstat -tuln | grep ":80") #netstat -tuln获取当前主机启动的服务</span><br><span class="line">if[ "$testing" != "" ];then</span><br><span class="line">  echo "is running"</span><br><span class="line">else</span><br><span class="line">  echo "is not running"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
+<h2 id="case…esca">case…esca</h2><p>基本格式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">case $变量名称 in</span><br><span class="line"> "第一个变量内容")</span><br><span class="line">   程序段</span><br><span class="line">   ;;</span><br><span class="line">case $变量名称 in</span><br><span class="line"> "第二个变量内容")</span><br><span class="line">   程序段</span><br><span class="line">   ;;</span><br><span class="line">esca</span><br></pre></td></tr></table></figure></p>
+<p>举例：用户输入one、two其中一个，将用户的输入输出到屏幕当中，<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">case $s1 in</span><br><span class="line">"one")</span><br><span class="line">   echo "You input is one"</span><br><span class="line"> ;;</span><br><span class="line">"two")</span><br><span class="line">   echo "You input is two"</span><br><span class="line"> ;;</span><br><span class="line">*)</span><br><span class="line">   echo "You input is other"</span><br><span class="line"> ;;</span><br></pre></td></tr></table></figure></p>
+<p>通过 sh test.sh one 来执行上面的script。</p>
+<h2 id="函数function">函数function</h2><p>和我们平时开发中使用到的方法类似，同样拥有内置变量，函数名称代表$0，后续的变量用$1、$2…表示。更改利用function实现之前的script<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> #!/bin/bash</span><br><span class="line"> PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line"> export PATH</span><br><span class="line"></span><br><span class="line">fuction printit()&#123;</span><br><span class="line"> echo "You input is $1"</span><br><span class="line">&#125; </span><br><span class="line">case $s1 in</span><br><span class="line"> "one")</span><br><span class="line">    printit one</span><br><span class="line">  ;;</span><br><span class="line"> "two")</span><br><span class="line">   printit two</span><br><span class="line">  ;;</span><br><span class="line"> *)</span><br><span class="line">   printit other</span><br><span class="line">  ;;</span><br></pre></td></tr></table></figure></p>
+<h1 id="循环">循环</h1><h2 id="while_do_done,until_do_done（不定循环）">while do done,until do done（不定循环）</h2><p>一般来说，不定循环的最常见状态就是下面两种方法：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while[ ... ]</span><br><span class="line">do</span><br><span class="line"> ...</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until[ ... ]</span><br><span class="line">do</span><br><span class="line"> ...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>举例：计算1+2+3+4+…+100的值<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">s=0</span><br><span class="line">i=0</span><br><span class="line">while[ "$i"!="100" ]</span><br><span class="line">do</span><br><span class="line">    i=$(($i+1))</span><br><span class="line">    s=$(($s+$i))</span><br><span class="line">done</span><br><span class="line">echo "The result is : $s"</span><br></pre></td></tr></table></figure></p>
+<h2 id="for…do…done（固定循环）">for…do…done（固定循环）</h2><p>简单举例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for animal in dog cat pig</span><br><span class="line">do</span><br><span class="line">  echo "The animal is $&#123;animal&#125;"</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<p>举例：用户输入某文件名，然后找出改文件内的各个文件的权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">#先判断目录是否存在</span><br><span class="line">read "Please input a directory: " dir</span><br><span class="line">if[ "$dir"=="" -o  ! -d "$dir" ];then</span><br><span class="line">  echo "The directory is not exist"</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line">#开始测试文件</span><br><span class="line">filelist=$(ls $dir)</span><br><span class="line">for filename in $filelist</span><br><span class="line">do</span><br><span class="line">  perm=""</span><br><span class="line">  test -r $filename &amp;&amp; perm="readable"</span><br><span class="line">  test -w $filename &amp;&amp; perm="$perm writable" </span><br><span class="line">  test -x $filename &amp;&amp; perm="$perm executable"</span><br><span class="line">  echo -e "\nThe filename: $file permissions are: $perm"</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h2 id="for…do…done的数值处理">for…do…done的数值处理</h2><p>举例：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s=0</span><br><span class="line">for ((i=1;i<span class="tag">&lt;<span class="title">=100;i++))</span></span><br><span class="line"><span class="attribute">do</span></span><br><span class="line">   <span class="attribute">s</span>=<span class="value">$(($s+$i))</span></span><br><span class="line"><span class="attribute">done</span></span><br><span class="line"><span class="attribute">echo</span> "<span class="attribute">The</span> <span class="attribute">result</span> <span class="attribute">is</span> <span class="attribute">:</span> $<span class="attribute">s</span>"</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="shell_script的追踪调试">shell script的追踪调试</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh -n ：不要执行script，仅查询语法问题，如果语法没有问题则不会显示任何信息</span><br><span class="line">sh -v ：在执行script之前，先将script的内容输出的屏幕上</span><br><span class="line">sh -x ：将使用到的script内容显示到屏幕上，很常用</span><br></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/05/shell script/" data-title="shell script | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/03/Go语言初识/"  title="Go语言初识">
+ <strong>下一篇：</strong><br/> 
+ <span>Go语言初识
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#编写第一个script"><span class="toc-number">1.</span> <span class="toc-text">编写第一个script</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现范例1"><span class="toc-number">2.</span> <span class="toc-text">实现范例1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现范例2"><span class="toc-number">3.</span> <span class="toc-text">实现范例2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#script执行方式的区别"><span class="toc-number">4.</span> <span class="toc-text">script执行方式的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shell中的判断式"><span class="toc-number">5.</span> <span class="toc-text">shell中的判断式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试功能_test"><span class="toc-number">5.1.</span> <span class="toc-text">测试功能 test</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#判断符号[]"><span class="toc-number">5.2.</span> <span class="toc-text">判断符号[]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell_script中的默认变量"><span class="toc-number">5.3.</span> <span class="toc-text">shell script中的默认变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#条件判断式"><span class="toc-number">6.</span> <span class="toc-text">条件判断式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#if…then"><span class="toc-number">6.1.</span> <span class="toc-text">if…then</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#case…esca"><span class="toc-number">6.2.</span> <span class="toc-text">case…esca</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数function"><span class="toc-number">6.3.</span> <span class="toc-text">函数function</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#循环"><span class="toc-number">7.</span> <span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#while_do_done,until_do_done（不定循环）"><span class="toc-number">7.1.</span> <span class="toc-text">while do done,until do done（不定循环）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for…do…done（固定循环）"><span class="toc-number">7.2.</span> <span class="toc-text">for…do…done（固定循环）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#for…do…done的数值处理"><span class="toc-number">7.3.</span> <span class="toc-text">for…do…done的数值处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shell_script的追踪调试"><span class="toc-number">8.</span> <span class="toc-text">shell script的追踪调试</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MapReduce/" title="MapReduce">MapReduce<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Oracle/" title="Oracle">Oracle<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2643661235&verifier=891f03cc&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> A programmer,love basketball and fitness <br/>
+			You cannot improve your past, but you can improve your future. Once time is wasted, life is wasted.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2643661235" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:facingfuture@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="longliqiang">longliqiang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
