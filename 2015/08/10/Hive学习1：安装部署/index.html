@@ -4,26 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>单节点部署CloudFoundry v2 | llq`s blog</title>
+    <title>Hive学习1：安装部署 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="环境要求ubuntu 10.04 64位的干净系统，可安装在虚拟机中（30g的硬盘，2g的内存 ），一定要保证网络通畅
-安装步骤下载cf_nise_installer的安装包1git clone https://github.com/yudai/cf_nise_installer.git">
+    <meta name="description" content="Hive的部署非常简单，下载hive，我用的是apache-hive-0.13.0-bin.tar，解压之后，进入bin目录，执行./hive命令即可进入Hive控制台。show tables;当前存在的表的个数。建表语句举例1create table teacher (id bigint,name string) row format delimited fields terminated by">
 <meta property="og:type" content="article">
-<meta property="og:title" content="单节点部署CloudFoundry v2">
-<meta property="og:url" content="http://yoursite.com/2015/07/30/单节点部署CloudFoundry V2/index.html">
+<meta property="og:title" content="Hive学习1：安装部署">
+<meta property="og:url" content="http://yoursite.com/2015/08/10/Hive学习1：安装部署/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="环境要求ubuntu 10.04 64位的干净系统，可安装在虚拟机中（30g的硬盘，2g的内存 ），一定要保证网络通畅
-安装步骤下载cf_nise_installer的安装包1git clone https://github.com/yudai/cf_nise_installer.git">
-<meta property="og:updated_time" content="2015-07-30T02:37:54.376Z">
+<meta property="og:description" content="Hive的部署非常简单，下载hive，我用的是apache-hive-0.13.0-bin.tar，解压之后，进入bin目录，执行./hive命令即可进入Hive控制台。show tables;当前存在的表的个数。建表语句举例1create table teacher (id bigint,name string) row format delimited fields terminated by">
+<meta property="og:updated_time" content="2015-08-12T03:08:15.848Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="单节点部署CloudFoundry v2">
-<meta name="twitter:description" content="环境要求ubuntu 10.04 64位的干净系统，可安装在虚拟机中（30g的硬盘，2g的内存 ），一定要保证网络通畅
-安装步骤下载cf_nise_installer的安装包1git clone https://github.com/yudai/cf_nise_installer.git">
+<meta name="twitter:title" content="Hive学习1：安装部署">
+<meta name="twitter:description" content="Hive的部署非常简单，下载hive，我用的是apache-hive-0.13.0-bin.tar，解压之后，进入bin目录，执行./hive命令即可进入Hive控制台。show tables;当前存在的表的个数。建表语句举例1create table teacher (id bigint,name string) row format delimited fields terminated by">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -83,14 +80,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/30/单节点部署CloudFoundry V2/" title="单节点部署CloudFoundry v2" itemprop="url">单节点部署CloudFoundry v2</a>
+      <a href="/2015/08/10/Hive学习1：安装部署/" title="Hive学习1：安装部署" itemprop="url">Hive学习1：安装部署</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-30T02:25:55.000Z" itemprop="datePublished"> 发表于 2015-07-30</time>
+    <time datetime="2015-08-10T02:39:14.000Z" itemprop="datePublished"> 发表于 2015-08-10</time>
     
   </p>
 </header>
@@ -99,22 +96,16 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#环境要求"><span class="toc-number">1.</span> <span class="toc-text">环境要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">2.</span> <span class="toc-text">安装步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载cf_nise_installer的安装包"><span class="toc-number">2.1.</span> <span class="toc-text">下载cf_nise_installer的安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改域名"><span class="toc-number">2.2.</span> <span class="toc-text">修改域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行安装指令"><span class="toc-number">2.3.</span> <span class="toc-text">执行安装指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动cf"><span class="toc-number">2.4.</span> <span class="toc-text">启动cf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看下cf的组件的状态"><span class="toc-number">2.5.</span> <span class="toc-text">查看下cf的组件的状态</span></a></li></ol></li></ol>
+			
 		
 		</div>
 		
-		<h1 id="环境要求">环境要求</h1><p>ubuntu 10.04 64位的干净系统，可安装在虚拟机中（30g的硬盘，2g的内存 ），一定要保证网络通畅</p>
-<h1 id="安装步骤">安装步骤</h1><h2 id="下载cf_nise_installer的安装包">下载cf_nise_installer的安装包</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/yudai/cf_nise_installer.git</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>会有如下的提示信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">正克隆到 'cf_nise_installer'...</span><br><span class="line">remote: Reusing existing pack: 719, done.</span><br><span class="line">remote: Total 719 (delta 0), reused 0 (delta 0)</span><br><span class="line">接收对象中: 100% (719/719), 119.42 KiB | 110.00 KiB/s, done.</span><br><span class="line">处理 delta 中: 100% (391/391), done.</span><br><span class="line">Checking connectivity... done</span><br></pre></td></tr></table></figure></p>
-<h2 id="修改域名">修改域名</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">longlong01@vm01:~/cf_nise_installer/scripts# vim generate_deploy_manifest.sh</span><br></pre></td></tr></table></figure>
-<p> 在第一行下面添加你的域名<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash -ex</span><br><span class="line">NISE_DOMAIN=cf.local</span><br></pre></td></tr></table></figure></p>
-<h2 id="执行安装指令">执行安装指令</h2><p>退出到root根目录下这里要注意路径<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./cf_nise_installer/scripts/bootstrap.sh</span><br></pre></td></tr></table></figure></p>
-<p>接下来就要进入漫长的等待</p>
-<h2 id="启动cf">启动cf</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/start.sh</span><br></pre></td></tr></table></figure>
-<p>如果启动成功会看到如下提示信息：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+ sudo /var/vcap/bosh/bin/monit</span><br><span class="line">monit daemon at 24117 awakened</span><br><span class="line">+ sleep 5</span><br><span class="line">+ for process in postgres nats</span><br><span class="line">+ sudo /var/vcap/bosh/bin/monit start postgres</span><br><span class="line">+ sleep 30</span><br></pre></td></tr></table></figure></p>
-<h2 id="查看下cf的组件的状态">查看下cf的组件的状态</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /var/vcap/bosh/bin/monit summary</span><br></pre></td></tr></table></figure>
-<p>最终看到以下信息代表单节点部署cf工作全部完成<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rocess 'cloud_controller_ng'       running</span><br><span class="line">Process 'cloud_controller_worker_local_1' running</span><br><span class="line">Process 'cloud_controller_worker_local_2' running</span><br><span class="line">Process 'nginx_ccng'                running</span><br><span class="line">Process 'cloud_controller_worker_1' running</span><br><span class="line">Process 'cloud_controller_clock'    running</span><br></pre></td></tr></table></figure></p>
+		<p>Hive的部署非常简单，下载hive，我用的是apache-hive-0.13.0-bin.tar，解压之后，进入bin目录，执行./hive命令即可进入Hive控制台。show tables;当前存在的表的个数。<br>建表语句举例<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table teacher (id bigint,name string) row format delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure></p>
+<p>创建表，列分隔符是”\t”<br><a id="more"></a><br>在apache-hive-0.13.0-bin/bin目录下执行./hive，会在当前目录下创建一个metastore_db（源数据库），在此下面存放着各种表，切换不同的目录来执行hive时不能共用同一metastore_db中的表，因此在实际开发中会使用mysql作为我们的metastore。</p>
+<p>安装mysql的步骤如下：<br>注意，在安装mysql时会会与Hive默认安装的包冲突，需要我们删除默认安装的包，查询以前安装的mysql相关包<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep mysql</span><br></pre></td></tr></table></figure></p>
+<p>暴力删除这个包<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">rpm -e mysql-libs-5.1.66-2.el6_3.i686 --nodeps</span><br><span class="line">rpm -ivh MySQL-server-5.1.73-1.glibc23.i386.rpm</span><br><span class="line">rpm -ivh MySQL-client-5.1.73-1.glibc23.i386.rpm</span><br><span class="line">```xml </span><br><span class="line">执行命令进行mysql的初始化</span><br><span class="line">```xml</span><br><span class="line">  /usr/bin/mysql_secure_installation</span><br><span class="line">```xml </span><br><span class="line">配置hive</span><br><span class="line">cp hive-default.xml.template hive-site.xml</span><br><span class="line">修改hive-site.xml（删除所有内容，只留一个<span class="tag">&lt;<span class="title">property</span>&gt;</span><span class="tag">&lt;/<span class="title">property</span>&gt;</span>）</span><br><span class="line">添加如下内容：</span><br><span class="line">```xml</span><br><span class="line"> <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">value</span>&gt;</span>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">description</span>&gt;</span>JDBC connect string for a JDBC metastore<span class="tag">&lt;/<span class="title">description</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">description</span>&gt;</span>Driver class name for a JDBC metastore<span class="tag">&lt;/<span class="title">description</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">value</span>&gt;</span>root<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">description</span>&gt;</span>username to use against metastore database<span class="tag">&lt;/<span class="title">description</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">value</span>&gt;</span>123<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">description</span>&gt;</span>password to use against metastore database<span class="tag">&lt;/<span class="title">description</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>安装hive和mysq完成后，将mysql的连接jar包拷贝到$HIVE_HOME/lib目录下,如果出现没有权限的问题，在mysql授权(在安装mysql的机器上执行)<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure></p>
+<p>执行下面的语句  <em>.</em>:所有库下的所有表   %：任何IP地址或主机都可以连接<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123' WITH GRANT OPTION;FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -122,13 +113,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CloudFoundry/">CloudFoundry</a>
+  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/环境部署/">环境部署</a>
+  <span></span> <a href="/tags/HBase/">HBase</a>
   </div>
 
 </div>
@@ -137,7 +128,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/30/单节点部署CloudFoundry V2/" data-title="单节点部署CloudFoundry v2 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/08/10/Hive学习1：安装部署/" data-title="Hive学习1：安装部署 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -151,18 +142,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/08/03/Go语言初识/" title="Go语言初识">
+ <a href="/2015/08/11/Hive学习2：常用命令总结/" title="Hive学习2：常用命令总结">
   <strong>上一篇：</strong><br/>
   <span>
-  Go语言初识</span>
+  Hive学习2：常用命令总结</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/07/26/Oracle 11g导入DMP文件步骤/"  title="Oracle 11g导入DMP文件步骤">
+<a href="/2015/08/05/shell script/"  title="shell script">
  <strong>下一篇：</strong><br/> 
- <span>Oracle 11g导入DMP文件步骤
+ <span>shell script
 </span>
 </a>
 </div>
@@ -177,7 +168,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#环境要求"><span class="toc-number">1.</span> <span class="toc-text">环境要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">2.</span> <span class="toc-text">安装步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载cf_nise_installer的安装包"><span class="toc-number">2.1.</span> <span class="toc-text">下载cf_nise_installer的安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改域名"><span class="toc-number">2.2.</span> <span class="toc-text">修改域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行安装指令"><span class="toc-number">2.3.</span> <span class="toc-text">执行安装指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动cf"><span class="toc-number">2.4.</span> <span class="toc-text">启动cf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看下cf的组件的状态"><span class="toc-number">2.5.</span> <span class="toc-text">查看下cf的组件的状态</span></a></li></ol></li></ol>
+ 
  
   </div>
 
@@ -191,11 +182,11 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>3</sup></a></li>
+			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>7</sup></a></li>
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>9</sup></a></li>
 		  
 		
 		  
@@ -224,7 +215,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>6</sup></a></li>
 			
 		
 			
@@ -232,23 +223,19 @@
 			
 		
 			
-				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
 			
 		
 			
@@ -260,11 +247,15 @@
 			
 		
 			
-				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -4,26 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>单节点部署CloudFoundry v1 | llq`s blog</title>
+    <title>Hive学习2：常用命令总结 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
+    <meta name="description" content="本文只是总结一些在Hive中常用的命令，并且假设需要的目录或者数据已经存在。
+创建表，\t作为列的分隔符1create table trade_detail (id bigint,income double,expenses double,time string) row formate delimited fields terminated by &apos;\t&apos;;
+1create table user">
 <meta property="og:type" content="article">
-<meta property="og:title" content="单节点部署CloudFoundry v1">
-<meta property="og:url" content="http://yoursite.com/2015/07/24/单节点部署CloudFoundry V1/index.html">
+<meta property="og:title" content="Hive学习2：常用命令总结">
+<meta property="og:url" content="http://yoursite.com/2015/08/11/Hive学习2：常用命令总结/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
-<meta property="og:updated_time" content="2015-07-30T02:27:25.985Z">
+<meta property="og:description" content="本文只是总结一些在Hive中常用的命令，并且假设需要的目录或者数据已经存在。
+创建表，\t作为列的分隔符1create table trade_detail (id bigint,income double,expenses double,time string) row formate delimited fields terminated by &apos;\t&apos;;
+1create table user">
+<meta property="og:updated_time" content="2015-08-12T03:08:29.988Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="单节点部署CloudFoundry v1">
-<meta name="twitter:description" content="Cloud FoundryCloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。
-环境要求">
+<meta name="twitter:title" content="Hive学习2：常用命令总结">
+<meta name="twitter:description" content="本文只是总结一些在Hive中常用的命令，并且假设需要的目录或者数据已经存在。
+创建表，\t作为列的分隔符1create table trade_detail (id bigint,income double,expenses double,time string) row formate delimited fields terminated by &apos;\t&apos;;
+1create table user">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -83,14 +86,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/24/单节点部署CloudFoundry V1/" title="单节点部署CloudFoundry v1" itemprop="url">单节点部署CloudFoundry v1</a>
+      <a href="/2015/08/11/Hive学习2：常用命令总结/" title="Hive学习2：常用命令总结" itemprop="url">Hive学习2：常用命令总结</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-24T06:53:55.000Z" itemprop="datePublished"> 发表于 2015-07-24</time>
+    <time datetime="2015-08-11T02:39:14.000Z" itemprop="datePublished"> 发表于 2015-08-11</time>
     
   </p>
 </header>
@@ -99,17 +102,33 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cloud_Foundry"><span class="toc-number">1.</span> <span class="toc-text">Cloud Foundry</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#环境要求"><span class="toc-number">2.</span> <span class="toc-text">环境要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">3.</span> <span class="toc-text">安装步骤</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h1 id="Cloud_Foundry">Cloud Foundry</h1><p>Cloud Foundry是VMware于2011年4月12日推出的业界第一个开源PaaS云平台，它支持多种框架、语言、运行时环境、云平台及应用服务，使开发 人员能够在几秒钟内进行应用程序的部署和扩展，无需担心任何基础架构的问题。</p>
-<h1 id="环境要求">环境要求</h1><a id="more"></a>
-<p>以Ubuntu 10.04 Server 64-bit为例，记住一定要是64位的，因为CF是构建在64位架构上。一个Ubuntu环境就够了，接下来就是按照文档来单节点部署一个实例，事实上在生产环境就是应该多节点安装，每个模块可以分别安装在不同的VM上面，但是开发和实验环境为了方便，就安装在一台VM上就足够了。</p>
-<h1 id="安装步骤">安装步骤</h1><p>安装前最好更新一下源<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></p>
-<p>安装curl工具：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install curl</span><br></pre></td></tr></table></figure></p>
-<p>接下来执行：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt; &lt;(curl -s -k -B  https://raw.github.com/cloudfoundry/vcap/master/dev_setup/bin/vcap_dev_setup)</span><br></pre></td></tr></table></figure></p>
-<p>系统会自动开始download所需的一切，中间会遇到一些地方需要输入密码，所以在安装开始后，需要经常盯着，不过这个安装过程比较耗时，下载完还有很多需要编译的东西。</p>
+		<p>本文只是总结一些在Hive中常用的命令，并且假设需要的目录或者数据已经存在。</p>
+<p>创建表，\t作为列的分隔符<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table trade_detail (id bigint,income double,expenses double,time string) row formate delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table user_info(id bigint, account string, name string, age int) row format delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>接下来是稍复杂的语句，创建表的的同时进行赋值<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table result row format delimited fields terminated by '\t' as select t1.account, t1.income, t1.expenses, t1.surplus, t2.name from user_info t2 join (select account, sum(income) as income, sum(expenses) as expenses, sum(income-expenses) as surplus from trade_detail group by account) t1 on(t1.account = t2.account);</span><br></pre></td></tr></table></figure></p>
+<p>加载本地文件到数据表中<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data local inpath '/home/hadoop/data/student.txt' overwrite into table student;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data local inpath '/home/hadoop/data/user_info.doc' overwrite into table user_info;</span><br></pre></td></tr></table></figure>
+<p>创建外部表 ，创建外部表的一般情况指的是：先有文件存放着数据，之后我们再来创建表，也就是说创建一张表，然后指向这个有数据的目录。以后只要是向这个目录中上传符合格式的数据会被自动装在到数据库表中，因为在metastore（元数据）会记录这些信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create external table t_detail(id bigint, account string, income double, expenses double, time string) ) row format delimited fields terminated by '\t' location '/hive/td_partition';</span><br></pre></td></tr></table></figure></p>
+<p>创建分区表，一般用于数据量比较大的情况下， partitioned by (logdate string)用来指定按照什么进行分区<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create external table t_detail(id bigint, account string, income double, expenses double, time string)  row format delimited fields terminated by '\t' location '/hive/td_partition' partitioned by (logdate string);</span><br></pre></td></tr></table></figure></p>
+<p>将mysql中的数据直接保存到Hive中<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop export --connect jdbc:mysql://192.168.8.103:3306/hmbbs --username root --password hadoop --export-dir '/user/hive/warehouse/pv_2013_05_31/000000_0' --table pv</span><br></pre></td></tr></table></figure></p>
+<p>基本的插入语法<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert overwrite table tablename [partiton(partcol1=val1,partclo2=val2)]select_statement from t_statement</span><br><span class="line">insert overwrite table test_insert select * from test_table;</span><br></pre></td></tr></table></figure></p>
+<p>更新表的名称<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; alter table source RENAME TO target;</span><br></pre></td></tr></table></figure></p>
+<p>添加新一列<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table invites add columns (new_col2 INT COMMENT 'a comment');</span><br></pre></td></tr></table></figure></p>
+<p>删除表：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE records;</span><br></pre></td></tr></table></figure></p>
+<p>删除表中数据，但要保持表的结构定义<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dfs -rmr /user/hive/warehouse/records;</span><br></pre></td></tr></table></figure></p>
+<p>显示所有函数<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show functions;</span><br></pre></td></tr></table></figure></p>
+<p>查看函数用法<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">describe function substr;</span><br></pre></td></tr></table></figure></p>
+<p>内连接<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT sales.*, things.* FROM sales JOIN things ON (sales.id = things.id);</span><br></pre></td></tr></table></figure></p>
+<p>查看hive为某个查询使用多少个MapReduce作业<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Explain SELECT sales.*, things.* FROM sales JOIN things ON (sales.id = things.id);</span><br></pre></td></tr></table></figure></p>
+<p>外连接<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT sales.*, things.* FROM sales LEFT OUTER JOIN things ON (sales.id = things.id);</span><br><span class="line">SELECT sales.*, things.* FROM sales RIGHT OUTER JOIN things ON (sales.id = things.id);</span><br><span class="line">SELECT sales.*, things.* FROM sales FULL OUTER JOIN things ON (sales.id = things.id);</span><br></pre></td></tr></table></figure></p>
+<p>创建视图</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; CREATE VIEW valid_records AS SELECT * FROM records2 WHERE temperature !=9999;</span><br></pre></td></tr></table></figure>
+<p>查看视图详细信息<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hive&gt; DESCRIBE EXTENDED valid_records;</span><br></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -117,13 +136,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/CloudFoundry/">CloudFoundry</a>
+  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/环境部署/">环境部署</a>
+  <span></span> <a href="/tags/HBase/">HBase</a>
   </div>
 
 </div>
@@ -132,7 +151,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/24/单节点部署CloudFoundry V1/" data-title="单节点部署CloudFoundry v1 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/08/11/Hive学习2：常用命令总结/" data-title="Hive学习2：常用命令总结 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -145,19 +164,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理">
-  <strong>上一篇：</strong><br/>
-  <span>
-  HBase学习3：综合梳理</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/"  title="HBase学习2：HBase Shell常用命令总结">
+<a href="/2015/08/10/Hive学习1：安装部署/"  title="Hive学习1：安装部署">
  <strong>下一篇：</strong><br/> 
- <span>HBase学习2：HBase Shell常用命令总结
+ <span>Hive学习1：安装部署
 </span>
 </a>
 </div>
@@ -172,7 +183,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cloud_Foundry"><span class="toc-number">1.</span> <span class="toc-text">Cloud Foundry</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#环境要求"><span class="toc-number">2.</span> <span class="toc-text">环境要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">3.</span> <span class="toc-text">安装步骤</span></a></li></ol>
+ 
  
   </div>
 
@@ -186,11 +197,11 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>3</sup></a></li>
+			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>7</sup></a></li>
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>9</sup></a></li>
 		  
 		
 		  
@@ -219,7 +230,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>6</sup></a></li>
 			
 		
 			
@@ -227,23 +238,19 @@
 			
 		
 			
-				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
 			
 		
 			
@@ -255,11 +262,15 @@
 			
 		
 			
-				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
 			
 		
 		</ul>
