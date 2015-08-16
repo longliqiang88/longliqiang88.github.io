@@ -23,7 +23,7 @@ MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()�
 MapReduce实现原理">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/MapReduce01.jpg">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/MapReduce02.jpg">
-<meta property="og:updated_time" content="2015-07-26T03:25:05.582Z">
+<meta property="og:updated_time" content="2015-08-14T14:38:25.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MapReduce-Hadoop分布式计算模型">
 <meta name="twitter:description" content="MapReduce概述MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。
@@ -111,7 +111,7 @@ MapReduce实现原理">
 		<h1 id="MapReduce概述">MapReduce概述</h1><p>MapReduce是一种分布式计算模型，由Google提出，主要用于搜索领域，解决海量数据的计算问题。</p>
 <p>MR由两个阶段组成：Map和Reduce，用户只需要实现map()和reduce()两个函数，即可实现分布式计算，非常简单。这两个函数的形参是key、value对，表示函数的输入信息。</p>
 <h1 id="MapReduce实现原理">MapReduce实现原理</h1><a id="more"></a>
-<p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/MapReduce01.jpg" alt="ddd"><br>执行步骤：<br>1.map任务处理</p>
+<p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/MapReduce01.jpg" alt="实现原理图"><br>执行步骤：<br>1.map任务处理</p>
 <p>1.1 读取输入文件内容，解析成key、value对。对输入文件的每一行，解析成key、value对。每一个键值对调用次map函数。</p>
 <p>1.2 写自己的逻辑，对输入的key、value处理，转换成新的key、value输出。</p>
 <p>1.3 对输出的key、value进行分区。</p>
@@ -244,6 +244,10 @@ MapReduce实现原理">
 		  
 		
 		  
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/MapReduce/" title="MapReduce">MapReduce<sup>2</sup></a></li>
 		  
 		
@@ -281,11 +285,11 @@ MapReduce实现原理">
 			
 		
 			
-				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
@@ -293,11 +297,15 @@ MapReduce实现原理">
 			
 		
 			
+				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 			
 		
 			
@@ -309,7 +317,7 @@ MapReduce实现原理">
 			
 		
 			
-				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
 			
 		
 		</ul>

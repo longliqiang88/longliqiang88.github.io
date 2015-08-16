@@ -1,0 +1,539 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Spring学习1：Spring基本特性 | llq`s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="longliqiang">
+    
+
+    
+    <meta name="description" content="Spring基本特征 Spring是一个非常活跃的开源框架；它是一个基于Core来构架多层JavaEE系统的框架,它的主要目地是简化企业开发。Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring学习1：Spring基本特性">
+<meta property="og:url" content="http://yoursite.com/2015/08/14/Spring学习1：Spring基本特性/index.html">
+<meta property="og:site_name" content="llq`s blog">
+<meta property="og:description" content="Spring基本特征 Spring是一个非常活跃的开源框架；它是一个基于Core来构架多层JavaEE系统的框架,它的主要目地是简化企业开发。Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring。">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/spring01.jpg">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/spring02.jpg">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/spring03.jpg">
+<meta property="og:updated_time" content="2015-08-16T03:53:58.669Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring学习1：Spring基本特性">
+<meta name="twitter:description" content="Spring基本特征 Spring是一个非常活跃的开源框架；它是一个基于Core来构架多层JavaEE系统的框架,它的主要目地是简化企业开发。Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/11.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="llq`s blog" title="llq`s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="llq`s blog">llq`s blog</a></h1>
+				<h2 class="blog-motto">Summary is for a better start.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">目录</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/14/Spring学习1：Spring基本特性/" title="Spring学习1：Spring基本特性" itemprop="url">Spring学习1：Spring基本特性</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-14T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring基本特征"><span class="toc-number">1.</span> <span class="toc-text">Spring基本特征</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开发spring所需要的工具"><span class="toc-number">2.</span> <span class="toc-text">开发spring所需要的工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring的jar包"><span class="toc-number">2.1.</span> <span class="toc-text">Spring的jar包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring配置文件"><span class="toc-number">2.2.</span> <span class="toc-text">Spring配置文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring_IOC"><span class="toc-number">3.</span> <span class="toc-text">Spring IOC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring创建对象的方式"><span class="toc-number">4.</span> <span class="toc-text">Spring创建对象的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#无参构造方法"><span class="toc-number">4.1.</span> <span class="toc-text">无参构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态工厂"><span class="toc-number">4.2.</span> <span class="toc-text">静态工厂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例工厂方法"><span class="toc-number">4.3.</span> <span class="toc-text">实例工厂方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring对象初始化bean时机"><span class="toc-number">5.</span> <span class="toc-text">Spring对象初始化bean时机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring容器的生命周期"><span class="toc-number">6.</span> <span class="toc-text">Spring容器的生命周期</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="Spring基本特征">Spring基本特征</h1><p> <img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring01.jpg" alt="Spring基本特征"><br>Spring是一个非常活跃的开源框架；它是一个基于Core来构架多层JavaEE系统的框架,它的主要目地是简化企业开发。<br>Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring。<br><a id="more"></a></p>
+<h1 id="开发spring所需要的工具">开发spring所需要的工具</h1><h2 id="Spring的jar包">Spring的jar包</h2><p>到<a href="http://www.springsource.org/download下载spring，然后进行解压缩，在解压目录中找到下面jar文件，拷贝到类路径下" target="_blank" rel="external">http://www.springsource.org/download下载spring，然后进行解压缩，在解压目录中找到下面jar文件，拷贝到类路径下</a><br>—spring的核心类库 在spring文档的dist下<br>dist\spring.jar<br>—引入的第三方类库 都spring文档的lib下<br>lib\jakarta-commons\commons-logging.jar<br>如果使用了切面编程(AOP),还需要下列jar文件<br>lib/aspectj/aspectjweaver.jar和aspectjrt.jar<br>lib/cglib/cglib-nodep-2.1_3.jar<br>如果使用了JSR-250中的注解,如@Resource/@PostConstruct/@PreDestroy,还需要下列jar文件<br>lib\j2ee\common-annotations.jar<br>注:JSR(Java 规范请求)是指向JCP(Java Community Process)提出新增一个标准化技术规范的正式请求。任何人都可以提交JSR(Java 规范请求)，以向Java平台增添新的API和服务。JSR已成为Java界的一个重要标准 </p>
+<h2 id="Spring配置文件">Spring配置文件</h2><p>默认情况下是applicationContext.xml文件。可以建立很多xml文件，工程中一般都是这样配置的。</p>
+<h1 id="Spring_IOC">Spring IOC</h1><p>IOC指的是控制反转，把对象的创建、初始化、销毁等工作都交给Spring容器。由spring容器来控制对象的声明周期。下图可以说明我们传统创建类的方式和使用Spring之后的区别：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring02.jpg" alt="Spring IOC"><br> 代码实现如下：<br> 首先创建Helloworld类：<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">	public void hello()&#123;</span><br><span class="line">		System.out.println("hello world");</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> Spring配置文件：<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">beans</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.springframework.org/schema/beans"</span></span><br><span class="line">       <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">       <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://www.springframework.org/schema/beans</span><br><span class="line">           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- </span><br><span class="line">    	表示一个类</span><br><span class="line">    	  id类的唯一标示</span><br><span class="line">    	  class 代表类的全名，也就是包名+类名</span><br><span class="line">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"helloWorld"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.HelloWorld"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p> main方法的代码如下：<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	/**</span><br><span class="line">	 * 1、启动spring容器</span><br><span class="line">	 * 2、从spring容器中把该对象提取出来</span><br><span class="line">	 * 3、对象调用方法</span><br><span class="line">	*/</span><br><span class="line">	ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");</span><br><span class="line">	HelloWorld helloWorld = (HelloWorld)context.getBean("helloWorld");</span><br><span class="line">	helloWorld.hello();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> Spring容易创建对象的意义：程序员可以更加专注于业务的开发，而不用管对象的创建、销毁等，把这些操作都交给Spring容器完成。</p>
+<h1 id="Spring创建对象的方式">Spring创建对象的方式</h1><h2 id="无参构造方法">无参构造方法</h2><p> 如果在配置文件中只使用id和class属性配置bean，则默认调用类的无参构造方法进行实例化，代码如下所示：<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"helloWorld"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.HelloWorld"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p> 上述配置将调用HelloWorld类的无参构造方法来创建HelloWorld实例。</p>
+<h2 id="静态工厂">静态工厂</h2><p> 有些类中提供了静态的工厂方法返回实例，假设HelloWorldFactory类中有如下的静态工厂方法：<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class HelloWorldFactory &#123;</span><br><span class="line">	public static HelloWorld getInstance()&#123;</span><br><span class="line">		return new HelloWorld();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在配置文件中使用factory-method属性调用改静态工厂方法，创建HelloWorld实例，代码如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"helloWorldFactory"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.HelloWorldFactory"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"helloWorld"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.HelloWorldFactory"</span> <span class="attribute">factory-method</span>=<span class="value">"getInstance"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="实例工厂方法">实例工厂方法</h2><ol>
+<li>提供工厂类</li>
+<li>把工厂放到Spring容器中</li>
+<li>在Spring容器中指定工厂类的工厂方法</li>
+<li>在客户端中创建对象<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"helloWorldFactory"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.HelloWorldFactory"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"helloWorld"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.HelloWorldFactory"</span> <span class="attribute">factory-bean</span>=<span class="value">"helloWorldFactory"</span> <span class="attribute">factory-method</span>=<span class="value">"getInstance"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Spring对象初始化bean时机">Spring对象初始化bean时机</h1><p>在默认情况下，只要在Spring容器中配置了一个bean，容器在启动时就会实例化该bean，单例模式。<br>如果在Spring配制文件时设置懒加载模式（lazy-init=”true”），在getBean时才会实例化对象。<br>如果scope=”prototype”时，无论lazy-init的值是什么都只会在使用时才会创建，当struts2的action和spring容器整合的时候，action的scope设置成prototype。</p>
+<h1 id="Spring容器的生命周期">Spring容器的生命周期</h1><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring03.jpg" alt="Spring容器生命周期"></p>
+<ol>
+<li>启动spring容器</li>
+<li>创建helloWorld对象</li>
+<li>调用helloWorld对象的init方法，init方法是由spring容器内部调用的</li>
+<li>在客户端提取helloWorld对象，对象调用方法</li>
+<li>当spring容器关闭的时候，执行destroy方法：注意：前提条件：必须为单例，如果多实例，不起作用。</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Spring/">Spring</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/14/Spring学习1：Spring基本特性/" data-title="Spring学习1：Spring基本特性 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/12/Hive学习3：综合梳理/"  title="Hive学习3：综合梳理">
+ <strong>下一篇：</strong><br/> 
+ <span>Hive学习3：综合梳理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring基本特征"><span class="toc-number">1.</span> <span class="toc-text">Spring基本特征</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开发spring所需要的工具"><span class="toc-number">2.</span> <span class="toc-text">开发spring所需要的工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring的jar包"><span class="toc-number">2.1.</span> <span class="toc-text">Spring的jar包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring配置文件"><span class="toc-number">2.2.</span> <span class="toc-text">Spring配置文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring_IOC"><span class="toc-number">3.</span> <span class="toc-text">Spring IOC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring创建对象的方式"><span class="toc-number">4.</span> <span class="toc-text">Spring创建对象的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#无参构造方法"><span class="toc-number">4.1.</span> <span class="toc-text">无参构造方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态工厂"><span class="toc-number">4.2.</span> <span class="toc-text">静态工厂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例工厂方法"><span class="toc-number">4.3.</span> <span class="toc-text">实例工厂方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring对象初始化bean时机"><span class="toc-number">5.</span> <span class="toc-text">Spring对象初始化bean时机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring容器的生命周期"><span class="toc-number">6.</span> <span class="toc-text">Spring容器的生命周期</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MapReduce/" title="MapReduce">MapReduce<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Oracle/" title="Oracle">Oracle<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hive/" title="Hive">Hive<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2643661235&verifier=891f03cc&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> A programmer,love basketball and fitness <br/>
+			You cannot improve your past, but you can improve your future. Once time is wasted, life is wasted.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2643661235" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:facingfuture@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="longliqiang">longliqiang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
