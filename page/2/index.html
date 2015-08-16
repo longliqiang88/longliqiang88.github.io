@@ -81,6 +81,72 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理" itemprop="url">HBase学习3：综合梳理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-25T08:25:27.000Z" itemprop="datePublished"> 发表于 2015-07-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Hbase特点：">Hbase特点：</h1><p>HBase介于nosql和RDBMS之间，仅能通过主键(row key)和主键的range来检索数据，仅支持单行事务(可通过hive支持来实现多表join等复杂操作)。主要用来存储非结构化和半结构化的松散数据。与hadoop一样，Hbase目标主要依靠横向扩展，通过不断增加廉价的商用服务器，来增加计算和存储能力。</p>
+<p>HBase中的表一般有这样的特点：</p>
+<ol>
+<li>大：一个表可以有上亿行，上百万列</li>
+<li>面向列:面向列(族)的存储和权限控制，列(族)独立检索。</li>
+<li>稀疏:对于为空(null)的列，并不占用存储空间，因此，表可以设计的非常稀疏。
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/25/HBase学习3：综合梳理/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HBase/">HBase</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/" title="HBase学习2：HBase Shell常用命令总结" itemprop="url">HBase学习2：HBase Shell常用命令总结</a>
   </h1>
   <p class="article-author">By
@@ -634,67 +700,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/10/HDFS-Hadoop分布式文件系统/" title="HDFS-Hadoop分布式文件系统" itemprop="url">HDFS-Hadoop分布式文件系统</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-10T04:44:55.000Z" itemprop="datePublished"> 发表于 2015-07-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是分布式文件系统">什么是分布式文件系统</h1><p>数据量越来越多，已经超出了一个操作系统的管辖范围，需要分配到更多的操作系统管理的磁盘中，因此需要一种文件系统来管理多台机器上的文件，这就是分布式文件系统。分布式文件系统是一种允许文件通过网络在多台主机上共享的文件系统，可以让多台机器上的用户分享文件和存储空间。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/10/HDFS-Hadoop分布式文件系统/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/HDFS/">HDFS</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -725,7 +730,7 @@
 		  
 		
 		  
-			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>1</sup></a></li>
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>2</sup></a></li>
 		  
 		
 		  
@@ -762,11 +767,11 @@
 			
 		
 			
-				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
 			
 		
 			
@@ -774,7 +779,7 @@
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
 			
 		
 			
@@ -786,7 +791,7 @@
 			
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
