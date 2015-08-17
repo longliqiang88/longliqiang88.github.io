@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/spring01.jpg">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/spring02.jpg">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/spring03.jpg">
-<meta property="og:updated_time" content="2015-08-16T07:43:00.157Z">
+<meta property="og:updated_time" content="2015-08-16T09:14:50.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring学习1：Spring基本特性">
 <meta name="twitter:description" content="Spring基本特征Spring是一个非常活跃的开源框架；它是一个基于Core来构架多层JavaEE系统的框架,它的主要目地是简化企业开发。Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring。">
@@ -106,7 +106,7 @@
 		<h1 id="Spring基本特征">Spring基本特征</h1><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring01.jpg" alt="Spring基本特征"><br>Spring是一个非常活跃的开源框架；它是一个基于Core来构架多层JavaEE系统的框架,它的主要目地是简化企业开发。<br>Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring。<br><a id="more"></a></p>
 <h1 id="开发spring所需要的工具">开发spring所需要的工具</h1><h2 id="Spring的jar包">Spring的jar包</h2><p>到<a href="http://www.springsource.org/download下载spring，然后进行解压缩，在解压目录中找到下面jar文件，拷贝到类路径下" target="_blank" rel="external">http://www.springsource.org/download下载spring，然后进行解压缩，在解压目录中找到下面jar文件，拷贝到类路径下</a><br>—spring的核心类库 在spring文档的dist下<br>dist\spring.jar<br>—引入的第三方类库 都spring文档的lib下<br>lib\jakarta-commons\commons-logging.jar<br>如果使用了切面编程(AOP),还需要下列jar文件<br>lib/aspectj/aspectjweaver.jar和aspectjrt.jar<br>lib/cglib/cglib-nodep-2.1_3.jar<br>如果使用了JSR-250中的注解,如@Resource/@PostConstruct/@PreDestroy,还需要下列jar文件<br>lib\j2ee\common-annotations.jar<br>注:JSR(Java 规范请求)是指向JCP(Java Community Process)提出新增一个标准化技术规范的正式请求。任何人都可以提交JSR(Java 规范请求)，以向Java平台增添新的API和服务。JSR已成为Java界的一个重要标准 </p>
 <h2 id="Spring配置文件">Spring配置文件</h2><p>默认情况下是applicationContext.xml文件。可以建立很多xml文件，工程中一般都是这样配置的。</p>
-<h1 id="Spring_IOC">Spring IOC</h1><p>IOC指的是控制反转，把对象的创建、初始化、销毁等工作都交给Spring容器。由spring容器来控制对象的声明周期。下图可以说明我们传统创建类的方式和使用Spring之后的区别：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring02.jpg" alt="Spring IOC"><br> 代码实现如下：<br> 首先创建Helloworld类：<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">	public void hello()&#123;</span><br><span class="line">		System.out.println("hello world");</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Spring_IOC">Spring IOC</h1><p>IOC指的是控制反转，把对象的创建、初始化、销毁等工作都交给Spring容器。由spring容器来控制对象的生命周期。下图可以说明我们传统创建类的方式和使用Spring之后的区别：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring02.jpg" alt="Spring IOC"><br> 代码实现如下：<br> 首先创建Helloworld类：<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">	public void hello()&#123;</span><br><span class="line">		System.out.println("hello world");</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p> Spring配置文件：<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">beans</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.springframework.org/schema/beans"</span></span><br><span class="line">       <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">       <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://www.springframework.org/schema/beans</span><br><span class="line">           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- </span><br><span class="line">    	表示一个类</span><br><span class="line">    	  id类的唯一标示</span><br><span class="line">    	  class 代表类的全名，也就是包名+类名</span><br><span class="line">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"helloWorld"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.HelloWorld"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p> main方法的代码如下：<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">	/**</span><br><span class="line">	 * 1、启动spring容器</span><br><span class="line">	 * 2、从spring容器中把该对象提取出来</span><br><span class="line">	 * 3、对象调用方法</span><br><span class="line">	*/</span><br><span class="line">	ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");</span><br><span class="line">	HelloWorld helloWorld = (HelloWorld)context.getBean("helloWorld");</span><br><span class="line">	helloWorld.hello();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p> Spring容易创建对象的意义：程序员可以更加专注于业务的开发，而不用管对象的创建、销毁等，把这些操作都交给Spring容器完成。</p>
@@ -218,7 +218,7 @@
 		  
 		
 		  
-			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>2</sup></a></li>
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>3</sup></a></li>
 		  
 		
 		  
@@ -247,15 +247,15 @@
 			
 		
 			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Hive/" title="Hive">Hive<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>2</sup></a></li>
 			
 		
 			
