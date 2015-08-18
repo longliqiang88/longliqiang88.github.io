@@ -4,22 +4,32 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>llq`s blog</title>
+    <title>Spring学习4：Spring AOP（面向切面编程） | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="Summary is for a better start.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="llq`s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="常用术语学习AOP之前，先了解AOP中常用术语
+
+切面（Aspect）切面是一个关注点的模块化，如事务管理就是一个在JavaEE企业中应用最常见的界面。在企业应用编程中，首先需要通过分析，抽取出通用的功能，即“切面”。事务、日志、安全性的框架、权限都是切面
+连接点（Joinpoint）连接点是执行程序过程中的特定的点。Spring框架只支持方法作为连接点，如方法调用之前、方法调用后、或者发生异常时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring学习4：Spring AOP（面向切面编程）">
+<meta property="og:url" content="http://yoursite.com/2015/08/18/Spring学习4：Spring AOP（面向切面编程）/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="Summary is for a better start.">
+<meta property="og:description" content="常用术语学习AOP之前，先了解AOP中常用术语
+
+切面（Aspect）切面是一个关注点的模块化，如事务管理就是一个在JavaEE企业中应用最常见的界面。在企业应用编程中，首先需要通过分析，抽取出通用的功能，即“切面”。事务、日志、安全性的框架、权限都是切面
+连接点（Joinpoint）连接点是执行程序过程中的特定的点。Spring框架只支持方法作为连接点，如方法调用之前、方法调用后、或者发生异常时">
+<meta property="og:updated_time" content="2015-08-18T13:31:06.383Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="llq`s blog">
-<meta name="twitter:description" content="Summary is for a better start.">
+<meta name="twitter:title" content="Spring学习4：Spring AOP（面向切面编程）">
+<meta name="twitter:description" content="常用术语学习AOP之前，先了解AOP中常用术语
+
+切面（Aspect）切面是一个关注点的模块化，如事务管理就是一个在JavaEE企业中应用最常见的界面。在企业应用编程中，首先需要通过分析，抽取出通用的功能，即“切面”。事务、日志、安全性的框架、权限都是切面
+连接点（Joinpoint）连接点是执行程序过程中的特定的点。Spring框架只支持方法作为连接点，如方法调用之前、方法调用后、或者发生异常时">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -73,12 +83,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2015/08/18/Spring学习4：Spring AOP（面向切面编程）/" title="Spring学习4：Spring AOP（面向切面编程）" itemprop="url">Spring学习4：Spring AOP（面向切面编程）</a>
@@ -92,9 +100,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h1 id="常用术语">常用术语</h1><p>学习AOP之前，先了解AOP中常用术语</p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用术语"><span class="toc-number">1.</span> <span class="toc-text">常用术语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AOP两种实现模式"><span class="toc-number">2.</span> <span class="toc-text">AOP两种实现模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#xml形式"><span class="toc-number">2.1.</span> <span class="toc-text">xml形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#举例说明"><span class="toc-number">2.1.1.</span> <span class="toc-text">举例说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现原理"><span class="toc-number">2.1.2.</span> <span class="toc-text">实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切入点表达式"><span class="toc-number">2.1.3.</span> <span class="toc-text">切入点表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOP中的各种通知"><span class="toc-number">2.1.4.</span> <span class="toc-text">AOP中的各种通知</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解形式"><span class="toc-number">2.2.</span> <span class="toc-text">注解形式</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="常用术语">常用术语</h1><p>学习AOP之前，先了解AOP中常用术语</p>
 <ol>
 <li>切面（Aspect）<br>切面是一个关注点的模块化，如事务管理就是一个在JavaEE企业中应用最常见的界面。在企业应用编程中，首先需要通过分析，抽取出通用的功能，即“切面”。<br>事务、日志、安全性的框架、权限都是切面</li>
 <li>连接点（Joinpoint）<br>连接点是执行程序过程中的特定的点。Spring框架只支持方法作为连接点，如方法调用之前、方法调用后、或者发生异常时等。</li>
@@ -131,14 +146,9 @@
 <p>接下来最重要的就是AOP的配置文件，applicationContext.xml，<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"personDao"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.PersonDaoImpl"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"transaction"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.Transaction"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line">      </span><br><span class="line"><span class="tag">&lt;<span class="title">aop:config</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- </span><br><span class="line">      切入点表达式</span><br><span class="line">      确定目标类</span><br><span class="line">      id标示</span><br><span class="line">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">aop:pointcut</span> <span class="attribute">expression</span>=<span class="value">"execution(* cn.zju.spring.PersonDaoImpl.*(..))"</span> <span class="attribute">id</span>=<span class="value">"perform"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">aop:aspect</span> <span class="attribute">ref</span>=<span class="value">"transaction"</span>&gt;</span><span class="comment">&lt;!-- ref指向切面类 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		前置通知</span><br><span class="line">      	 		   1、在目标方法执行之前完成</span><br><span class="line">      	 		   2、有一个参数Joinpoint</span><br><span class="line">      	 		        	该参数能够获取目标方法的一些信息</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 	&lt;aop:before method="beginTransaction" pointcut-ref="perform"/&gt;</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		后置通知</span><br><span class="line">      	 		   1、在目标方法执行之后完成</span><br><span class="line">      	 		   2、有一个参数Joinpoint</span><br><span class="line">      	 		   3、returning属性可以获取目标方法的返回值</span><br><span class="line">      	 		   4、如果目标方法遇到异常，则后置通知将不再执行</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 	&lt;aop:after-returning method="commit" pointcut-ref="perform" returning="val"/&gt;</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		异常通知</span><br><span class="line">      	 			throwing </span><br><span class="line">      	 			     参数的名称 ex</span><br><span class="line">      	 			获取目标方法抛出的异常信息</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 	&lt;aop:after-throwing method="throwingMethod" pointcut-ref="perform" throwing="ex"/&gt;</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		最终通知</span><br><span class="line">      	 			无论目标方法是否遇到异常，最终通知都要执行</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	 <span class="comment">&lt;!-- </span><br><span class="line">      	 	&lt;aop:after method="finallyMethod" pointcut-ref="perform"/&gt;</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		环绕通知</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="tag">&lt;<span class="title">aop:around</span> <span class="attribute">method</span>=<span class="value">"aroundMethod"</span> <span class="attribute">pointcut-ref</span>=<span class="value">"perform"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">aop:config</span>&gt;</span></span><br><span class="line">在后续博客中会有实际案例，通过案例可以更加清楚各种的通知的用法。</span><br></pre></td></tr></table></figure></p>
 <h2 id="注解形式">注解形式</h2><p>在上述例子中，我们修改事务类transaction和配置文件来实现各种通知的说明,切面类和目标方法都不需要做改变，<br>事务处理类transaction<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Transaction</span> </span>&#123;</span><br><span class="line">    <span class="annotation">@Pointcut</span>(<span class="string">"execution(* cn.zju.spring.PersonDaoImpl.*(..))"</span>)  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">anyMethod</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//定义一个切入点  </span></span><br><span class="line"></span><br><span class="line">	<span class="annotation">@Before</span>(<span class="string">"anyMethod() &amp;&amp; args(joinPoint)"</span>)  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beginTransaction</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"args:"</span>+joinPoint.getArgs());<span class="comment">//获取目标方法的参数</span></span><br><span class="line">		<span class="comment">//获取方法的名称</span></span><br><span class="line">		System.out.println(<span class="string">"methodName:"</span>+joinPoint.getSignature().getName());</span><br><span class="line">		System.out.println(<span class="string">"begin transaction"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="annotation">@AfterReturning</span>(<span class="string">"anyMethod()"</span>)  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">commit</span><span class="params">(JoinPoint joinPoint,Object val)</span></span>&#123;</span><br><span class="line">		System.out.println(val);</span><br><span class="line">		System.out.println(<span class="string">"commit"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 异常通知</span><br><span class="line">	 */</span></span><br><span class="line">    <span class="annotation">@AfterThrowing</span>(<span class="string">"anyMethod()"</span>)  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">throwingMethod</span><span class="params">(JoinPoint joinPoint,Throwable ex)</span></span>&#123;</span><br><span class="line">		System.out.println(ex.getMessage());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 最终通知</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="annotation">@After</span>(<span class="string">"anyMethod()"</span>)  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finallyMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"finally method"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 环绕通知</span><br><span class="line">	 *   控制目标方法的执行</span><br><span class="line">	 */</span></span><br><span class="line">	  <span class="annotation">@Around</span>(<span class="string">"anyMethod()"</span>)  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">aroundMethod</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();<span class="comment">//获取目标方法的名称</span></span><br><span class="line">		<span class="keyword">if</span>(methodName.equals(<span class="string">"savePerson"</span>))&#123;</span><br><span class="line">			joinPoint.proceed();<span class="comment">//调用目标方法</span></span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"权限不足"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>然后下面的配置文件就比较简单了<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="title">beans</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.springframework.org/schema/beans"</span>  </span><br><span class="line">       <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span><br><span class="line">       <span class="attribute">xmlns:aop</span>=<span class="value">"http://www.springframework.org/schema/aop"</span>  </span><br><span class="line">       <span class="attribute">xsi:schemaLocation</span>=<span class="value">"  </span><br><span class="line">       http://www.springframework.org/schema/beans   </span><br><span class="line">       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  </span><br><span class="line">       http://www.springframework.org/schema/aop   </span><br><span class="line">       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"</span>&gt;</span>  </span><br><span class="line">          </span><br><span class="line">    <span class="tag">&lt;<span class="title">aop:aspectj-autoproxy</span>/&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"personDao"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.PersonDaoImpl"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"transaction"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.Transaction"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="title">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
@@ -156,583 +166,43 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-</div>
+	  <div data-url="http://yoursite.com/2015/08/18/Spring学习4：Spring AOP（面向切面编程）/" data-title="Spring学习4：Spring AOP（面向切面编程） | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  </div>
+	
+	</div>
+
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/16/Spring学习3：代理模式/" title="Spring学习3：代理模式" itemprop="url">Spring学习3：代理模式</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-16T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="代理模式">代理模式</h1><p>所谓代理，就是一个人或者一个机构代表另一个人或者另一个机构采取行动。在一些情况下，一个客户不想或者不能够直接引用一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
-<p>代理模式是一种结构性设计模式。当客户端不想直接调用主题对象，而希望主题对象的行为前后加上预处理或者后续处理时，则可以使用代理模式。</p>
-<h1 id="代理模式的三种角色">代理模式的三种角色</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/16/Spring学习3：代理模式/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/16/Spring学习3：代理模式/"  title="Spring学习3：代理模式">
+ <strong>下一篇：</strong><br/> 
+ <span>Spring学习3：代理模式
+</span>
+</a>
 </div>
 
-</footer>
+</nav>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/15/Spring学习2：Spring DI（依赖注入）/" title="Spring学习2：Spring DI（依赖注入）" itemprop="url">Spring学习2：Spring DI（依赖注入）</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-15T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Spring_DI">Spring DI</h1><p>DI（依赖注入）就是给属性赋值。</p>
-<h1 id="spring容器的执行顺序">spring容器的执行顺序</h1><p>考虑依赖注入之后的Spring的执行顺序如下<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring04.jpg" alt="spring容器的执行顺序"><br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/15/Spring学习2：Spring DI（依赖注入）/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
 	
-</div>
 
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/14/Spring学习1：Spring基本特性/" title="Spring学习1：Spring基本特性" itemprop="url">Spring学习1：Spring基本特性</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-14T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Spring基本特征">Spring基本特征</h1><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring01.jpg" alt="Spring基本特征"><br>Spring是一个非常活跃的开源框架；它是一个基于Core来构架多层JavaEE系统的框架,它的主要目地是简化企业开发。<br>Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/14/Spring学习1：Spring基本特性/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/12/Hive学习3：综合梳理/" title="Hive学习3：综合梳理" itemprop="url">Hive学习3：综合梳理</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-12T02:39:14.000Z" itemprop="datePublished"> 发表于 2015-08-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="什么是Hive">什么是Hive</h1><p>Hive是建立在 Hadoop上的数据仓库基础构架。它提供了一系列的工具，可以用来进行数据提取转化加载（ETL），这是一种可以存储、查询和分析存储在Hadoop中的大规模数据的机制。Hive定义了简单的类 SQL查询语言，称为HQL，它允许熟悉SQL的用户查询数据。同时，这个语言也允许熟悉MapReduce开发者的开发自定义的mapper和reducer来处理内建的mapper和reducer无法完成的复杂的分析工作。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/12/Hive学习3：综合梳理/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Hive/">Hive</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/11/Hive学习2：常用命令总结/" title="Hive学习2：常用命令总结" itemprop="url">Hive学习2：常用命令总结</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-11T02:39:14.000Z" itemprop="datePublished"> 发表于 2015-08-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>本文只是总结一些在Hive中常用的命令，并且假设需要的目录或者数据已经存在。</p>
-<p>创建表，\t作为列的分隔符<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table trade_detail (id bigint,income double,expenses double,time string) row formate delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table user_info(id bigint, account string, name string, age int) row format delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/11/Hive学习2：常用命令总结/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Hive/">Hive</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/10/Hive学习1：安装部署/" title="Hive学习1：安装部署" itemprop="url">Hive学习1：安装部署</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-10T02:39:14.000Z" itemprop="datePublished"> 发表于 2015-08-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Hive的部署非常简单，下载hive，我用的是apache-hive-0.13.0-bin.tar，解压之后，进入bin目录，执行./hive命令即可进入Hive控制台。show tables;当前存在的表的个数。<br>建表语句举例<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table teacher (id bigint,name string) row format delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure></p>
-<p>创建表，列分隔符是”\t”<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/10/Hive学习1：安装部署/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Hive/">Hive</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/05/shell script/" title="shell script" itemprop="url">shell script</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-05T06:37:56.000Z" itemprop="datePublished"> 发表于 2015-08-05</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Shell SCript是一种纯文本文件，帮助我们一次执行多个命令，或者是利用一些逻辑判断帮助我们实现某些功能。(本文适合初学者)</p>
-<h1 id="编写第一个script">编写第一个script</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">PATH=/bin:/sbin:usr/bin:/usr/sbin:usr/local/bin:/usr/local/sbiin:~/bin</span><br><span class="line">export PATH</span><br><span class="line">echo -e "Hello World! \a\n"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/05/shell script/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/03/Go语言初识/" title="Go语言初识" itemprop="url">Go语言初识</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-03T01:56:04.000Z" itemprop="datePublished"> 发表于 2015-08-03</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>为了CloudFoundry项目需要，学习了一下Go语言，下面是个人学习Go语言的总结。</p>
-<h1 id="语言特点">语言特点</h1><p>软件工程的思想指导了go语言的设计<br>清晰简洁的依赖性管理<br>清晰的语法<br>清晰的语义<br>– 无指针运算<br>– 没有隐式的数字类型转换<br>– 数组边界检查<br>– 没有类型别名<br>重组合轻继承<br>更加简单的编程模式（垃圾回收，并发）<br>简单易用的编程辅助工具（go, gofmt, godoc, gofix）<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/03/Go语言初识/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/CloudFoundry/">CloudFoundry</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Go语言/">Go语言</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/" title="Oracle 11g导入DMP文件步骤" itemprop="url">Oracle 11g导入DMP文件步骤</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-26T13:28:15.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>可以使用sql plus 也可以使用 plsql</p>
-<h1 id="开启Oracle服务">开启Oracle服务</h1><p>使用管理员账户登录</p>
-<h1 id="创建表空间">创建表空间</h1><p>在sql窗口中输入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create tablespace test datafile 'D:\test.ora' size 1000m</span><br></pre></td></tr></table></figure></p>
-<p>这里的test为表空间名称，路径自己来命名。然后点执行按钮。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
-  </nav>
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用术语"><span class="toc-number">1.</span> <span class="toc-text">常用术语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AOP两种实现模式"><span class="toc-number">2.</span> <span class="toc-text">AOP两种实现模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#xml形式"><span class="toc-number">2.1.</span> <span class="toc-text">xml形式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#举例说明"><span class="toc-number">2.1.1.</span> <span class="toc-text">举例说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现原理"><span class="toc-number">2.1.2.</span> <span class="toc-text">实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切入点表达式"><span class="toc-number">2.1.3.</span> <span class="toc-text">切入点表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOP中的各种通知"><span class="toc-number">2.1.4.</span> <span class="toc-text">AOP中的各种通知</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解形式"><span class="toc-number">2.2.</span> <span class="toc-text">注解形式</span></a></li></ol></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -934,12 +404,89 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -1005,4 +552,4 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
