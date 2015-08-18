@@ -81,100 +81,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/18/Spring学习4：Spring AOP（面向切面编程）/" title="Spring学习4：Spring AOP（面向切面编程）" itemprop="url">Spring学习4：Spring AOP（面向切面编程）</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-18T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="常用术语">常用术语</h1><p>学习AOP之前，先了解AOP中常用术语</p>
-<ol>
-<li>切面（Aspect）<br>切面是一个关注点的模块化，如事务管理就是一个在JavaEE企业中应用最常见的界面。在企业应用编程中，首先需要通过分析，抽取出通用的功能，即“切面”。<br>事务、日志、安全性的框架、权限都是切面</li>
-<li>连接点（Joinpoint）<br>连接点是执行程序过程中的特定的点。Spring框架只支持方法作为连接点，如方法调用之前、方法调用后、或者发生异常时等。</li>
-<li>通知（Advice）<br>通知就是切面的具体实现。通知将在切面的某个特定的连接点上执行动作，Spring中执行的动作往往就是调用某一个类的具体方法。例如：在保存订单的模块中，进行日志管理（一个切面），具体是在保存订单的方法执行之前（连接点）执行写日志（通知）的功能。其中，日志管理是很多模块中通用的功能，因此这就是一个切面，而具体是在保存订单之前执行日志保存，那么保存订单前这个点就是连接点，实现日志保存功能的类就是通知。<br>就是切面中的方法。</li>
-<li><p>切入点（Pointcut）<br>切入点是连接点的集合，通知将在满足一个切入点表达式的所有连接点上运行。<br>举例：<br>在拦截器中，有一系列判断性的内容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(method.equals(<span class="string">"savePerson"</span>)||method.equals(<span class="string">"updatePerson"</span>) ||method.equals(<span class="string">"deletePerson"</span>))&#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<p>满足了上面三个方法才能开启事务，这些判断条件就为切入点</p>
-</li>
-<li>引入（Introduction）<br>引入的意思是在一个类中加入新的属性或者方法。</li>
-<li>目标对象（Target Object）<br>被一个或多个切面所通知的对象成为目标对象。</li>
-<li>AOP代理（AOP Proxy）<br>AOP代理是AOP框架所生成的对象，该对象是目标对象的代理对象。代理对象能够在目标对象的基础上，在相应的连接点上调用通知。</li>
-<li>织入（Weaving）<br>把切面连接到其他的应用程序之上，创建一个被通知的对象的过程，被称为织入。<h1 id="AOP两种实现模式">AOP两种实现模式</h1><h2 id="xml形式">xml形式</h2>举例说明如何在applicationContext.xml中配置AOP（因为当前只负责介绍AOP实现模式，因此配置环境需要的jar包先不介绍）<h3 id="举例说明">举例说明</h3>创建接口personDAO和实现类personDaoImpl<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PersonDao</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 目标方法</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">savePerson</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonDaoImpl</span> <span class="keyword">implements</span> <span class="title">PersonDao</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">savePerson</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"save person"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>事务处理类Transaction<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Transaction</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beginTransaction</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"begin transaction"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">commit</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"commit"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接下来最重要的就是AOP的配置文件，applicationContext.xml。通过配置AOP可以实现创建代理对象：代理对象的方法=目标方法+通知。将原本不相关的目标方法和通知结合起来。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"personDao"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.PersonDaoImpl"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"transaction"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.Transaction"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line">      </span><br><span class="line"><span class="tag">&lt;<span class="title">aop:config</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- </span><br><span class="line">    切入点表达式</span><br><span class="line">    确定目标类</span><br><span class="line">    id 标示</span><br><span class="line">--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">aop:pointcut</span> <span class="attribute">expression</span>=<span class="value">"execution(* cn.zju.spring.PersonDaoImpl.*(..))"</span> <span class="attribute">id</span>=<span class="value">"perform"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">aop:aspect</span> <span class="attribute">ref</span>=<span class="value">"transaction"</span>&gt;</span>  <span class="comment">&lt;!-- ref指向切面类 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">aop:before</span> <span class="attribute">method</span>=<span class="value">"beginTransaction"</span> <span class="attribute">pointcut-ref</span>=<span class="value">"perform"</span>/&gt;</span>  <span class="comment">&lt;!--前置通知 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">aop:after-returning</span> <span class="attribute">method</span>=<span class="value">"commit"</span> <span class="attribute">pointcut-ref</span>=<span class="value">"perform"</span>/&gt;</span>  <span class="comment">&lt;!--后置通知 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>客户端代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">    PersonDao personDao = (PersonDao)context.getBean(<span class="string">"personDao"</span>);</span><br><span class="line">    personDao.savePerson();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="实现原理">实现原理</h3><ol>
-<li>当启动Spring容器时，因为声明了两个bean,<bean id="" class="">…  所以Spring容易会为这两个bean创建对象。</bean></li>
-<li>当Spring解析到aop:config的时候，解析切入点表达式，让切入点表达式和Spring容器中的bean做匹配</li>
-<li>如果匹配成功则为该类创建代理对象：代理对象的方法=目标方法+通知</li>
-<li>在客户端通过getBean在Spring容器中查找相应对象，如果有代理对象则返回代理对象，否则返回对象本身。<h3 id="切入点表达式">切入点表达式</h3>Spring AOP中用户可能会经常使用execution切入点指示符。执行表达式的格式如下：<br>execution（modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern（param-pattern）throws-pattern?）<br>除了返回类型模式（上面代码片断中的ret-type-pattern），名字模式和参数模式以外， 所有的部分都是可选的。返回类型模式决定了方法的返回类型必须依次匹配一个连接点。 你会使用的最频繁的返回类型模式是*，它代表了匹配任意的返回类型。举例说明如下：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">execution（public * *（..））</span><br><span class="line">任意的公共方法</span><br><span class="line"></span><br><span class="line">execution（* set*（..））</span><br><span class="line">以set开头的所有的方法</span><br><span class="line"></span><br><span class="line">execution（* com.xyz.service.AccountService.*（..））</span><br><span class="line">com.xyz.service.AccountService这个类里的所有的方法</span><br><span class="line"></span><br><span class="line">execution（* com.xyz.service.*.*（..））</span><br><span class="line">com.xyz.service包下的所有的类的所有的方法</span><br><span class="line"></span><br><span class="line">execution（* com.xyz.service..*.*（..））</span><br><span class="line">com.xyz.service包及子包下所有的类的所有的方法</span><br><span class="line"></span><br><span class="line">excution(* cn.itheima06.spring.aop..*.*(String,?,Long))</span><br><span class="line">cn.itheima06.spring.aop包及子包下所有的类的有三个参数，第一个参数为String类型，第二个参数为任意类型，第三个参数为Long类型的方法</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="AOP中的各种通知">AOP中的各种通知</h3><ol>
-<li>前置通知<br> 在目标方法执行之前执行<br> 通知中有一个参数JoinPoint,可以获取目标方法的一些信息</li>
-<li>后置通知<br> 在目标方法执行之后执行<br> 可以获取目标方法的返回值<br> 如果目标方法遇到异常，将不执行</li>
-<li>异常通知<br> 获取目标方法抛出的异常信息</li>
-<li>最终通知：相当于代码中的finally</li>
-<li>环绕通知：<br> 能控制目标方法的执行，如果做权限控制，可以在这里进行判断。<br>举例说明，在上述例子中，我们修改事务类transaction和配置文件来实现各种通知的说明,切面类和目标方法都不需要做改变，<br>事务处理类transaction<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Transaction</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 前置通知</span><br><span class="line">	 * 	JoinPoint连接点</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beginTransaction</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"args:"</span>+joinPoint.getArgs());<span class="comment">//获取目标方法的参数</span></span><br><span class="line">		<span class="comment">//获取方法的名称</span></span><br><span class="line">		System.out.println(<span class="string">"methodName:"</span>+joinPoint.getSignature().getName());</span><br><span class="line">		System.out.println(<span class="string">"begin transaction"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 后置通知</span><br><span class="line">	 * <span class="doctag">@param</span> joinPoint</span><br><span class="line">	 * <span class="doctag">@param</span> val</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">commit</span><span class="params">(JoinPoint joinPoint,Object val)</span></span>&#123;</span><br><span class="line">		System.out.println(val);</span><br><span class="line">		System.out.println(<span class="string">"commit"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 异常通知</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">throwingMethod</span><span class="params">(JoinPoint joinPoint,Throwable ex)</span></span>&#123;</span><br><span class="line">		System.out.println(ex.getMessage());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 最终通知</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finallyMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"finally method"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span><br><span class="line">	 * 环绕通知</span><br><span class="line">	 *   控制目标方法的执行</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">aroundMethod</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();<span class="comment">//获取目标方法的名称</span></span><br><span class="line">		<span class="keyword">if</span>(methodName.equals(<span class="string">"savePerson"</span>))&#123;</span><br><span class="line">			joinPoint.proceed();<span class="comment">//调用目标方法</span></span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"权限不足"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>接下来最重要的就是AOP的配置文件，applicationContext.xml，<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"personDao"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.PersonDaoImpl"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">bean</span> <span class="attribute">id</span>=<span class="value">"transaction"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.spring.Transaction"</span>&gt;</span><span class="tag">&lt;/<span class="title">bean</span>&gt;</span></span><br><span class="line">      </span><br><span class="line"><span class="tag">&lt;<span class="title">aop:config</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- </span><br><span class="line">      切入点表达式</span><br><span class="line">      确定目标类</span><br><span class="line">      id标示</span><br><span class="line">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">aop:pointcut</span> <span class="attribute">expression</span>=<span class="value">"execution(* cn.zju.spring.PersonDaoImpl.*(..))"</span> <span class="attribute">id</span>=<span class="value">"perform"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">aop:aspect</span> <span class="attribute">ref</span>=<span class="value">"transaction"</span>&gt;</span><span class="comment">&lt;!-- ref指向切面类 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		前置通知</span><br><span class="line">      	 		   1、在目标方法执行之前完成</span><br><span class="line">      	 		   2、有一个参数Joinpoint</span><br><span class="line">      	 		        	该参数能够获取目标方法的一些信息</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 	&lt;aop:before method="beginTransaction" pointcut-ref="perform"/&gt;</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		后置通知</span><br><span class="line">      	 		   1、在目标方法执行之后完成</span><br><span class="line">      	 		   2、有一个参数Joinpoint</span><br><span class="line">      	 		   3、returning属性可以获取目标方法的返回值</span><br><span class="line">      	 		   4、如果目标方法遇到异常，则后置通知将不再执行</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 	&lt;aop:after-returning method="commit" pointcut-ref="perform" returning="val"/&gt;</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		异常通知</span><br><span class="line">      	 			throwing </span><br><span class="line">      	 			     参数的名称 ex</span><br><span class="line">      	 			获取目标方法抛出的异常信息</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 	&lt;aop:after-throwing method="throwingMethod" pointcut-ref="perform" throwing="ex"/&gt;</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		最终通知</span><br><span class="line">      	 			无论目标方法是否遇到异常，最终通知都要执行</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	 <span class="comment">&lt;!-- </span><br><span class="line">      	 	&lt;aop:after method="finallyMethod" pointcut-ref="perform"/&gt;</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="comment">&lt;!-- </span><br><span class="line">      	 		环绕通知</span><br><span class="line">      	 	 --&gt;</span></span><br><span class="line">      	 	<span class="tag">&lt;<span class="title">aop:around</span> <span class="attribute">method</span>=<span class="value">"aroundMethod"</span> <span class="attribute">pointcut-ref</span>=<span class="value">"perform"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">aop:config</span>&gt;</span></span><br><span class="line">在后续博客中会有实际案例，通过案例可以更加清楚各种的通知的用法。</span><br></pre></td></tr></table></figure></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2015/08/16/Spring学习3：代理模式/" title="Spring学习3：代理模式" itemprop="url">Spring学习3：代理模式</a>
   </h1>
   <p class="article-author">By
@@ -724,6 +630,67 @@
 
 
 
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/26/Oracle kill session/" title="Oracle kill session" itemprop="url">Oracle kill session</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-26T13:28:07.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。<br>可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。<br>用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.object_id, a.session_id, b.object_name, c.*  </span><br><span class="line">  FROM v$locked_object a, dba_objects b, v$session c  </span><br><span class="line">WHERE a.object_id = b.object_id  </span><br><span class="line">   AND a.SESSION_ID = c.sid(+)</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/26/Oracle kill session/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -754,7 +721,7 @@
 		  
 		
 		  
-			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>4</sup></a></li>
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>3</sup></a></li>
 		  
 		
 		  
@@ -783,7 +750,7 @@
 			
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>4</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>3</sup></a></li>
 			
 		
 			
