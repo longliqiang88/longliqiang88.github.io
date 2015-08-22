@@ -1,0 +1,552 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>struts2学习1：初识struts2 | llq`s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="longliqiang">
+    
+
+    
+    <meta name="description" content="struts2Struts2是在WebWork2基础上发展而来，属于MVC框架。优点：
+
+提供了拦截器，可以进行AOP编程；
+提供了类型转换器，可以把特殊的请求参数转换成需要的类型；
+struts2的应用可以不依赖于 ServletAPI和strutsAPI，无侵入式设计；
+提供支持多种表现层技术，如JSP等等
+struts2的输入校验可以对指定方法进行校验
+提供全局范围、包范围和Action范围">
+<meta property="og:type" content="article">
+<meta property="og:title" content="struts2学习1：初识struts2">
+<meta property="og:url" content="http://yoursite.com/2015/08/22/struts2学习1：初识struts2/index.html">
+<meta property="og:site_name" content="llq`s blog">
+<meta property="og:description" content="struts2Struts2是在WebWork2基础上发展而来，属于MVC框架。优点：
+
+提供了拦截器，可以进行AOP编程；
+提供了类型转换器，可以把特殊的请求参数转换成需要的类型；
+struts2的应用可以不依赖于 ServletAPI和strutsAPI，无侵入式设计；
+提供支持多种表现层技术，如JSP等等
+struts2的输入校验可以对指定方法进行校验
+提供全局范围、包范围和Action范围">
+<meta property="og:updated_time" content="2015-08-22T12:50:11.939Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="struts2学习1：初识struts2">
+<meta name="twitter:description" content="struts2Struts2是在WebWork2基础上发展而来，属于MVC框架。优点：
+
+提供了拦截器，可以进行AOP编程；
+提供了类型转换器，可以把特殊的请求参数转换成需要的类型；
+struts2的应用可以不依赖于 ServletAPI和strutsAPI，无侵入式设计；
+提供支持多种表现层技术，如JSP等等
+struts2的输入校验可以对指定方法进行校验
+提供全局范围、包范围和Action范围">
+
+    
+    <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/11.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="llq`s blog" title="llq`s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="llq`s blog">llq`s blog</a></h1>
+				<h2 class="blog-motto">Summary is for a better start.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">目录</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/22/struts2学习1：初识struts2/" title="struts2学习1：初识struts2" itemprop="url">struts2学习1：初识struts2</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-22T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts2"><span class="toc-number">1.</span> <span class="toc-text">struts2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建struts2开发环境"><span class="toc-number">2.</span> <span class="toc-text">搭建struts2开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入JAR文件"><span class="toc-number">2.1.</span> <span class="toc-text">导入JAR文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts-xml"><span class="toc-number">2.2.</span> <span class="toc-text">struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-xml"><span class="toc-number">2.3.</span> <span class="toc-text">web.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一个struts2应用"><span class="toc-number">3.</span> <span class="toc-text">第一个struts2应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件struts-xml"><span class="toc-number">3.1.</span> <span class="toc-text">配置文件struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HelloWorldAction"><span class="toc-number">3.2.</span> <span class="toc-text">HelloWorldAction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsp页"><span class="toc-number">3.3.</span> <span class="toc-text">jsp页</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="struts2">struts2</h1><p>Struts2是在WebWork2基础上发展而来，属于MVC框架。优点：</p>
+<ol>
+<li>提供了拦截器，可以进行AOP编程；</li>
+<li>提供了类型转换器，可以把特殊的请求参数转换成需要的类型；</li>
+<li>struts2的应用可以不依赖于 ServletAPI和strutsAPI，无侵入式设计；</li>
+<li>提供支持多种表现层技术，如JSP等等</li>
+<li>struts2的输入校验可以对指定方法进行校验</li>
+<li>提供全局范围、包范围和Action范围的国际化资源文件管理实现。<h1 id="搭建struts2开发环境">搭建struts2开发环境</h1><a id="more"></a>
+<h2 id="导入JAR文件">导入JAR文件</h2>可以从<a href="http://struts.apache.org/download.cgi#struts2015下载struts.2.x.x-all.zip。下载完成之后解压文件。开发struts2应用需要依赖的JAR文件在lib文件夹下，不同的应用需要的JAR包是不同的。下面给出开发struts2程序需要的最少的JAR：" target="_blank" rel="external">http://struts.apache.org/download.cgi#struts2015下载struts.2.x.x-all.zip。下载完成之后解压文件。开发struts2应用需要依赖的JAR文件在lib文件夹下，不同的应用需要的JAR包是不同的。下面给出开发struts2程序需要的最少的JAR：</a><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struts2-core-2.x.x.jar：struts2框架的核心类库</span><br><span class="line">xwork-core-2.x.x.jar：XWork类库，struts2在其上面构建</span><br><span class="line">ognl-2.6.x.jar：对象图导航语言（Object Graph Navigation Language），struts2框架通过其读写对象的属性</span><br><span class="line">freemarker-2.3.x.jar：struts2的UI标签的模板使用FreeMarker编写</span><br><span class="line">commons-logging-1.1.x.jar：ASF出品的日志包，struts2框架使用这个日志包来支持Log4j和JDK1.4+的日志记录</span><br><span class="line">commons-fileupload-1.2.1.jar：文件上传组件，2.1.6之后必须加入此文件。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="struts-xml">struts.xml</h2><p>struts2的默认配置文件为struts.xml,<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="doctype">&lt;!DOCTYPE struts PUBLIC</span><br><span class="line">    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"</span><br><span class="line">    "http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">struts</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">struts</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="web-xml">web.xml</h2><p>框架通过Filter（在web.xml中配置）启动。需要在web.xml中配置,<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-name</span>&gt;</span>struts2<span class="tag">&lt;/<span class="title">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-class</span>&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter<span class="tag">&lt;/<span class="title">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">filter-name</span>&gt;</span>struts2<span class="tag">&lt;/<span class="title">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>StrutsPrepareAndExecuteFilter中的init()方法将会读取类路径下默认的配置文件struts.xml完成初始化操作。<br>struts2读取到struts.xml的内容之后，会以JavaBean的形式存放在内存中，以后每次struts2对用户的请求处理将会使用内存中的数据，而不会每次都去读取struts.xml完成初始化操作。</p>
+<h1 id="第一个struts2应用">第一个struts2应用</h1><p>第一步不做太难的，从HelloWorld做起</p>
+<h2 id="配置文件struts-xml">配置文件struts.xml</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="doctype">&lt;!DOCTYPE struts PUBLIC</span><br><span class="line">    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"</span><br><span class="line">    "http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">struts</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">package</span> <span class="attribute">name</span>=<span class="value">"zjustruts"</span> <span class="attribute">namespace</span>=<span class="value">"/test"</span> <span class="attribute">extends</span>=<span class="value">"struts-default"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">action</span> <span class="attribute">name</span>=<span class="value">"helloworld"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.struts.HelloWorldAction"</span> <span class="attribute">method</span>=<span class="value">"execute"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">result</span> <span class="attribute">name</span>=<span class="value">"success"</span>&gt;</span>/WEB-INF/page/MyJsp.jsp<span class="tag">&lt;/<span class="title">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">action</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">package</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">struts</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="HelloWorldAction">HelloWorldAction</h2><p>HelloWorldAction类的代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldAction</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String message;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> message;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span></span>&#123;</span><br><span class="line">		message = <span class="string">"我的第一个struts应用"</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="jsp页">jsp页</h2><p>在jsp也中，通过${message}即可获得action传递过来的值。<br>最后，发布到服务器，通过<a href="http://localhost:8080/struts01/test/helloworld进行访问。" target="_blank" rel="external">http://localhost:8080/struts01/test/helloworld进行访问。</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/struts2/">struts2</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/22/struts2学习1：初识struts2/" data-title="struts2学习1：初识struts2 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/18/Spring学习4：Spring AOP（面向切面编程）/"  title="Spring学习4：Spring AOP（面向切面编程）">
+ <strong>下一篇：</strong><br/> 
+ <span>Spring学习4：Spring AOP（面向切面编程）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts2"><span class="toc-number">1.</span> <span class="toc-text">struts2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建struts2开发环境"><span class="toc-number">2.</span> <span class="toc-text">搭建struts2开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入JAR文件"><span class="toc-number">2.1.</span> <span class="toc-text">导入JAR文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts-xml"><span class="toc-number">2.2.</span> <span class="toc-text">struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-xml"><span class="toc-number">2.3.</span> <span class="toc-text">web.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一个struts2应用"><span class="toc-number">3.</span> <span class="toc-text">第一个struts2应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件struts-xml"><span class="toc-number">3.1.</span> <span class="toc-text">配置文件struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HelloWorldAction"><span class="toc-number">3.2.</span> <span class="toc-text">HelloWorldAction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsp页"><span class="toc-number">3.3.</span> <span class="toc-text">jsp页</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MapReduce/" title="MapReduce">MapReduce<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Oracle/" title="Oracle">Oracle<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hive/" title="Hive">Hive<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/struts2/" title="struts2">struts2<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2643661235&verifier=891f03cc&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> A programmer,love basketball and fitness <br/>
+			You cannot improve your past, but you can improve your future. Once time is wasted, life is wasted.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2643661235" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:facingfuture@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="longliqiang">longliqiang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
