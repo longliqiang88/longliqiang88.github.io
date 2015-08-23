@@ -21,7 +21,7 @@ struts2的输入校验可以对指定方法进行校验
 提供全局范围、包范围和Action范围">
 <meta property="og:type" content="article">
 <meta property="og:title" content="struts2学习1：初识struts2">
-<meta property="og:url" content="http://yoursite.com/2015/08/22/struts2学习1：初识struts2/index.html">
+<meta property="og:url" content="http://yoursite.com/2015/08/21/struts2学习1：初识struts2/index.html">
 <meta property="og:site_name" content="llq`s blog">
 <meta property="og:description" content="struts2Struts2是在WebWork2基础上发展而来，属于MVC框架。优点：
 
@@ -31,7 +31,8 @@ struts2的应用可以不依赖于 ServletAPI和strutsAPI，无侵入式设计�
 提供支持多种表现层技术，如JSP等等
 struts2的输入校验可以对指定方法进行校验
 提供全局范围、包范围和Action范围">
-<meta property="og:updated_time" content="2015-08-22T12:50:11.939Z">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/struts01.jpg">
+<meta property="og:updated_time" content="2015-08-23T03:02:58.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="struts2学习1：初识struts2">
 <meta name="twitter:description" content="struts2Struts2是在WebWork2基础上发展而来，属于MVC框架。优点：
@@ -101,14 +102,14 @@ struts2的输入校验可以对指定方法进行校验
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/22/struts2学习1：初识struts2/" title="struts2学习1：初识struts2" itemprop="url">struts2学习1：初识struts2</a>
+      <a href="/2015/08/21/struts2学习1：初识struts2/" title="struts2学习1：初识struts2" itemprop="url">struts2学习1：初识struts2</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-22T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-22</time>
+    <time datetime="2015-08-21T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-21</time>
     
   </p>
 </header>
@@ -117,7 +118,7 @@ struts2的输入校验可以对指定方法进行校验
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts2"><span class="toc-number">1.</span> <span class="toc-text">struts2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建struts2开发环境"><span class="toc-number">2.</span> <span class="toc-text">搭建struts2开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入JAR文件"><span class="toc-number">2.1.</span> <span class="toc-text">导入JAR文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts-xml"><span class="toc-number">2.2.</span> <span class="toc-text">struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-xml"><span class="toc-number">2.3.</span> <span class="toc-text">web.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一个struts2应用"><span class="toc-number">3.</span> <span class="toc-text">第一个struts2应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件struts-xml"><span class="toc-number">3.1.</span> <span class="toc-text">配置文件struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HelloWorldAction"><span class="toc-number">3.2.</span> <span class="toc-text">HelloWorldAction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsp页"><span class="toc-number">3.3.</span> <span class="toc-text">jsp页</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts2"><span class="toc-number">1.</span> <span class="toc-text">struts2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建struts2开发环境"><span class="toc-number">2.</span> <span class="toc-text">搭建struts2开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入JAR文件"><span class="toc-number">2.1.</span> <span class="toc-text">导入JAR文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts-xml"><span class="toc-number">2.2.</span> <span class="toc-text">struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-xml"><span class="toc-number">2.3.</span> <span class="toc-text">web.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一个struts2应用"><span class="toc-number">3.</span> <span class="toc-text">第一个struts2应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件struts-xml"><span class="toc-number">3.1.</span> <span class="toc-text">配置文件struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HelloWorldAction"><span class="toc-number">3.2.</span> <span class="toc-text">HelloWorldAction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsp页"><span class="toc-number">3.3.</span> <span class="toc-text">jsp页</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#struts2的处理流程"><span class="toc-number">4.</span> <span class="toc-text">struts2的处理流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为多个应用指定多个struts配置文件"><span class="toc-number">5.</span> <span class="toc-text">为多个应用指定多个struts配置文件</span></a></li></ol>
 		
 		</div>
 		
@@ -138,7 +139,11 @@ struts2的输入校验可以对指定方法进行校验
 <h1 id="第一个struts2应用">第一个struts2应用</h1><p>第一步不做太难的，从HelloWorld做起</p>
 <h2 id="配置文件struts-xml">配置文件struts.xml</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="doctype">&lt;!DOCTYPE struts PUBLIC</span><br><span class="line">    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"</span><br><span class="line">    "http://struts.apache.org/dtds/struts-2.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">struts</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">package</span> <span class="attribute">name</span>=<span class="value">"zjustruts"</span> <span class="attribute">namespace</span>=<span class="value">"/test"</span> <span class="attribute">extends</span>=<span class="value">"struts-default"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">action</span> <span class="attribute">name</span>=<span class="value">"helloworld"</span> <span class="attribute">class</span>=<span class="value">"cn.zju.struts.HelloWorldAction"</span> <span class="attribute">method</span>=<span class="value">"execute"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">result</span> <span class="attribute">name</span>=<span class="value">"success"</span>&gt;</span>/WEB-INF/page/MyJsp.jsp<span class="tag">&lt;/<span class="title">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">action</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">package</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">struts</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="HelloWorldAction">HelloWorldAction</h2><p>HelloWorldAction类的代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldAction</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> String message;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> message;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span></span>&#123;</span><br><span class="line">		message = <span class="string">"我的第一个struts应用"</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="jsp页">jsp页</h2><p>在jsp也中，通过${message}即可获得action传递过来的值。<br>最后，发布到服务器，通过<a href="http://localhost:8080/struts01/test/helloworld进行访问。" target="_blank" rel="external">http://localhost:8080/struts01/test/helloworld进行访问。</a></p>
+<h2 id="jsp页">jsp页</h2><p>在jsp也中，通过${message}即可获得action传递过来的值。<br>最后，发布到服务器，通过<a href="http://localhost:8080/struts01/test/helloworld进行访问。" target="_blank" rel="external">http://localhost:8080/struts01/test/helloworld进行访问。</a><br>注：在配置文件中，action中配置的method返回值都是String类型的，浏览器在请求时只要请求<a href="http://localhost:8080/struts01/test/helloworld即可，不需要具体知道hello.jsp路径。" target="_blank" rel="external">http://localhost:8080/struts01/test/helloworld即可，不需要具体知道hello.jsp路径。</a></p>
+<h1 id="struts2的处理流程">struts2的处理流程</h1><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/struts01.jpg" alt="struts2的处理流程图"><br>StrutsPrepareAndExecutFilter是struts2框架的核心控制器，它负责拦截由<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>指定的所有用户请求，当请求到达时，该Filter会过滤用户的请求。默认的情况下，如果用户请求的路径不带后缀或者后缀以.action结尾，这时请求将被转入struts框架处理，否则框架就会忽略这个请求。当请求转入struts框架处理时会先经过一系列的拦截器，然后再到Action。</p>
+<p>注：与struts1不同的是，struts2对用的每一次请求都会创建一个Action，所以上struts2中的Action是线程安全的。</p>
+<h1 id="为多个应用指定多个struts配置文件">为多个应用指定多个struts配置文件</h1><p>有时为了提供struts.xml文件的可读性，我们可以将一个struts.xml配置文件分解成多个，然后在struts.xml文件中包含其他配置文件：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">struts</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="title">include</span> <span class="attribute">file</span>=<span class="value">"struts-user.xml"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="title">include</span> <span class="attribute">file</span>=<span class="value">"struts-order.xml"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">struts</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -161,7 +166,7 @@ struts2的输入校验可以对指定方法进行校验
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/08/22/struts2学习1：初识struts2/" data-title="struts2学习1：初识struts2 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/08/21/struts2学习1：初识struts2/" data-title="struts2学习1：初识struts2 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -174,6 +179,14 @@ struts2的输入校验可以对指定方法进行校验
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/08/22/struts2学习2：Action详解/" title="struts2学习2：Action详解">
+  <strong>上一篇：</strong><br/>
+  <span>
+  struts2学习2：Action详解</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/08/18/Spring学习4：Spring AOP（面向切面编程）/"  title="Spring学习4：Spring AOP（面向切面编程）">
@@ -193,7 +206,7 @@ struts2的输入校验可以对指定方法进行校验
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts2"><span class="toc-number">1.</span> <span class="toc-text">struts2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建struts2开发环境"><span class="toc-number">2.</span> <span class="toc-text">搭建struts2开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入JAR文件"><span class="toc-number">2.1.</span> <span class="toc-text">导入JAR文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts-xml"><span class="toc-number">2.2.</span> <span class="toc-text">struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-xml"><span class="toc-number">2.3.</span> <span class="toc-text">web.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一个struts2应用"><span class="toc-number">3.</span> <span class="toc-text">第一个struts2应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件struts-xml"><span class="toc-number">3.1.</span> <span class="toc-text">配置文件struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HelloWorldAction"><span class="toc-number">3.2.</span> <span class="toc-text">HelloWorldAction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsp页"><span class="toc-number">3.3.</span> <span class="toc-text">jsp页</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts2"><span class="toc-number">1.</span> <span class="toc-text">struts2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建struts2开发环境"><span class="toc-number">2.</span> <span class="toc-text">搭建struts2开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#导入JAR文件"><span class="toc-number">2.1.</span> <span class="toc-text">导入JAR文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts-xml"><span class="toc-number">2.2.</span> <span class="toc-text">struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-xml"><span class="toc-number">2.3.</span> <span class="toc-text">web.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一个struts2应用"><span class="toc-number">3.</span> <span class="toc-text">第一个struts2应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件struts-xml"><span class="toc-number">3.1.</span> <span class="toc-text">配置文件struts.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HelloWorldAction"><span class="toc-number">3.2.</span> <span class="toc-text">HelloWorldAction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsp页"><span class="toc-number">3.3.</span> <span class="toc-text">jsp页</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#struts2的处理流程"><span class="toc-number">4.</span> <span class="toc-text">struts2的处理流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为多个应用指定多个struts配置文件"><span class="toc-number">5.</span> <span class="toc-text">为多个应用指定多个struts配置文件</span></a></li></ol>
  
   </div>
 
@@ -219,7 +232,7 @@ struts2的输入校验可以对指定方法进行校验
 		  
 		
 		  
-			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>5</sup></a></li>
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>6</sup></a></li>
 		  
 		
 		  
@@ -244,11 +257,11 @@ struts2的输入校验可以对指定方法进行校验
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>4</sup></a></li>
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>4</sup></a></li>
 			
 		
 			
@@ -260,19 +273,23 @@ struts2的输入校验可以对指定方法进行校验
 			
 		
 			
+				<li><a href="/tags/struts2/" title="struts2">struts2<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
 			
 		
 			
@@ -292,11 +309,7 @@ struts2的输入校验可以对指定方法进行校验
 			
 		
 			
-				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/struts2/" title="struts2">struts2<sup>1</sup></a></li>
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
 			
 		
 		</ul>
