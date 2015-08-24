@@ -4,37 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>HBase学习3：综合梳理 | llq`s blog</title>
+    <title>struts2学习3：类型转换器 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="Hbase特点：HBase介于nosql和RDBMS之间，仅能通过主键(row key)和主键的range来检索数据，仅支持单行事务(可通过hive支持来实现多表join等复杂操作)。主要用来存储非结构化和半结构化的松散数据。与hadoop一样，Hbase目标主要依靠横向扩展，通过不断增加廉价的商用服务器，来增加计算和存储能力。
-HBase中的表一般有这样的特点：
-
-大：一个表可以有上亿行，上百万">
+    <meta name="description" content="在struts开发中，有时会遇到这样的情况：
+如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HBase学习3：综合梳理">
-<meta property="og:url" content="http://yoursite.com/2015/07/25/HBase学习3：综合梳理/index.html">
+<meta property="og:title" content="struts2学习3：类型转换器">
+<meta property="og:url" content="http://yoursite.com/2015/08/23/struts2学习3：类型转换器/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="Hbase特点：HBase介于nosql和RDBMS之间，仅能通过主键(row key)和主键的range来检索数据，仅支持单行事务(可通过hive支持来实现多表join等复杂操作)。主要用来存储非结构化和半结构化的松散数据。与hadoop一样，Hbase目标主要依靠横向扩展，通过不断增加廉价的商用服务器，来增加计算和存储能力。
-HBase中的表一般有这样的特点：
-
-大：一个表可以有上亿行，上百万">
-<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0301.jpg">
-<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0302.jpg">
-<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0303.jpg">
-<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0304.jpg">
-<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0305.jpg">
-<meta property="og:updated_time" content="2015-07-26T03:28:57.529Z">
+<meta property="og:description" content="在struts开发中，有时会遇到这样的情况：
+如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期">
+<meta property="og:updated_time" content="2015-08-24T02:21:02.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HBase学习3：综合梳理">
-<meta name="twitter:description" content="Hbase特点：HBase介于nosql和RDBMS之间，仅能通过主键(row key)和主键的range来检索数据，仅支持单行事务(可通过hive支持来实现多表join等复杂操作)。主要用来存储非结构化和半结构化的松散数据。与hadoop一样，Hbase目标主要依靠横向扩展，通过不断增加廉价的商用服务器，来增加计算和存储能力。
-HBase中的表一般有这样的特点：
-
-大：一个表可以有上亿行，上百万">
+<meta name="twitter:title" content="struts2学习3：类型转换器">
+<meta name="twitter:description" content="在struts开发中，有时会遇到这样的情况：
+如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -94,14 +83,14 @@ HBase中的表一般有这样的特点：
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理" itemprop="url">HBase学习3：综合梳理</a>
+      <a href="/2015/08/23/struts2学习3：类型转换器/" title="struts2学习3：类型转换器" itemprop="url">struts2学习3：类型转换器</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-25T08:25:27.000Z" itemprop="datePublished"> 发表于 2015-07-25</time>
+    <time datetime="2015-08-23T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-23</time>
     
   </p>
 </header>
@@ -110,37 +99,16 @@ HBase中的表一般有这样的特点：
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hbase特点："><span class="toc-number">1.</span> <span class="toc-text">Hbase特点：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hbase的逻辑结构"><span class="toc-number">2.</span> <span class="toc-text">Hbase的逻辑结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#物理存储"><span class="toc-number">3.</span> <span class="toc-text">物理存储</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#系统架构"><span class="toc-number">4.</span> <span class="toc-text">系统架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Client"><span class="toc-number">4.1.</span> <span class="toc-text">Client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zookeeper"><span class="toc-number">4.2.</span> <span class="toc-text">Zookeeper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Master"><span class="toc-number">4.3.</span> <span class="toc-text">Master</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Region_Server"><span class="toc-number">4.4.</span> <span class="toc-text">Region Server</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置局部类型转化器"><span class="toc-number">1.</span> <span class="toc-text">配置局部类型转化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置全局类型转换器"><span class="toc-number">2.</span> <span class="toc-text">配置全局类型转换器</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="Hbase特点：">Hbase特点：</h1><p>HBase介于nosql和RDBMS之间，仅能通过主键(row key)和主键的range来检索数据，仅支持单行事务(可通过hive支持来实现多表join等复杂操作)。主要用来存储非结构化和半结构化的松散数据。与hadoop一样，Hbase目标主要依靠横向扩展，通过不断增加廉价的商用服务器，来增加计算和存储能力。</p>
-<p>HBase中的表一般有这样的特点：</p>
-<ol>
-<li>大：一个表可以有上亿行，上百万列</li>
-<li>面向列:面向列(族)的存储和权限控制，列(族)独立检索。</li>
-<li>稀疏:对于为空(null)的列，并不占用存储空间，因此，表可以设计的非常稀疏。<a id="more"></a>
-<h1 id="Hbase的逻辑结构">Hbase的逻辑结构</h1>HBase以表的形式存储数据。表有行和列组成。列划分为若干个列族(row family)。<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0301.jpg" alt="ddd"><h1 id="物理存储">物理存储</h1>Table中的所有行都按照row key的字典序排列。</li>
-</ol>
-<p>Table 在行的方向上分割为多个Hregion。<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0302.jpg" alt="ddd"></p>
-<p>region按大小分割的，每个表一开始只有一个region，随着数据不断插入表，region不断增大，当增大到一个阀值的时候，Hregion就会等分会两个新的Hregion。当table中的行不断增多，就会有越来越多的Hregion。<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0303.jpg" alt="ddd"></p>
-<p>Hregion是Hbase中分布式存储和负载均衡的最小单元。最小单元就表示不同的Hregion可以分布在不同的HRegion server上。但一个Hregion是不会拆分到多个server上的。<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0304.jpg" alt="ddd"></p>
-<p>HRegion虽然是分布式存储的最小单元，但并不是存储的最小单元。<br>事实上，HRegion由一个或者多个Store组成，每个store保存一个columns family。<br>每个Strore又由一个memStore和0至多个StoreFile组成。</p>
-<h1 id="系统架构">系统架构</h1><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/HBase0305.jpg" alt="ddd"></p>
-<h2 id="Client">Client</h2><ol>
-<li>包含访问hbase的接口，client维护着一些cache来加快对hbase的访问，比如regione的位置信息。<h2 id="Zookeeper">Zookeeper</h2></li>
-<li>保证任何时候，集群中只有一个master</li>
-<li>存贮所有Region的寻址入口。</li>
-<li>实时监控Region Server的状态，将Region server的上线和下线信息实时通知给Master</li>
-<li>存储Hbase的schema,包括有哪些table，每个table有哪些column family<h2 id="Master">Master</h2></li>
-<li>为Region server分配region</li>
-<li>负责region server的负载均衡</li>
-<li>发现失效的region server并重新分配其上的region</li>
-<li>GFS上的垃圾文件回收</li>
-<li>处理schema更新请求<h2 id="Region_Server">Region Server</h2></li>
-<li>Region server维护Master分配给它的region，处理对这些region的IO请求</li>
-<li>Region server负责切分在运行过程中变得过大的region<br>可以看到，client访问hbase上数据的过程并不需要master参与（寻址访问zookeeper和region server，数据读写访问regione server），master仅仅维护者table和region的元数据信息，负载很低。</li>
-</ol>
+		<p>在struts开发中，有时会遇到这样的情况：</p>
+<p>如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。<br>我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期格式之间的双向转换，自定类型转换器要继承DefaultTypeConverter：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class TypeConverter extends DefaultTypeConverter&#123;</span><br><span class="line"> @Override</span><br><span class="line">  public Object convertValue(Map<span class="tag">&lt;<span class="title">String,</span> <span class="attribute">Object</span>&gt;</span> context, Object value,Class toType) &#123;</span><br><span class="line">    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");</span><br><span class="line">    try&#123;</span><br><span class="line">        if(toType==Date.class)&#123;</span><br><span class="line">          String[] params = (String[]) value; </span><br><span class="line">          return dateFormat.parse(params[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(toType==String.class)&#123;</span><br><span class="line">          Date date = (Date)value; </span><br><span class="line">          return dateFormat.format(date);</span><br><span class="line">        &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     catch (Exception e) &#123;&#125;</span><br><span class="line">         return null;</span><br><span class="line">     &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="配置局部类型转化器">配置局部类型转化器</h1><a id="more"></a>
+<p>在action类所在的包下放置ActionClassName-conversion.properties文件，ActionClassName是类名，后面的-conversion.properties是固定的写法，<br>本例中应该是：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorldAction-conversion.properties</span><br></pre></td></tr></table></figure></p>
+<p>Properties文件里面的内容为：属性名称=类型转换器的全类名(既包名.类名)<br>本例中应该是：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">birthday = com.zju.struts.DateTypeConverter</span><br></pre></td></tr></table></figure></p>
+<h1 id="配置全局类型转换器">配置全局类型转换器</h1><p>如果业务需求所有的日期都要转换，则可以使用全局类型转换器，只要在src根目录下面放置xwork-conversion.properties文件,并且properties文件中的内容为：<br>待转换的类型=类型转换器的全类名<br>本例中应该是：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.util.Date = com.zju.struts.DateTypeConverter</span><br></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -148,13 +116,13 @@ HBase中的表一般有这样的特点：
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
+  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/HBase/">HBase</a>
+  <span></span> <a href="/tags/struts2/">struts2</a>
   </div>
 
 </div>
@@ -163,7 +131,7 @@ HBase中的表一般有这样的特点：
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/25/HBase学习3：综合梳理/" data-title="HBase学习3：综合梳理 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/08/23/struts2学习3：类型转换器/" data-title="struts2学习3：类型转换器 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -176,19 +144,11 @@ HBase中的表一般有这样的特点：
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/" title="HBase学习4：利用Java接口操作HBase">
-  <strong>上一篇：</strong><br/>
-  <span>
-  HBase学习4：利用Java接口操作HBase</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/07/24/HBase学习2：HBase Shell常用命令总结/"  title="HBase学习2：HBase Shell常用命令总结">
+<a href="/2015/08/22/struts2学习2：Action详解/"  title="struts2学习2：Action详解">
  <strong>下一篇：</strong><br/> 
- <span>HBase学习2：HBase Shell常用命令总结
+ <span>struts2学习2：Action详解
 </span>
 </a>
 </div>
@@ -203,7 +163,7 @@ HBase中的表一般有这样的特点：
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hbase特点："><span class="toc-number">1.</span> <span class="toc-text">Hbase特点：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hbase的逻辑结构"><span class="toc-number">2.</span> <span class="toc-text">Hbase的逻辑结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#物理存储"><span class="toc-number">3.</span> <span class="toc-text">物理存储</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#系统架构"><span class="toc-number">4.</span> <span class="toc-text">系统架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Client"><span class="toc-number">4.1.</span> <span class="toc-text">Client</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zookeeper"><span class="toc-number">4.2.</span> <span class="toc-text">Zookeeper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Master"><span class="toc-number">4.3.</span> <span class="toc-text">Master</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Region_Server"><span class="toc-number">4.4.</span> <span class="toc-text">Region Server</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置局部类型转化器"><span class="toc-number">1.</span> <span class="toc-text">配置局部类型转化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置全局类型转换器"><span class="toc-number">2.</span> <span class="toc-text">配置全局类型转换器</span></a></li></ol>
  
   </div>
 
