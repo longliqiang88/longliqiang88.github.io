@@ -4,22 +4,34 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>llq`s blog</title>
+    <title>Hibernate学习1：快速入门 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="Summary is for a better start.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="llq`s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+    <meta name="description" content="在此不介绍过多没用的概念，直接入门。本文的目的是演示一下helloworld级别的Hibernate程序，目前我也是初学者，从而给初学者一个低得不能再低的入门门槛。
+项目整体构成
+安装配置需要到Hibernate官网去下载所需的JAR文件，本例中需要的JAR如下：有了JAR之后我们就可以写代码了。
+配置文件hibernate.cfg.xml12345678910111213141516171819">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate学习1：快速入门">
+<meta property="og:url" content="http://yoursite.com/2015/08/27/Hibernate学习1：快速入门/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="Summary is for a better start.">
+<meta property="og:description" content="在此不介绍过多没用的概念，直接入门。本文的目的是演示一下helloworld级别的Hibernate程序，目前我也是初学者，从而给初学者一个低得不能再低的入门门槛。
+项目整体构成
+安装配置需要到Hibernate官网去下载所需的JAR文件，本例中需要的JAR如下：有了JAR之后我们就可以写代码了。
+配置文件hibernate.cfg.xml12345678910111213141516171819">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/hibernate02.jpg">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/hibernate01.png">
+<meta property="og:updated_time" content="2015-08-27T08:09:57.597Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="llq`s blog">
-<meta name="twitter:description" content="Summary is for a better start.">
+<meta name="twitter:title" content="Hibernate学习1：快速入门">
+<meta name="twitter:description" content="在此不介绍过多没用的概念，直接入门。本文的目的是演示一下helloworld级别的Hibernate程序，目前我也是初学者，从而给初学者一个低得不能再低的入门门槛。
+项目整体构成
+安装配置需要到Hibernate官网去下载所需的JAR文件，本例中需要的JAR如下：有了JAR之后我们就可以写代码了。
+配置文件hibernate.cfg.xml12345678910111213141516171819">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -73,12 +85,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2015/08/27/Hibernate学习1：快速入门/" title="Hibernate学习1：快速入门" itemprop="url">Hibernate学习1：快速入门</a>
@@ -92,9 +102,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <p>在此不介绍过多没用的概念，直接入门。本文的目的是演示一下helloworld级别的Hibernate程序，目前我也是初学者，从而给初学者一个低得不能再低的入门门槛。</p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目整体构成"><span class="toc-number">1.</span> <span class="toc-text">项目整体构成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装配置"><span class="toc-number">2.</span> <span class="toc-text">安装配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置文件hibernate-cfg-xml"><span class="toc-number">3.</span> <span class="toc-text">配置文件hibernate.cfg.xml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#映射文件User-hbm-xml"><span class="toc-number">4.</span> <span class="toc-text">映射文件User.hbm.xml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#User-java（JavaBean）"><span class="toc-number">5.</span> <span class="toc-text">User.java（JavaBean）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#main()方法"><span class="toc-number">6.</span> <span class="toc-text">main()方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结果"><span class="toc-number">7.</span> <span class="toc-text">结果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码优化"><span class="toc-number">8.</span> <span class="toc-text">代码优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#@建立工具类HibernateUtil"><span class="toc-number">9.</span> <span class="toc-text">@建立工具类HibernateUtil</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#优化后的方法"><span class="toc-number">9.1.</span> <span class="toc-text">优化后的方法</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>在此不介绍过多没用的概念，直接入门。本文的目的是演示一下helloworld级别的Hibernate程序，目前我也是初学者，从而给初学者一个低得不能再低的入门门槛。</p>
 <h1 id="项目整体构成">项目整体构成</h1><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/hibernate02.jpg" alt="项目整体构成"></p>
 <h1 id="安装配置">安装配置</h1><p>需要到Hibernate官网去下载所需的JAR文件，本例中需要的JAR如下：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/hibernate01.png" alt="JAR包"><br>有了JAR之后我们就可以写代码了。</p>
 <h1 id="配置文件hibernate-cfg-xml">配置文件hibernate.cfg.xml</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE hibernate-configuration PUBLIC</span><br><span class="line">	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span><br><span class="line">	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">hibernate-configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">session-factory</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"connection.driver_class"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="title">property</span>&gt;</span> <span class="comment">&lt;!--驱动类的名字--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"connection.url"</span>&gt;</span>jdbc:mysql:///test<span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"connection.username"</span>&gt;</span>root<span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"connection.password"</span>&gt;</span>8989<span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"dialect"</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="title">property</span>&gt;</span> <span class="comment">&lt;!--对应不同数据库的方言--&gt;</span></span><br><span class="line">		</span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"hbm2ddl.auto"</span>&gt;</span>create<span class="tag">&lt;/<span class="title">property</span>&gt;</span>  <span class="comment">&lt;!--通过映射文件生成ddl文件，用来直接建表--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">		<span class="tag">&lt;<span class="title">mapping</span> <span class="attribute">resource</span>=<span class="value">"cn/zju/hibernate/User.hbm.xml"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -105,14 +122,9 @@
 <h1 id="代码优化">代码优化</h1><p>通过以上的代码，我们就完成了入门级的Hibernate程序开发，当然作为一名优秀程序员我们要学会优化我们的代码来使我们的程序运行起来更加的有效率，下面我们进行代码的优化：</p>
 <h1 id="@建立工具类HibernateUtil">@建立工具类HibernateUtil</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.zju.hibernate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.hibernate.Session;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.SessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.cfg.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">HibernateUtil</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">HibernateUtil</span><span class="params">()</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> SessionFactory sessionFactory;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SessionFactory <span class="title">getSessionFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sessionFactory;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span>&#123;<span class="comment">//静态块，只会在加载类的时候运行一次，之后就不会再运行</span></span><br><span class="line">		Configuration cfg = <span class="keyword">new</span> Configuration();</span><br><span class="line">		cfg.configure(); <span class="comment">//默认会读取配置文件hibernate.cfg.xml，如果不是这个名字需要在方法中指定新的名字</span></span><br><span class="line">		sessionFactory = cfg.buildSessionFactory();</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSession</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sessionFactory.openSession();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="优化后的方法">优化后的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addUser</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">   Session s = <span class="keyword">null</span>;</span><br><span class="line">   Transaction tx = <span class="keyword">null</span>;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">     s = HibernateUtil.getSession();</span><br><span class="line">     tx = s.beginTransaction();</span><br><span class="line"></span><br><span class="line">     s.save(user);</span><br><span class="line">     tx.commit();</span><br><span class="line">   </span><br><span class="line">   &#125; <span class="keyword">catch</span> (HibernateException e) &#123;</span><br><span class="line">    <span class="keyword">if</span> (tx != <span class="keyword">null</span>)</span><br><span class="line">      tx.rollback();</span><br><span class="line">     <span class="keyword">throw</span> e;</span><br><span class="line">   &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">     <span class="keyword">if</span> (s != <span class="keyword">null</span>)</span><br><span class="line">      s.close();</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
@@ -130,605 +142,43 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-</div>
+	  <div data-url="http://yoursite.com/2015/08/27/Hibernate学习1：快速入门/" data-title="Hibernate学习1：快速入门 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  </div>
+	
+	</div>
+
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/24/struts2学习5：输入校验/" title="struts2学习5：输入校验" itemprop="url">struts2学习5：输入校验</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-24T13:45:49.000Z" itemprop="datePublished"> 发表于 2015-08-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>struts2提供了功能强大的输入校验机制，通过struts2内建的输入校验器，可完成大部分的校验功能，并可以同时完成客户端和服务器端的校验。如果应用的输入校验规则特别，struts2也允许通过重写validate方法来完成自定义校验。</p>
-<h1 id="输入校验的流程">输入校验的流程</h1><ol>
-<li>类型转换器对输入参数进行类型转换，并把转换后的值赋给action中的属性。</li>
-<li>如果在执行类型转换的过程中出现异常，系统会将异常信息保存到ActionContext，conversionError拦截器会将异常信息添加到fieldErrors里,不管是否出现异常，都会进入第三步。</li>
-<li>系统通过反射技术先调用action中的validateXxx()方法，</li>
-<li>然后在调用validate()方法。</li>
-<li>最后，如果系统的fieldErrors中存在错误信息(*即存放错误信息的集合的size大于0)，系统会将请求回发到input视图中，如果没有错误信息，系统会执行action中的处理方法。
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/24/struts2学习5：输入校验/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/struts2/">struts2</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/24/struts2学习5：输入校验/"  title="struts2学习5：输入校验">
+ <strong>下一篇：</strong><br/> 
+ <span>struts2学习5：输入校验
+</span>
+</a>
 </div>
 
-</footer>
+</nav>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/24/struts2学习4：利用自定义拦截器实现登录权限验证/" title="struts2学习4：利用自定义拦截器实现登录权限验证" itemprop="url">struts2学习4：利用自定义拦截器实现登录权限验证</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-24T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>通过例子可以很好理解struts2中的自定义拦截器，如果用户登录成功可以访问action中的所有方法，如果用户没有登录则不可以访问action中的方法，并且提示“没有权限执行该操作”。<br>本例子重点说明自定义拦截器的使用方法，对于登录等界面不做过多的代码编写。<br>user.jsp，用来实现用户登录功能，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">"java"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">   request,getSession().setAttribute(<span class="string">"user"</span>,<span class="string">"zju"</span>);</span><br><span class="line">%&gt;</span><br><span class="line">用户已经登录</span><br></pre></td></tr></table></figure></p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/24/struts2学习4：利用自定义拦截器实现登录权限验证/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/struts2/">struts2</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
 	
-</div>
 
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/23/struts2学习3：类型转换器/" title="struts2学习3：类型转换器" itemprop="url">struts2学习3：类型转换器</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-23T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>在struts开发中，有时会遇到这样的情况：</p>
-<p>如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。<br>我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期格式之间的双向转换，自定类型转换器要继承DefaultTypeConverter：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class TypeConverter extends DefaultTypeConverter&#123;</span><br><span class="line"> @Override</span><br><span class="line">  public Object convertValue(Map<span class="tag">&lt;<span class="title">String,</span> <span class="attribute">Object</span>&gt;</span> context, Object value,Class toType) &#123;</span><br><span class="line">    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");</span><br><span class="line">    try&#123;</span><br><span class="line">        if(toType==Date.class)&#123;</span><br><span class="line">          String[] params = (String[]) value; </span><br><span class="line">          return dateFormat.parse(params[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(toType==String.class)&#123;</span><br><span class="line">          Date date = (Date)value; </span><br><span class="line">          return dateFormat.format(date);</span><br><span class="line">        &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     catch (Exception e) &#123;&#125;</span><br><span class="line">         return null;</span><br><span class="line">     &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="配置局部类型转化器">配置局部类型转化器</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/23/struts2学习3：类型转换器/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/struts2/">struts2</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/22/struts2学习2：Action详解/" title="struts2学习2：Action详解" itemprop="url">struts2学习2：Action详解</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-22T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Action是struts2的核心内容，接下来我们将学习一下struts2中的Action。</p>
-<h1 id="Action配置中的各项默认值">Action配置中的各项默认值</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">action</span> <span class="attribute">name</span>=<span class="value">"helloworld"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">result</span>&gt;</span>/WEB-INF/page/hello.jsp<span class="tag">&lt;/<span class="title">result</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">action</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>class的默认值是ActionSupport，method的默认值是execute、result中name的默认值是success。<br>在这种配置情况下，当浏览器请求helloworld（action）时，可以直接请求转发到hello.jsp界面。</p>
-<h1 id="result的几种转发类型">result的几种转发类型</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/22/struts2学习2：Action详解/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/struts2/">struts2</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/21/struts2学习1：初识struts2/" title="struts2学习1：初识struts2" itemprop="url">struts2学习1：初识struts2</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-21T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="struts2">struts2</h1><p>Struts2是在WebWork2基础上发展而来，属于MVC框架。优点：</p>
-<ol>
-<li>提供了拦截器，可以进行AOP编程；</li>
-<li>提供了类型转换器，可以把特殊的请求参数转换成需要的类型；</li>
-<li>struts2的应用可以不依赖于 ServletAPI和strutsAPI，无侵入式设计；</li>
-<li>提供支持多种表现层技术，如JSP等等</li>
-<li>struts2的输入校验可以对指定方法进行校验</li>
-<li>提供全局范围、包范围和Action范围的国际化资源文件管理实现。<h1 id="搭建struts2开发环境">搭建struts2开发环境</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/21/struts2学习1：初识struts2/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/struts2/">struts2</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/18/Spring学习4：Spring AOP（面向切面编程）/" title="Spring学习4：Spring AOP（面向切面编程）" itemprop="url">Spring学习4：Spring AOP（面向切面编程）</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-18T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="常用术语">常用术语</h1><p>学习AOP之前，先了解AOP中常用术语</p>
-<ol>
-<li>切面（Aspect）<br>切面是一个关注点的模块化，如事务管理就是一个在JavaEE企业中应用最常见的界面。在企业应用编程中，首先需要通过分析，抽取出通用的功能，即“切面”。<br>事务、日志、安全性的框架、权限都是切面</li>
-<li>连接点（Joinpoint）<br>连接点是执行程序过程中的特定的点。Spring框架只支持方法作为连接点，如方法调用之前、方法调用后、或者发生异常时等。</li>
-<li>通知（Advice）<br>通知就是切面的具体实现。通知将在切面的某个特定的连接点上执行动作，Spring中执行的动作往往就是调用某一个类的具体方法。例如：在保存订单的模块中，进行日志管理（一个切面），具体是在保存订单的方法执行之前（连接点）执行写日志（通知）的功能。其中，日志管理是很多模块中通用的功能，因此这就是一个切面，而具体是在保存订单之前执行日志保存，那么保存订单前这个点就是连接点，实现日志保存功能的类就是通知。<br>就是切面中的方法。</li>
-<li><p>切入点（Pointcut）<br>切入点是连接点的集合，通知将在满足一个切入点表达式的所有连接点上运行。<br>举例：<br>在拦截器中，有一系列判断性的内容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(method.equals(<span class="string">"savePerson"</span>)||method.equals(<span class="string">"updatePerson"</span>) ||method.equals(<span class="string">"deletePerson"</span>))&#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<p>满足了上面三个方法才能开启事务，这些判断条件就为切入点</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/18/Spring学习4：Spring AOP（面向切面编程）/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/16/Spring学习3：代理模式/" title="Spring学习3：代理模式" itemprop="url">Spring学习3：代理模式</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-16T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="代理模式">代理模式</h1><p>所谓代理，就是一个人或者一个机构代表另一个人或者另一个机构采取行动。在一些情况下，一个客户不想或者不能够直接引用一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
-<p>代理模式是一种结构性设计模式。当客户端不想直接调用主题对象，而希望主题对象的行为前后加上预处理或者后续处理时，则可以使用代理模式。</p>
-<h1 id="代理模式的三种角色">代理模式的三种角色</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/16/Spring学习3：代理模式/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/15/Spring学习2：Spring DI（依赖注入）/" title="Spring学习2：Spring DI（依赖注入）" itemprop="url">Spring学习2：Spring DI（依赖注入）</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-15T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Spring_DI">Spring DI</h1><p>DI（依赖注入）就是给属性赋值。</p>
-<h1 id="spring容器的执行顺序">spring容器的执行顺序</h1><p>考虑依赖注入之后的Spring的执行顺序如下<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring04.jpg" alt="spring容器的执行顺序"><br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/15/Spring学习2：Spring DI（依赖注入）/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/14/Spring学习1：Spring基本特性/" title="Spring学习1：Spring基本特性" itemprop="url">Spring学习1：Spring基本特性</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-14T13:34:22.000Z" itemprop="datePublished"> 发表于 2015-08-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Spring基本特征">Spring基本特征</h1><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/spring01.jpg" alt="Spring基本特征"><br>Spring是一个非常活跃的开源框架；它是一个基于Core来构架多层JavaEE系统的框架,它的主要目地是简化企业开发。<br>Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/14/Spring学习1：Spring基本特性/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Spring/">Spring</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
-  </nav>
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目整体构成"><span class="toc-number">1.</span> <span class="toc-text">项目整体构成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装配置"><span class="toc-number">2.</span> <span class="toc-text">安装配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置文件hibernate-cfg-xml"><span class="toc-number">3.</span> <span class="toc-text">配置文件hibernate.cfg.xml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#映射文件User-hbm-xml"><span class="toc-number">4.</span> <span class="toc-text">映射文件User.hbm.xml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#User-java（JavaBean）"><span class="toc-number">5.</span> <span class="toc-text">User.java（JavaBean）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#main()方法"><span class="toc-number">6.</span> <span class="toc-text">main()方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结果"><span class="toc-number">7.</span> <span class="toc-text">结果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码优化"><span class="toc-number">8.</span> <span class="toc-text">代码优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#@建立工具类HibernateUtil"><span class="toc-number">9.</span> <span class="toc-text">@建立工具类HibernateUtil</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#优化后的方法"><span class="toc-number">9.1.</span> <span class="toc-text">优化后的方法</span></a></li></ol></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -938,12 +388,89 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -1009,4 +536,4 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
