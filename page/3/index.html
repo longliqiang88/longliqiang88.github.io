@@ -81,6 +81,68 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/" title="HBase学习4：利用Java接口操作HBase" itemprop="url">HBase学习4：利用Java接口操作HBase</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-26T07:41:50.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>多余不赘述，直接上代码（记得项目中一定要添加必须的Jar文件）</p>
+<h1 id="创建表">创建表</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCreate</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span><br><span class="line">		Configuration conf </span>= HBaseConfiguration.create();</span><br><span class="line">		conf.set(<span class="string">"hbase.zookeeper.quorum"</span>,<span class="string">"hadoop01,hadoop02,hadoop03"</span>);<span class="comment">//制定zookeeper的地址</span></span><br><span class="line">		HBaseAdmin admin = <span class="keyword">new</span> HBaseAdmin(conf);<span class="comment">//指定要操作的HBase集群</span></span><br><span class="line">		HTableDescriptor td = <span class="keyword">new</span> HTableDescriptor(<span class="string">"user"</span>);<span class="comment">//设定表名字</span></span><br><span class="line">		HColumnDescriptor cd = <span class="keyword">new</span> HColumnDescriptor(<span class="string">"info"</span>);<span class="comment">//设定列族,可以指定多个列族</span></span><br><span class="line">		cd.setMaxVersions(<span class="number">10</span>);</span><br><span class="line">		td.addFamily(cd);</span><br><span class="line">		admin.createTable(td);</span><br><span class="line">		admin.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HBase/">HBase</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/25/HBase学习3：综合梳理/" title="HBase学习3：综合梳理" itemprop="url">HBase学习3：综合梳理</a>
   </h1>
   <p class="article-author">By
@@ -638,68 +700,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/10/Maven学习总结/" title="Maven学习总结" itemprop="url">Maven学习总结</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-10T12:46:47.000Z" itemprop="datePublished"> 发表于 2015-07-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Maven概念">Maven概念</h1><p>Maven是一种基于项目对象模型（POM），可以通过一小段描述信息来管理项目的构建、报告和文档的软件项目管理工具。ps：个人使用心得，maven使用起来最方便的就是管理jar文件。</p>
-<h1 id="Maven安装">Maven安装</h1><p>下载maven，配置环境变量，可通过mvn -v来测试maven安装是否成功。<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/07/10/Maven学习总结/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Maven/">Maven</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Maven/">Maven</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -730,7 +730,7 @@
 		  
 		
 		  
-			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>12</sup></a></li>
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>13</sup></a></li>
 		  
 		
 		  
@@ -767,15 +767,15 @@
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Hive/" title="Hive">Hive<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>3</sup></a></li>
 			
 		
 			

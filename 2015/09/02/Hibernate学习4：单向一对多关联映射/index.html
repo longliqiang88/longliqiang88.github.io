@@ -4,32 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Oracle 11g导入DMP文件步骤 | llq`s blog</title>
+    <title>Hibernate学习4：单向一对多关联映射 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="可以使用sql plus 也可以使用 plsql
-开启Oracle服务使用管理员账户登录
-创建表空间在sql窗口中输入1create tablespace test datafile &apos;D:\test.ora&apos; size 1000m
-这里的test为表空间名称，路径自己来命名。然后点执行按钮。">
+    <meta name="description" content="接续上一篇博客：如果我们从部门的角度去考虑部门和员工的关系，那么两者的管理就变为了一对多（一个部门对应多个员工）。我们继续用例子来说明一对多管理关系。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Oracle 11g导入DMP文件步骤">
-<meta property="og:url" content="http://yoursite.com/2015/07/26/Oracle 11g导入DMP文件步骤/index.html">
+<meta property="og:title" content="Hibernate学习4：单向一对多关联映射">
+<meta property="og:url" content="http://yoursite.com/2015/09/02/Hibernate学习4：单向一对多关联映射/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="可以使用sql plus 也可以使用 plsql
-开启Oracle服务使用管理员账户登录
-创建表空间在sql窗口中输入1create tablespace test datafile &apos;D:\test.ora&apos; size 1000m
-这里的test为表空间名称，路径自己来命名。然后点执行按钮。">
-<meta property="og:updated_time" content="2015-07-26T13:35:35.204Z">
+<meta property="og:description" content="接续上一篇博客：如果我们从部门的角度去考虑部门和员工的关系，那么两者的管理就变为了一对多（一个部门对应多个员工）。我们继续用例子来说明一对多管理关系。">
+<meta property="og:updated_time" content="2015-09-03T07:07:30.811Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Oracle 11g导入DMP文件步骤">
-<meta name="twitter:description" content="可以使用sql plus 也可以使用 plsql
-开启Oracle服务使用管理员账户登录
-创建表空间在sql窗口中输入1create tablespace test datafile &apos;D:\test.ora&apos; size 1000m
-这里的test为表空间名称，路径自己来命名。然后点执行按钮。">
+<meta name="twitter:title" content="Hibernate学习4：单向一对多关联映射">
+<meta name="twitter:description" content="接续上一篇博客：如果我们从部门的角度去考虑部门和员工的关系，那么两者的管理就变为了一对多（一个部门对应多个员工）。我们继续用例子来说明一对多管理关系。">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -89,14 +80,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/" title="Oracle 11g导入DMP文件步骤" itemprop="url">Oracle 11g导入DMP文件步骤</a>
+      <a href="/2015/09/02/Hibernate学习4：单向一对多关联映射/" title="Hibernate学习4：单向一对多关联映射" itemprop="url">Hibernate学习4：单向一对多关联映射</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-26T13:28:15.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    <time datetime="2015-09-02T06:32:51.000Z" itemprop="datePublished"> 发表于 2015-09-02</time>
     
   </p>
 </header>
@@ -105,21 +96,21 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开启Oracle服务"><span class="toc-number">1.</span> <span class="toc-text">开启Oracle服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建表空间"><span class="toc-number">2.</span> <span class="toc-text">创建表空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户"><span class="toc-number">3.</span> <span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#授权"><span class="toc-number">4.</span> <span class="toc-text">授权</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查找字段查询到DATA_PUMP_DIR的路径所在的路径"><span class="toc-number">5.</span> <span class="toc-text">查找字段查询到DATA_PUMP_DIR的路径所在的路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#执行导入语句"><span class="toc-number">6.</span> <span class="toc-text">执行导入语句</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实体类（JavaBean）"><span class="toc-number">1.</span> <span class="toc-text">实体类（JavaBean）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Department-java"><span class="toc-number">1.1.</span> <span class="toc-text">Department.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Employee-java"><span class="toc-number">1.2.</span> <span class="toc-text">Employee.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Department-hbm-xml"><span class="toc-number">2.</span> <span class="toc-text">Department.hbm.xml</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">2.1.</span> <span class="toc-text">set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#key"><span class="toc-number">2.2.</span> <span class="toc-text">key</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#one-to-many"><span class="toc-number">3.</span> <span class="toc-text">one-to-many</span></a></li></ol>
 		
 		</div>
 		
-		<p>可以使用sql plus 也可以使用 plsql</p>
-<h1 id="开启Oracle服务">开启Oracle服务</h1><p>使用管理员账户登录</p>
-<h1 id="创建表空间">创建表空间</h1><p>在sql窗口中输入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create tablespace test datafile 'D:\test.ora' size 1000m</span><br></pre></td></tr></table></figure></p>
-<p>这里的test为表空间名称，路径自己来命名。然后点执行按钮。<br><a id="more"></a></p>
-<h1 id="创建用户">创建用户</h1><p>输入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user demo identified by demo default tablespace test quota 500m on users;</span><br></pre></td></tr></table></figure></p>
-<p>这里第一个demo 为用户名，第二个demo 为密码，test为表空间名。</p>
-<h1 id="授权">授权</h1><p>给这个用户受dba权限 输入grant dba to demo执行</p>
-<h1 id="查找字段查询到DATA_PUMP_DIR的路径所在的路径">查找字段查询到DATA_PUMP_DIR的路径所在的路径</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from dba_directories</span><br></pre></td></tr></table></figure>
-<p>然后把把文件ppm_20141210.dmp放到该路径下</p>
-<h1 id="执行导入语句">执行导入语句</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">impdp userid='demo/demo' remap_schema=ppm:demo directory=DATA_PUMP_DIR dumpfile=ppm_20141210.dmp remap_tablespace=TS_PPM:test</span><br></pre></td></tr></table></figure>
-<p>最后执行即可导入。</p>
+		<p>接续上一篇博客：如果我们从部门的角度去考虑部门和员工的关系，那么两者的管理就变为了一对多（一个部门对应多个员工）。我们继续用例子来说明一对多管理关系。<br><a id="more"></a></p>
+<h1 id="实体类（JavaBean）">实体类（JavaBean）</h1><h2 id="Department-java">Department.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Department</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Set&lt;Employee&gt; emps;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//省略get、set方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Employee-java">Employee.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> Department depart; </span><br><span class="line">    <span class="comment">//省略get、set方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Department-hbm-xml">Department.hbm.xml</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="doctype">&lt;!DOCTYPE hibernate-mapping PUBLIC </span><br><span class="line">	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">hibernate-mapping</span> <span class="attribute">package</span>=<span class="value">"cn.zju.domain"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">class</span> <span class="attribute">name</span>=<span class="value">"Department"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">id</span> <span class="attribute">name</span>=<span class="value">"id"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">generator</span> <span class="attribute">class</span>=<span class="value">"native"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">set</span> <span class="attribute">name</span>=<span class="value">"emps"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="title">key</span> <span class="attribute">column</span>=<span class="value">"depart_id"</span>&gt;</span><span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="title">one-to-many</span> <span class="attribute">class</span>=<span class="value">"Employee"</span> /&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="title">set</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Hibernate提供one-to-many标签来实现一对多关联关系：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">set</span> <span class="attribute">name</span>=<span class="value">"emps"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">key</span> <span class="attribute">column</span>=<span class="value">"depart_id"</span>&gt;</span><span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">one-to-many</span> <span class="attribute">class</span>=<span class="value">"Employee"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">set</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="set">set</h2><p>name属性：指向待映射的持久化类</p>
+<h2 id="key">key</h2><p>设定与所关联的持久化类对应的表的外键</p>
+<ul>
+<li>column: 指定关联表的外键名<h1 id="one-to-many">one-to-many</h1>设定集合属性中所关联的持久化类</li>
+<li>class: 指定关联的持久化类的类名</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -127,13 +118,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
+  <span></span> <a href="/tags/Hibernate/">Hibernate</a>
   </div>
 
 </div>
@@ -142,7 +133,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/26/Oracle 11g导入DMP文件步骤/" data-title="Oracle 11g导入DMP文件步骤 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/09/02/Hibernate学习4：单向一对多关联映射/" data-title="Hibernate学习4：单向一对多关联映射 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,19 +146,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/03/Go语言初识/" title="Go语言初识">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Go语言初识</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/07/26/Oracle kill session/"  title="Oracle kill session">
+<a href="/2015/08/29/Hibernate学习3：单向多对一关联映射/"  title="Hibernate学习3：单向多对一关联映射">
  <strong>下一篇：</strong><br/> 
- <span>Oracle kill session
+ <span>Hibernate学习3：单向多对一关联映射
 </span>
 </a>
 </div>
@@ -182,7 +165,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开启Oracle服务"><span class="toc-number">1.</span> <span class="toc-text">开启Oracle服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建表空间"><span class="toc-number">2.</span> <span class="toc-text">创建表空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户"><span class="toc-number">3.</span> <span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#授权"><span class="toc-number">4.</span> <span class="toc-text">授权</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查找字段查询到DATA_PUMP_DIR的路径所在的路径"><span class="toc-number">5.</span> <span class="toc-text">查找字段查询到DATA_PUMP_DIR的路径所在的路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#执行导入语句"><span class="toc-number">6.</span> <span class="toc-text">执行导入语句</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实体类（JavaBean）"><span class="toc-number">1.</span> <span class="toc-text">实体类（JavaBean）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Department-java"><span class="toc-number">1.1.</span> <span class="toc-text">Department.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Employee-java"><span class="toc-number">1.2.</span> <span class="toc-text">Employee.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Department-hbm-xml"><span class="toc-number">2.</span> <span class="toc-text">Department.hbm.xml</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">2.1.</span> <span class="toc-text">set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#key"><span class="toc-number">2.2.</span> <span class="toc-text">key</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#one-to-many"><span class="toc-number">3.</span> <span class="toc-text">one-to-many</span></a></li></ol>
  
   </div>
 
