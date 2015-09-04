@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>一对一关联映射 | llq`s blog</title>
+    <title>Hibernate学习5：一对一关联映射 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
@@ -16,7 +16,7 @@
 主键关联：两个对象具有相同的主键值，以表明他们之间的一一对应的关系，数据库表不会有额外的字段去维护他们之间的关系，仅通过表的主键来关联。
 外键关联：本来是用于一对多的配置，但是如果加上唯一的限制之后，也可以用来表示一对一关联关系。主键关联举例来说明主键关联，数据库中有一张perso">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一对一关联映射">
+<meta property="og:title" content="Hibernate学习5：一对一关联映射">
 <meta property="og:url" content="http://yoursite.com/2015/09/04/Hibernate学习5：一对一关联映射/index.html">
 <meta property="og:site_name" content="llq`s blog">
 <meta property="og:description" content="概述一对一关联映射指的是两个对象之间是一对一的关系，比如person—id_card。一对一关联映射可以分为两种：
@@ -25,9 +25,9 @@
 外键关联：本来是用于一对多的配置，但是如果加上唯一的限制之后，也可以用来表示一对一关联关系。主键关联举例来说明主键关联，数据库中有一张perso">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/Hibernate11.jpg">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/Hibernate12.jpg">
-<meta property="og:updated_time" content="2015-09-04T14:41:28.566Z">
+<meta property="og:updated_time" content="2015-09-04T14:53:29.560Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一对一关联映射">
+<meta name="twitter:title" content="Hibernate学习5：一对一关联映射">
 <meta name="twitter:description" content="概述一对一关联映射指的是两个对象之间是一对一的关系，比如person—id_card。一对一关联映射可以分为两种：
 
 主键关联：两个对象具有相同的主键值，以表明他们之间的一一对应的关系，数据库表不会有额外的字段去维护他们之间的关系，仅通过表的主键来关联。
@@ -91,7 +91,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/04/Hibernate学习5：一对一关联映射/" title="一对一关联映射" itemprop="url">一对一关联映射</a>
+      <a href="/2015/09/04/Hibernate学习5：一对一关联映射/" title="Hibernate学习5：一对一关联映射" itemprop="url">Hibernate学习5：一对一关联映射</a>
   </h1>
   <p class="article-author">By
        
@@ -114,7 +114,8 @@
 		<h1 id="概述">概述</h1><p>一对一关联映射指的是两个对象之间是一对一的关系，比如person—id_card。<br>一对一关联映射可以分为两种：</p>
 <ol>
 <li>主键关联：两个对象具有相同的主键值，以表明他们之间的一一对应的关系，数据库表不会有额外的字段去维护他们之间的关系，仅通过表的主键来关联。</li>
-<li>外键关联：本来是用于一对多的配置，但是如果加上唯一的限制之后，也可以用来表示一对一关联关系。<h1 id="主键关联">主键关联</h1>举例来说明主键关联，数据库中有一张person表，用来存放人员信息，包括姓名和年龄，还有一张id_card表，存放身份证信息。<h2 id="E-R图">E-R图</h2><img src="http://7xk9vl.com1.z0.glb.clouddn.com/Hibernate11.jpg" alt="E-R图"></li>
+<li>外键关联：本来是用于一对多的配置，但是如果加上唯一的限制之后，也可以用来表示一对一关联关系。<h1 id="主键关联">主键关联</h1>举例来说明主键关联，数据库中有一张person表，用来存放人员信息，包括姓名和年龄，还有一张id_card表，存放身份证信息。<h2 id="E-R图">E-R图</h2><a id="more"></a>
+<img src="http://7xk9vl.com1.z0.glb.clouddn.com/Hibernate11.jpg" alt="E-R图"></li>
 </ol>
 <ul>
 <li>person对象是主对象，id_card对象是从对象</li>
@@ -123,7 +124,6 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IdCard</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">private</span> Date usefulLife;</span><br><span class="line">	<span class="keyword">private</span> Person person;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//省去get、set方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="映射文件">映射文件</h2><h3 id="Person-hbm-xml">Person.hbm.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="doctype">&lt;!DOCTYPE hibernate-mapping PUBLIC </span><br><span class="line">	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">hibernate-mapping</span> <span class="attribute">package</span>=<span class="value">"cn.zju.domain"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="title">class</span> <span class="attribute">name</span>=<span class="value">"Person"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">id</span> <span class="attribute">name</span>=<span class="value">"id"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">generator</span> <span class="attribute">class</span>=<span class="value">"native"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"name"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">one-to-one</span> <span class="attribute">name</span>=<span class="value">"idCard"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">class</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>+</p>
 <h3 id="IdCard-hbm-xml">IdCard.hbm.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="doctype">&lt;!DOCTYPE hibernate-mapping PUBLIC </span><br><span class="line">	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span><br><span class="line">	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">hibernate-mapping</span> <span class="attribute">package</span>=<span class="value">"cn.zju.domain"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="title">class</span> <span class="attribute">name</span>=<span class="value">"IdCard"</span> <span class="attribute">table</span>=<span class="value">"id_card"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">id</span> <span class="attribute">name</span>=<span class="value">"id"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="title">generator</span> <span class="attribute">class</span>=<span class="value">"foreign"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">param</span> <span class="attribute">name</span>=<span class="value">"property"</span>&gt;</span>person<span class="tag">&lt;/<span class="title">param</span>&gt;</span> <span class="comment">&lt;!--主键生成，通过person表的主键来生成自己的主键--&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="title">generator</span>&gt;</span></span><br><span class="line">			</span><br><span class="line">		<span class="tag">&lt;/<span class="title">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">property</span> <span class="attribute">name</span>=<span class="value">"usefulLife"</span> <span class="attribute">column</span>=<span class="value">"useful_life"</span>/&gt;</span></span><br><span class="line">		 </span><br><span class="line">		<span class="tag">&lt;<span class="title">one-to-one</span> <span class="attribute">name</span>=<span class="value">"person"</span> <span class="attribute">constrained</span>=<span class="value">"true"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">class</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>如果采用基于主键的映射策略，则一端的主键生成器需要使用foreign策略，表明将根据对方的主键来生成自己的主键，本实体不能拥有自己的主键声称策略。</li>
@@ -173,7 +173,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/09/04/Hibernate学习5：一对一关联映射/" data-title="一对一关联映射 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/09/04/Hibernate学习5：一对一关联映射/" data-title="Hibernate学习5：一对一关联映射 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
