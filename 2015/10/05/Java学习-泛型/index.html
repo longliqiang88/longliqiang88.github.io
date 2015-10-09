@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/10/05/Java学习-泛型/index.html">
 <meta property="og:site_name" content="llq`s blog">
 <meta property="og:description" content="体验泛型在Jdk1.5之后，定义集合时需要你明确集合中要装哪种类型的数据，无法加入指定类型之外的数据。1234ArrayList&amp;lt;Integer&amp;gt; arr1 = new ArrayList&amp;lt;Integer&amp;gt;(); arr1.add(1);arr1.add(&quot;aa&quot;); //有的泛型之后，此行代码在编译的时候会报错int x = arr1.get(0);  //有了泛型之后，">
-<meta property="og:updated_time" content="2015-10-09T06:42:50.962Z">
+<meta property="og:updated_time" content="2015-10-09T07:03:20.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习-反射机制">
 <meta name="twitter:description" content="体验泛型在Jdk1.5之后，定义集合时需要你明确集合中要装哪种类型的数据，无法加入指定类型之外的数据。1234ArrayList&amp;lt;Integer&amp;gt; arr1 = new ArrayList&amp;lt;Integer&amp;gt;(); arr1.add(1);arr1.add(&quot;aa&quot;); //有的泛型之后，此行代码在编译的时候会报错int x = arr1.get(0);  //有了泛型之后，">
@@ -101,10 +101,10 @@
 		</div>
 		
 		<h1 id="体验泛型">体验泛型</h1><p>在Jdk1.5之后，定义集合时需要你明确集合中要装哪种类型的数据，无法加入指定类型之外的数据。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; arr1 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(); </span><br><span class="line">arr1.add(<span class="number">1</span>);</span><br><span class="line">arr1.add(<span class="string">"aa"</span>); <span class="comment">//有的泛型之后，此行代码在编译的时候会报错</span></span><br><span class="line"><span class="keyword">int</span> x = arr1.get(<span class="number">0</span>);  <span class="comment">//有了泛型之后，取数据的时候不需要进行强制类型转换</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="什么是泛型">什么是泛型</h1><p>泛型是提供给javac编译器使用的，可以限定集合中的输入类型，让编译器挡住源程序的非法输入。<br>需要注意的是：编译器编译带类型说明的集合时会出掉“类型”信息，使程序运行的效率不受影响。对于参数话的泛型类型，getClass()方法的返回值和原始类型完全一样。由于编译器生成的字节码会去掉泛型的类型信息，只要能跳过编译器，就可以往泛型集合中加入其它类型的数据。<br>举例，用泛型得到集合，再调用其add方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; arr1 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(); </span><br><span class="line">arr1.getClass().getMethod(<span class="string">"add"</span>, Object.class).invoke(arr1, <span class="string">"aaa"</span>);        </span><br><span class="line">System.out.println(arr1.get(<span class="number">0</span>));  <span class="comment">//可以在控制台输出aaa</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="什么是泛型">什么是泛型</h1><p>泛型是提供给javac编译器使用的，可以限定集合中的输入类型，让编译器挡住源程序的非法输入。<br>需要注意的是：编译器编译带类型参数的集合时会出掉“类型”信息，使程序运行的效率不受影响。对于参数化的泛型类型，getClass()方法的返回值和原始类型完全一样。由于编译器生成的字节码会去掉泛型的类型信息，只要能跳过编译器，就可以往泛型集合中加入其它类型的数据。<br>举例，用泛型得到集合，再调用其add方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; arr1 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(); </span><br><span class="line">arr1.getClass().getMethod(<span class="string">"add"</span>, Object.class).invoke(arr1, <span class="string">"aaa"</span>);        </span><br><span class="line">System.out.println(arr1.get(<span class="number">0</span>));  <span class="comment">//可以在控制台输出aaa</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="了解泛型">了解泛型</h1><p>ArrayList<e>和ArrayList<integer> 类引用中涉及术语如下：<br>整个类型被称为ArrayList<e>泛型类型<br>ArrayList<e>中的E被称为泛型变量或泛型类型<br>ArrayList<integer>被称为参数化类型<br>Integer为实际类型参数</integer></e></e></integer></e></p>
 <p>参数化类型可以引用一个原始类型的对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; c = <span class="keyword">new</span> Vector();</span><br></pre></td></tr></table></figure></p>
-<p>原始类型可以引用引用一个参数化类型的对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collection c = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br></pre></td></tr></table></figure></p>
+<p>原始类型可以引用一个参数化类型的对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collection c = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br></pre></td></tr></table></figure></p>
 <p>参数化类型不考虑类型参数之间的继承关系：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector&lt;Object&gt; v = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br><span class="line">Vector&lt;String&gt; v = <span class="keyword">new</span> Vector&lt;Object&gt;();</span><br></pre></td></tr></table></figure></p>
 <p>以上的定义是错误的！</p>
 <h1 id="泛型的通配符">泛型的通配符</h1><p>Collection&lt;?&gt;可以匹配任何参数类型，但具体匹配的是什么类型只有以后才知道。通配符定义的变量主要做引用，可以调用与参数无关的方法，不能调用与参数有关的方法。<br>举例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCollection</span><span class="params">(Collection&lt;?&gt; cols)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(Object obj:cols)&#123;</span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cols.add(<span class="string">"aaa"</span>); <span class="comment">//错误！！因为通配符不能确定之后匹配的一定就是String类型</span></span><br><span class="line">    <span class="keyword">int</span> len = cols.size(); <span class="comment">//可以！！可以调用与参数无关的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -112,7 +112,7 @@
 <h1 id="自定义泛型方法">自定义泛型方法</h1><h2 id="例1">例1</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T[],<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">    T tmp = a[i];</span><br><span class="line">    a[i] = a[j];</span><br><span class="line">    a[j] = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="例2：将Object转成自定义返回类型">例2：将Object转成自定义返回类型</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">autoConvert</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (T)obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="自定义泛型类的应用">自定义泛型类的应用</h1><p>如果一个类的实例对象中多处都要用到同一个泛型参数，即这些地方引用的泛型类型保持同一个实际类型时，这时候就要采用泛型类型的方法进行定义，也就是类姐的泛型，语法格式如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericDao</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T field ;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(T obj)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getById</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用如下代码记性方法调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GenericDao&lt;Person&gt; dao = <span class="keyword">new</span> GenericDao&lt;Person&gt;();</span><br><span class="line">dao.save(...);</span><br></pre></td></tr></table></figure></p>
+<p>使用如下代码进行方法调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GenericDao&lt;Person&gt; dao = <span class="keyword">new</span> GenericDao&lt;Person&gt;();</span><br><span class="line">dao.save(...);</span><br></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -205,7 +205,7 @@
 		  
 		
 		  
-			<li><a href="/categories/OpenStack/" title="OpenStack">OpenStack<sup>2</sup></a></li>
+			<li><a href="/categories/OpenStack/" title="OpenStack">OpenStack<sup>1</sup></a></li>
 		  
 		
 		  
@@ -250,11 +250,11 @@
 			
 		
 			
-				<li><a href="/tags/OpenStack/" title="OpenStack">OpenStack<sup>2</sup></a></li>
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
 			
 		
 			
@@ -270,11 +270,11 @@
 			
 		
 			
-				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+				<li><a href="/tags/OpenStack/" title="OpenStack">OpenStack<sup>1</sup></a></li>
 			
 		
 			
