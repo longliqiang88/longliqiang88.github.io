@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/10/05/Java学习-泛型/index.html">
 <meta property="og:site_name" content="llq`s blog">
 <meta property="og:description" content="体验泛型在Jdk1.5之后，定义集合时需要你明确集合中要装哪种类型的数据，无法加入指定类型之外的数据。1234ArrayList&amp;lt;Integer&amp;gt; arr1 = new ArrayList&amp;lt;Integer&amp;gt;(); arr1.add(1);arr1.add(&quot;aa&quot;); //有的泛型之后，此行代码在编译的时候会报错int x = arr1.get(0);  //有了泛型之后，">
-<meta property="og:updated_time" content="2015-10-09T07:03:20.178Z">
+<meta property="og:updated_time" content="2015-10-09T07:05:49.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习-反射机制">
 <meta name="twitter:description" content="体验泛型在Jdk1.5之后，定义集合时需要你明确集合中要装哪种类型的数据，无法加入指定类型之外的数据。1234ArrayList&amp;lt;Integer&amp;gt; arr1 = new ArrayList&amp;lt;Integer&amp;gt;(); arr1.add(1);arr1.add(&quot;aa&quot;); //有的泛型之后，此行代码在编译的时候会报错int x = arr1.get(0);  //有了泛型之后，">
@@ -102,6 +102,7 @@
 		
 		<h1 id="体验泛型">体验泛型</h1><p>在Jdk1.5之后，定义集合时需要你明确集合中要装哪种类型的数据，无法加入指定类型之外的数据。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; arr1 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(); </span><br><span class="line">arr1.add(<span class="number">1</span>);</span><br><span class="line">arr1.add(<span class="string">"aa"</span>); <span class="comment">//有的泛型之后，此行代码在编译的时候会报错</span></span><br><span class="line"><span class="keyword">int</span> x = arr1.get(<span class="number">0</span>);  <span class="comment">//有了泛型之后，取数据的时候不需要进行强制类型转换</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="什么是泛型">什么是泛型</h1><p>泛型是提供给javac编译器使用的，可以限定集合中的输入类型，让编译器挡住源程序的非法输入。<br>需要注意的是：编译器编译带类型参数的集合时会出掉“类型”信息，使程序运行的效率不受影响。对于参数化的泛型类型，getClass()方法的返回值和原始类型完全一样。由于编译器生成的字节码会去掉泛型的类型信息，只要能跳过编译器，就可以往泛型集合中加入其它类型的数据。<br>举例，用泛型得到集合，再调用其add方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; arr1 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(); </span><br><span class="line">arr1.getClass().getMethod(<span class="string">"add"</span>, Object.class).invoke(arr1, <span class="string">"aaa"</span>);        </span><br><span class="line">System.out.println(arr1.get(<span class="number">0</span>));  <span class="comment">//可以在控制台输出aaa</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <h1 id="了解泛型">了解泛型</h1><p>ArrayList<e>和ArrayList<integer> 类引用中涉及术语如下：<br>整个类型被称为ArrayList<e>泛型类型<br>ArrayList<e>中的E被称为泛型变量或泛型类型<br>ArrayList<integer>被称为参数化类型<br>Integer为实际类型参数</integer></e></e></integer></e></p>
 <p>参数化类型可以引用一个原始类型的对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; c = <span class="keyword">new</span> Vector();</span><br></pre></td></tr></table></figure></p>
 <p>原始类型可以引用一个参数化类型的对象：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collection c = <span class="keyword">new</span> Vector&lt;String&gt;();</span><br></pre></td></tr></table></figure></p>
@@ -150,9 +151,9 @@
  
 
 <div class="next">
-<a href="/2015/09/28/OpenStack学习1：组织结构一览/"  title="OpenStack学习1：组织结构一览">
+<a href="/2015/09/05/Hibernate学习6：多对多关联映射/"  title="Hibernate学习6：多对多关联映射">
  <strong>下一篇：</strong><br/> 
- <span>OpenStack学习1：组织结构一览
+ <span>Hibernate学习6：多对多关联映射
 </span>
 </a>
 </div>
@@ -205,10 +206,6 @@
 		  
 		
 		  
-			<li><a href="/categories/OpenStack/" title="OpenStack">OpenStack<sup>1</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/Oracle/" title="Oracle">Oracle<sup>2</sup></a></li>
 		  
 		
@@ -250,15 +247,11 @@
 			
 		
 			
-				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/泛型/" title="泛型">泛型<sup>1</sup></a></li>
 			
 		
 			
@@ -274,7 +267,7 @@
 			
 		
 			
-				<li><a href="/tags/OpenStack/" title="OpenStack">OpenStack<sup>1</sup></a></li>
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
@@ -286,7 +279,7 @@
 			
 		
 			
-				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+				<li><a href="/tags/泛型/" title="泛型">泛型<sup>1</sup></a></li>
 			
 		
 		</ul>
