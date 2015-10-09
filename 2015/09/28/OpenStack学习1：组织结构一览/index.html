@@ -4,26 +4,41 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>struts2学习3：类型转换器 | llq`s blog</title>
+    <title>OpenStack学习1：组织结构一览 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="在struts开发中，有时会遇到这样的情况：
-如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期">
+    <meta name="description" content="OpenStack是一个构建云环境的工具集，所有的OpenStack组件都可以单独部署，而组件的各个模块也可以单独部署。
+OpenStack组件介绍
+所有的OpenStack组件都是用Python编写。
+最终用户可以通过Web界面、命令行来使用组件服务或直接调用每个组件的API。
+每个组件都通过统一认证源（Keystone）
+通过公共的REST API来实现各个组件之间的交互。
+大部分组件通过Me">
 <meta property="og:type" content="article">
-<meta property="og:title" content="struts2学习3：类型转换器">
-<meta property="og:url" content="http://yoursite.com/2015/08/23/struts2学习3：类型转换器/index.html">
+<meta property="og:title" content="OpenStack学习1：组织结构一览">
+<meta property="og:url" content="http://yoursite.com/2015/09/28/OpenStack学习1：组织结构一览/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="在struts开发中，有时会遇到这样的情况：
-如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期">
-<meta property="og:updated_time" content="2015-08-24T02:21:02.224Z">
+<meta property="og:description" content="OpenStack是一个构建云环境的工具集，所有的OpenStack组件都可以单独部署，而组件的各个模块也可以单独部署。
+OpenStack组件介绍
+所有的OpenStack组件都是用Python编写。
+最终用户可以通过Web界面、命令行来使用组件服务或直接调用每个组件的API。
+每个组件都通过统一认证源（Keystone）
+通过公共的REST API来实现各个组件之间的交互。
+大部分组件通过Me">
+<meta property="og:updated_time" content="2015-09-28T11:49:06.176Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="struts2学习3：类型转换器">
-<meta name="twitter:description" content="在struts开发中，有时会遇到这样的情况：
-如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期">
+<meta name="twitter:title" content="OpenStack学习1：组织结构一览">
+<meta name="twitter:description" content="OpenStack是一个构建云环境的工具集，所有的OpenStack组件都可以单独部署，而组件的各个模块也可以单独部署。
+OpenStack组件介绍
+所有的OpenStack组件都是用Python编写。
+最终用户可以通过Web界面、命令行来使用组件服务或直接调用每个组件的API。
+每个组件都通过统一认证源（Keystone）
+通过公共的REST API来实现各个组件之间的交互。
+大部分组件通过Me">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -83,14 +98,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/23/struts2学习3：类型转换器/" title="struts2学习3：类型转换器" itemprop="url">struts2学习3：类型转换器</a>
+      <a href="/2015/09/28/OpenStack学习1：组织结构一览/" title="OpenStack学习1：组织结构一览" itemprop="url">OpenStack学习1：组织结构一览</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-23T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-23</time>
+    <time datetime="2015-09-28T10:22:22.000Z" itemprop="datePublished"> 发表于 2015-09-28</time>
     
   </p>
 </header>
@@ -99,16 +114,20 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置局部类型转化器"><span class="toc-number">1.</span> <span class="toc-text">配置局部类型转化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置全局类型转换器"><span class="toc-number">2.</span> <span class="toc-text">配置全局类型转换器</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenStack组件介绍"><span class="toc-number">1.</span> <span class="toc-text">OpenStack组件介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenStack组件特点"><span class="toc-number">2.</span> <span class="toc-text">OpenStack组件特点</span></a></li></ol>
 		
 		</div>
 		
-		<p>在struts开发中，有时会遇到这样的情况：</p>
-<p>如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。<br>我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期格式之间的双向转换，自定类型转换器要继承DefaultTypeConverter：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class TypeConverter extends DefaultTypeConverter&#123;</span><br><span class="line"> @Override</span><br><span class="line">  public Object convertValue(Map<span class="tag">&lt;<span class="title">String,</span> <span class="attribute">Object</span>&gt;</span> context, Object value,Class toType) &#123;</span><br><span class="line">    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");</span><br><span class="line">    try&#123;</span><br><span class="line">        if(toType==Date.class)&#123;</span><br><span class="line">          String[] params = (String[]) value; </span><br><span class="line">          return dateFormat.parse(params[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(toType==String.class)&#123;</span><br><span class="line">          Date date = (Date)value; </span><br><span class="line">          return dateFormat.format(date);</span><br><span class="line">        &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     catch (Exception e) &#123;&#125;</span><br><span class="line">         return null;</span><br><span class="line">     &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="配置局部类型转化器">配置局部类型转化器</h1><a id="more"></a>
-<p>在action类所在的包下放置ActionClassName-conversion.properties文件，ActionClassName是类名，后面的-conversion.properties是固定的写法，<br>本例中应该是：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HelloWorldAction-conversion.properties</span><br></pre></td></tr></table></figure></p>
-<p>Properties文件里面的内容为：属性名称=类型转换器的全类名(既包名.类名)<br>本例中应该是：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">birthday = com.zju.struts.DateTypeConverter</span><br></pre></td></tr></table></figure></p>
-<h1 id="配置全局类型转换器">配置全局类型转换器</h1><p>如果业务需求所有的日期都要转换，则可以使用全局类型转换器，只要在src根目录下面放置xwork-conversion.properties文件,并且properties文件中的内容为：<br>待转换的类型=类型转换器的全类名<br>本例中应该是：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.util.Date = com.zju.struts.DateTypeConverter</span><br></pre></td></tr></table></figure></p>
+		<p>OpenStack是一个构建云环境的工具集，所有的OpenStack组件都可以单独部署，而组件的各个模块也可以单独部署。</p>
+<h1 id="OpenStack组件介绍">OpenStack组件介绍</h1><ul>
+<li>所有的OpenStack组件都是用Python编写。</li>
+<li>最终用户可以通过Web界面、命令行来使用组件服务或直接调用每个组件的API。</li>
+<li>每个组件都通过统一认证源（Keystone）</li>
+<li>通过公共的REST API来实现各个组件之间的交互。</li>
+<li>大部分组件通过Message Queue（RabbitMQ）来实现组件内部交互。</li>
+<li>所有的组件都通过DataBase来存放数据信息。</li>
+<li>OpenStack的守护进程大多由WSGI中间件来实现。<h1 id="OpenStack组件特点">OpenStack组件特点</h1></li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -116,13 +135,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
+  <a class="article-category-link" href="/categories/OpenStack/">OpenStack</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/struts2/">struts2</a>
+  <span></span> <a href="/tags/OpenStack/">OpenStack</a>
   </div>
 
 </div>
@@ -131,7 +150,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/08/23/struts2学习3：类型转换器/" data-title="struts2学习3：类型转换器 | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/09/28/OpenStack学习1：组织结构一览/" data-title="OpenStack学习1：组织结构一览 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -145,18 +164,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/08/24/struts2学习4：利用自定义拦截器实现登录权限验证/" title="struts2学习4：利用自定义拦截器实现登录权限验证">
+ <a href="/2015/10/05/Java学习-泛型/" title="Java学习-反射机制">
   <strong>上一篇：</strong><br/>
   <span>
-  struts2学习4：利用自定义拦截器实现登录权限验证</span>
+  Java学习-反射机制</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/08/22/struts2学习2：Action详解/"  title="struts2学习2：Action详解">
+<a href="/2015/09/05/Hibernate学习6：多对多关联映射/"  title="Hibernate学习6：多对多关联映射">
  <strong>下一篇：</strong><br/> 
- <span>struts2学习2：Action详解
+ <span>Hibernate学习6：多对多关联映射
 </span>
 </a>
 </div>
@@ -171,7 +190,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#配置局部类型转化器"><span class="toc-number">1.</span> <span class="toc-text">配置局部类型转化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置全局类型转换器"><span class="toc-number">2.</span> <span class="toc-text">配置全局类型转换器</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenStack组件介绍"><span class="toc-number">1.</span> <span class="toc-text">OpenStack组件介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenStack组件特点"><span class="toc-number">2.</span> <span class="toc-text">OpenStack组件特点</span></a></li></ol>
  
   </div>
 
