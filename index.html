@@ -81,6 +81,67 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/11/22/OpenStack之Horizon源码分析/" title="OpenStack之Horizon源码分析" itemprop="url">OpenStack之Horizon源码分析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-22T13:51:18.000Z" itemprop="datePublished"> 发表于 2015-11-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="分析环境搭建">分析环境搭建</h1><p>利用Devstack搭建一个用户开发的单节点OpenStack平台，具体搭建的教程在此不介绍。<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/Horizon01.png" alt="平台最终效果图"><br>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/11/22/OpenStack之Horizon源码分析/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/OpenStack/">OpenStack</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/源码分析/">源码分析</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/10/05/Java学习-泛型/" title="Java学习-泛型" itemprop="url">Java学习-泛型</a>
   </h1>
   <p class="article-author">By
@@ -639,69 +700,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/23/struts2学习3：类型转换器/" title="struts2学习3：类型转换器" itemprop="url">struts2学习3：类型转换器</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-23T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>在struts开发中，有时会遇到这样的情况：</p>
-<p>如果页面传来一个参数reg.action?birthday=2010-11-12到后台action，然后属性用date类型是可以接收到的，但是如果传的是20101112这样类型的字符串，用date类型是获取不到，并且会出现错误的，struts2提供了一种类型转换器供我们使用。<br>我们用如下代码定义类型转换器，用来实现字符串格式(“20150601”)和日期格式之间的双向转换，自定类型转换器要继承DefaultTypeConverter：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class TypeConverter extends DefaultTypeConverter&#123;</span><br><span class="line"> @Override</span><br><span class="line">  public Object convertValue(Map<span class="tag">&lt;<span class="title">String,</span> <span class="attribute">Object</span>&gt;</span> context, Object value,Class toType) &#123;</span><br><span class="line">    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");</span><br><span class="line">    try&#123;</span><br><span class="line">        if(toType==Date.class)&#123;</span><br><span class="line">          String[] params = (String[]) value; </span><br><span class="line">          return dateFormat.parse(params[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(toType==String.class)&#123;</span><br><span class="line">          Date date = (Date)value; </span><br><span class="line">          return dateFormat.format(date);</span><br><span class="line">        &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     catch (Exception e) &#123;&#125;</span><br><span class="line">         return null;</span><br><span class="line">     &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="配置局部类型转化器">配置局部类型转化器</h1>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/23/struts2学习3：类型转换器/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/struts2/">struts2</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -741,6 +739,10 @@
 		
 		  
 			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/OpenStack/" title="OpenStack">OpenStack<sup>1</sup></a></li>
 		  
 		
 		  
@@ -785,11 +787,15 @@
 			
 		
 			
-				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/泛型/" title="泛型">泛型<sup>1</sup></a></li>
 			
 		
 			
@@ -801,11 +807,11 @@
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
@@ -817,7 +823,7 @@
 			
 		
 			
-				<li><a href="/tags/泛型/" title="泛型">泛型<sup>1</sup></a></li>
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
 			
 		
 		</ul>
