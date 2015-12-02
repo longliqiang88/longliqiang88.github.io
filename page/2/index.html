@@ -81,6 +81,134 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/08/24/struts2学习5：输入校验/" title="struts2学习5：输入校验" itemprop="url">struts2学习5：输入校验</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-24T13:45:49.000Z" itemprop="datePublished"> 发表于 2015-08-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>struts2提供了功能强大的输入校验机制，通过struts2内建的输入校验器，可完成大部分的校验功能，并可以同时完成客户端和服务器端的校验。如果应用的输入校验规则特别，struts2也允许通过重写validate方法来完成自定义校验。</p>
+<h1 id="输入校验的流程">输入校验的流程</h1><ol>
+<li>类型转换器对输入参数进行类型转换，并把转换后的值赋给action中的属性。</li>
+<li>如果在执行类型转换的过程中出现异常，系统会将异常信息保存到ActionContext，conversionError拦截器会将异常信息添加到fieldErrors里,不管是否出现异常，都会进入第三步。</li>
+<li>系统通过反射技术先调用action中的validateXxx()方法，</li>
+<li>然后在调用validate()方法。</li>
+<li>最后，如果系统的fieldErrors中存在错误信息(*即存放错误信息的集合的size大于0)，系统会将请求回发到input视图中，如果没有错误信息，系统会执行action中的处理方法。
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/08/24/struts2学习5：输入校验/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/struts2/">struts2</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/24/struts2学习4：利用自定义拦截器实现登录权限验证/" title="struts2学习4：利用自定义拦截器实现登录权限验证" itemprop="url">struts2学习4：利用自定义拦截器实现登录权限验证</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-24T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>通过例子可以很好理解struts2中的自定义拦截器，如果用户登录成功可以访问action中的所有方法，如果用户没有登录则不可以访问action中的方法，并且提示“没有权限执行该操作”。<br>本例子重点说明自定义拦截器的使用方法，对于登录等界面不做过多的代码编写。<br>user.jsp，用来实现用户登录功能，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">"java"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">   request,getSession().setAttribute(<span class="string">"user"</span>,<span class="string">"zju"</span>);</span><br><span class="line">%&gt;</span><br><span class="line">用户已经登录</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/08/24/struts2学习4：利用自定义拦截器实现登录权限验证/#more">阅读更多</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/struts2/">struts2</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/08/23/struts2学习3：类型转换器/" title="struts2学习3：类型转换器" itemprop="url">struts2学习3：类型转换器</a>
   </h1>
   <p class="article-author">By
@@ -585,131 +713,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/11/Hive学习2：常用命令总结/" title="Hive学习2：常用命令总结" itemprop="url">Hive学习2：常用命令总结</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-11T02:39:14.000Z" itemprop="datePublished"> 发表于 2015-08-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>本文只是总结一些在Hive中常用的命令，并且假设需要的目录或者数据已经存在。</p>
-<p>创建表，\t作为列的分隔符<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table trade_detail (id bigint,income double,expenses double,time string) row formate delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table user_info(id bigint, account string, name string, age int) row format delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/11/Hive学习2：常用命令总结/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Hive/">Hive</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/10/Hive学习1：安装部署/" title="Hive学习1：安装部署" itemprop="url">Hive学习1：安装部署</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-10T02:39:14.000Z" itemprop="datePublished"> 发表于 2015-08-10</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Hive的部署非常简单，下载hive，我用的是apache-hive-0.13.0-bin.tar，解压之后，进入bin目录，执行./hive命令即可进入Hive控制台。show tables;当前存在的表的个数。<br>建表语句举例<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table teacher (id bigint,name string) row format delimited fields terminated by '\t';</span><br></pre></td></tr></table></figure></p>
-<p>创建表，列分隔符是”\t”<br>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/10/Hive学习1：安装部署/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Hive/">Hive</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -733,6 +736,10 @@
 		
 		  
 			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>1</sup></a></li>
 		  
 		
 		  
@@ -797,11 +804,15 @@
 			
 		
 			
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>1</sup></a></li>
+				<li><a href="/tags/JVM/" title="JVM">JVM<sup>1</sup></a></li>
 			
 		
 			

@@ -81,6 +81,134 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/12/02/Understand JVM：垃圾收集器和内存分配策略/" title="Understand JVM：Java内存区域与内存溢出异常" itemprop="url">Understand JVM：Java内存区域与内存溢出异常</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-02T13:07:55.000Z" itemprop="datePublished"> 发表于 2015-12-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JVM/">JVM</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/02/Understand JVM：Java内存区域与内存溢出异常/" title="Understand JVM：Java内存区域与内存溢出异常" itemprop="url">Understand JVM：Java内存区域与内存溢出异常</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-02T11:15:14.000Z" itemprop="datePublished"> 发表于 2015-12-02</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/jvm0.JPG" alt="Java内存模型"></p>
+<h1 id="运行时内存区域">运行时内存区域</h1><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域，每个区域有各自的用途，有着不同的创建和销毁时间。</p>
+<h2 id="程序计数器">程序计数器</h2><p>程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型中，字节码解释器工作就是通过改变这个计数器的值来选取下一个需要执行的字节码的指令，分支、循环、跳转、异常处理、线程恢复等基础的功能都需要依赖这个计数器来完成。</p>
+<h2 id="Java虚拟机栈">Java虚拟机栈</h2><p>Java虚拟机栈是描述Java方法栈执行的内存模型，每一个方法被执行的时候都会同时创建一个栈帧用于存储局部变量表、操作栈、动态链接等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在Java虚拟机栈的从入栈到出栈的过程。</p>
+<h2 id="本地方法栈">本地方法栈</h2><p>与Java虚拟机栈不同的是，本地方法栈是为Java虚拟机执行native方法服务的。</p>
+<h2 id="Java堆">Java堆</h2><p>Java堆是Java虚拟机所管理的内存中最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建，目的就是为了存放对象实例。同时Java堆也是垃圾收集器管理的主要区域。</p>
+<h2 id="方法区">方法区</h2><p>方法区是也是一个线程共享的内存区域，用于存放已被虚拟机加载的类的信息、常量、静态变量、即时编译器编译后的代码等。</p>
+<h2 id="运行时常量池">运行时常量池</h2><p>运行时常量池是方法区的一部分，主要用于存放编译期间生成的各种字面量和符号引用。</p>
+<h1 id="在Java中对象访问是如何进行的？">在Java中对象访问是如何进行的？</h1><p>在Java语言中，对象访问无处不在，任何对象的访问都会涉及到Java栈、Java堆和方法区这三个最重要的内存区域。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure></p>
+<p>分析上面一行代码，Object obj会翻译到Java栈的本地变量表中，最为一个reference类型数据出现，<br>new Object()这部分语义会反应到Java堆中，形成一块存储了Object类型的结构化内存，<br>在方法区中会存放此段对象数据类型的地址信息，包括类型，父类等等的地址信息。</p>
+<h2 id="句柄访问方式">句柄访问方式</h2><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/jvm01.JPG" alt="句柄访问方式"><br>java堆中将划分出一块内存来作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据和类型数据各自的具体地址信息。</p>
+<h2 id="直接指针访问方式">直接指针访问方式</h2><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/jvm01.JPG" alt="直接指针访问方式"><br>reference变量中直接存储的就是对象的地址，而java堆对象一部分存储了对象实例数据，另外一部分存储了对象类型数据。</p>
+<p>这两种访问对象的方式各有优势，使用句柄访问方式最大好处就是reference中存储的是稳定的句柄地址，在对象移动时只需要改变句柄中的实例数据指针，而reference不需要改变。使用指针访问方式最大好处就是速度快，它节省了一次指针定位的时间开销，就虚拟机而言，它使用的是第二种方式(直接指针访问)。</p>
+<h1 id="内存溢出异常（OutOfMemoryError）">内存溢出异常（OutOfMemoryError）</h1><ul>
+<li>Java堆溢出<br>Java堆用于存放对象实例，如果我们不断地创建对象，并且在GC不会回收的情况下，就会造成Java堆溢出。</li>
+<li>虚拟机栈和本地方法栈溢出</li>
+<li>运行时常良池溢出</li>
+<li>方法区溢出</li>
+<li>本机直接溢出</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JVM/">JVM</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/11/22/OpenStack之Horizon源码分析/" title="OpenStack之Horizon源码分析" itemprop="url">OpenStack之Horizon源码分析</a>
   </h1>
   <p class="article-author">By
@@ -572,134 +700,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/24/struts2学习5：输入校验/" title="struts2学习5：输入校验" itemprop="url">struts2学习5：输入校验</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-24T13:45:49.000Z" itemprop="datePublished"> 发表于 2015-08-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>struts2提供了功能强大的输入校验机制，通过struts2内建的输入校验器，可完成大部分的校验功能，并可以同时完成客户端和服务器端的校验。如果应用的输入校验规则特别，struts2也允许通过重写validate方法来完成自定义校验。</p>
-<h1 id="输入校验的流程">输入校验的流程</h1><ol>
-<li>类型转换器对输入参数进行类型转换，并把转换后的值赋给action中的属性。</li>
-<li>如果在执行类型转换的过程中出现异常，系统会将异常信息保存到ActionContext，conversionError拦截器会将异常信息添加到fieldErrors里,不管是否出现异常，都会进入第三步。</li>
-<li>系统通过反射技术先调用action中的validateXxx()方法，</li>
-<li>然后在调用validate()方法。</li>
-<li>最后，如果系统的fieldErrors中存在错误信息(*即存放错误信息的集合的size大于0)，系统会将请求回发到input视图中，如果没有错误信息，系统会执行action中的处理方法。
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/24/struts2学习5：输入校验/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/struts2/">struts2</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/08/24/struts2学习4：利用自定义拦截器实现登录权限验证/" title="struts2学习4：利用自定义拦截器实现登录权限验证" itemprop="url">struts2学习4：利用自定义拦截器实现登录权限验证</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-24T02:14:54.000Z" itemprop="datePublished"> 发表于 2015-08-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>通过例子可以很好理解struts2中的自定义拦截器，如果用户登录成功可以访问action中的所有方法，如果用户没有登录则不可以访问action中的方法，并且提示“没有权限执行该操作”。<br>本例子重点说明自定义拦截器的使用方法，对于登录等界面不做过多的代码编写。<br>user.jsp，用来实现用户登录功能，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">"java"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">   request,getSession().setAttribute(<span class="string">"user"</span>,<span class="string">"zju"</span>);</span><br><span class="line">%&gt;</span><br><span class="line">用户已经登录</span><br></pre></td></tr></table></figure></p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/08/24/struts2学习4：利用自定义拦截器实现登录权限验证/#more">阅读更多</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/struts2/">struts2</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -723,6 +723,10 @@
 		
 		  
 			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>1</sup></a></li>
 		  
 		
 		  
@@ -787,11 +791,15 @@
 			
 		
 			
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>1</sup></a></li>
+				<li><a href="/tags/JVM/" title="JVM">JVM<sup>1</sup></a></li>
 			
 		
 			

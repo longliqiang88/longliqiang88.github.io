@@ -4,23 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Oracle kill session | llq`s blog</title>
+    <title>Understand JVM：Java内存区域与内存溢出异常 | llq`s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
+    <meta name="description" content="运行时内存区域Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域，每个区域有各自的用途，有着不同的创建和销毁时间。
+程序计数器程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型中，字节码解释器工作就是通过改变这个计数器的值来选取下一个需要执行的字节码的指令，分支、循环、跳转、异常处理、线程恢复等基础的功能都需要依赖这个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Oracle kill session">
-<meta property="og:url" content="http://yoursite.com/2015/07/26/Oracle kill session/index.html">
+<meta property="og:title" content="Understand JVM：Java内存区域与内存溢出异常">
+<meta property="og:url" content="http://yoursite.com/2015/12/02/Understand JVM：Java内存区域与内存溢出异常/index.html">
 <meta property="og:site_name" content="llq`s blog">
-<meta property="og:description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
-<meta property="og:updated_time" content="2015-07-26T13:32:09.577Z">
+<meta property="og:description" content="运行时内存区域Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域，每个区域有各自的用途，有着不同的创建和销毁时间。
+程序计数器程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型中，字节码解释器工作就是通过改变这个计数器的值来选取下一个需要执行的字节码的指令，分支、循环、跳转、异常处理、线程恢复等基础的功能都需要依赖这个">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/jvm0.JPG">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/jvm01.JPG">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/jvm01.JPG">
+<meta property="og:updated_time" content="2015-12-02T13:06:48.703Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Oracle kill session">
-<meta name="twitter:description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
+<meta name="twitter:title" content="Understand JVM：Java内存区域与内存溢出异常">
+<meta name="twitter:description" content="运行时内存区域Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域，每个区域有各自的用途，有着不同的创建和销毁时间。
+程序计数器程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型中，字节码解释器工作就是通过改变这个计数器的值来选取下一个需要执行的字节码的指令，分支、循环、跳转、异常处理、线程恢复等基础的功能都需要依赖这个">
 
     
     <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
@@ -80,14 +86,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/26/Oracle kill session/" title="Oracle kill session" itemprop="url">Oracle kill session</a>
+      <a href="/2015/12/02/Understand JVM：Java内存区域与内存溢出异常/" title="Understand JVM：Java内存区域与内存溢出异常" itemprop="url">Understand JVM：Java内存区域与内存溢出异常</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-26T13:28:07.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    <time datetime="2015-12-02T11:15:14.000Z" itemprop="datePublished"> 发表于 2015-12-02</time>
     
   </p>
 </header>
@@ -96,15 +102,30 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#运行时内存区域"><span class="toc-number">1.</span> <span class="toc-text">运行时内存区域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#程序计数器"><span class="toc-number">1.1.</span> <span class="toc-text">程序计数器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java虚拟机栈"><span class="toc-number">1.2.</span> <span class="toc-text">Java虚拟机栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地方法栈"><span class="toc-number">1.3.</span> <span class="toc-text">本地方法栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java堆"><span class="toc-number">1.4.</span> <span class="toc-text">Java堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法区"><span class="toc-number">1.5.</span> <span class="toc-text">方法区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行时常量池"><span class="toc-number">1.6.</span> <span class="toc-text">运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Java中对象访问是如何进行的？"><span class="toc-number">2.</span> <span class="toc-text">在Java中对象访问是如何进行的？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#句柄访问方式"><span class="toc-number">2.1.</span> <span class="toc-text">句柄访问方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接指针访问方式"><span class="toc-number">2.2.</span> <span class="toc-text">直接指针访问方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内存溢出异常（OutOfMemoryError）"><span class="toc-number">3.</span> <span class="toc-text">内存溢出异常（OutOfMemoryError）</span></a></li></ol>
 		
 		</div>
 		
-		<p>有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。<br>可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。<br>用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.object_id, a.session_id, b.object_name, c.*  </span><br><span class="line">  FROM v$locked_object a, dba_objects b, v$session c  </span><br><span class="line">WHERE a.object_id = b.object_id  </span><br><span class="line">   AND a.SESSION_ID = c.sid(+)</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>杀Seesion的SQL语句语法如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter system kill session 'sid, serial#'</span><br></pre></td></tr></table></figure></p>
-<p>如上面查出来的一条记录的sid是53, serial#为663,就执行以下的语句<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter system kill session '53,663'</span><br></pre></td></tr></table></figure></p>
-<p>如果要一次性杀死多个会话，一个一个填写sid和serial#十分的繁琐，应该在查询被锁对象的同时拼凑出多条的杀会话语句，以分号分隔，一起复制下来，然后就可以批量的执行了。<br>拼凑kill语句的方式如下，下面加了一个过滤条件和一个排序，杀除真正关心的表，并且着重注意超时时间过长的会话。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT'alter system kill session '''|| c.sid ||''||','|| c.serial# ||''';',a.object_id, a.session_id, b.object_name, c.*</span><br><span class="line">FROMv$locked_object a, dba_objects b, v$session c WHEREa.object_id = b.object_id ANDa.SESSION_ID = c.sid(+) ANDschemaname ='Unmi' ORDERBYlogon_time</span><br></pre></td></tr></table></figure></p>
+		<p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/jvm0.JPG" alt="Java内存模型"></p>
+<h1 id="运行时内存区域">运行时内存区域</h1><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域，每个区域有各自的用途，有着不同的创建和销毁时间。</p>
+<h2 id="程序计数器">程序计数器</h2><p>程序计数器是一块较小的内存空间，可以看做是当前线程所执行的字节码的行号指示器。在虚拟机的概念模型中，字节码解释器工作就是通过改变这个计数器的值来选取下一个需要执行的字节码的指令，分支、循环、跳转、异常处理、线程恢复等基础的功能都需要依赖这个计数器来完成。</p>
+<h2 id="Java虚拟机栈">Java虚拟机栈</h2><p>Java虚拟机栈是描述Java方法栈执行的内存模型，每一个方法被执行的时候都会同时创建一个栈帧用于存储局部变量表、操作栈、动态链接等信息。每一个方法被调用直至执行完成的过程，就对应着一个栈帧在Java虚拟机栈的从入栈到出栈的过程。</p>
+<h2 id="本地方法栈">本地方法栈</h2><p>与Java虚拟机栈不同的是，本地方法栈是为Java虚拟机执行native方法服务的。</p>
+<h2 id="Java堆">Java堆</h2><p>Java堆是Java虚拟机所管理的内存中最大的一块。Java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建，目的就是为了存放对象实例。同时Java堆也是垃圾收集器管理的主要区域。</p>
+<h2 id="方法区">方法区</h2><p>方法区是也是一个线程共享的内存区域，用于存放已被虚拟机加载的类的信息、常量、静态变量、即时编译器编译后的代码等。</p>
+<h2 id="运行时常量池">运行时常量池</h2><p>运行时常量池是方法区的一部分，主要用于存放编译期间生成的各种字面量和符号引用。</p>
+<h1 id="在Java中对象访问是如何进行的？">在Java中对象访问是如何进行的？</h1><p>在Java语言中，对象访问无处不在，任何对象的访问都会涉及到Java栈、Java堆和方法区这三个最重要的内存区域。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure></p>
+<p>分析上面一行代码，Object obj会翻译到Java栈的本地变量表中，最为一个reference类型数据出现，<br>new Object()这部分语义会反应到Java堆中，形成一块存储了Object类型的结构化内存，<br>在方法区中会存放此段对象数据类型的地址信息，包括类型，父类等等的地址信息。</p>
+<h2 id="句柄访问方式">句柄访问方式</h2><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/jvm01.JPG" alt="句柄访问方式"><br>java堆中将划分出一块内存来作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据和类型数据各自的具体地址信息。</p>
+<h2 id="直接指针访问方式">直接指针访问方式</h2><p><img src="http://7xk9vl.com1.z0.glb.clouddn.com/jvm01.JPG" alt="直接指针访问方式"><br>reference变量中直接存储的就是对象的地址，而java堆对象一部分存储了对象实例数据，另外一部分存储了对象类型数据。</p>
+<p>这两种访问对象的方式各有优势，使用句柄访问方式最大好处就是reference中存储的是稳定的句柄地址，在对象移动时只需要改变句柄中的实例数据指针，而reference不需要改变。使用指针访问方式最大好处就是速度快，它节省了一次指针定位的时间开销，就虚拟机而言，它使用的是第二种方式(直接指针访问)。</p>
+<h1 id="内存溢出异常（OutOfMemoryError）">内存溢出异常（OutOfMemoryError）</h1><ul>
+<li>Java堆溢出<br>Java堆用于存放对象实例，如果我们不断地创建对象，并且在GC不会回收的情况下，就会造成Java堆溢出。</li>
+<li>虚拟机栈和本地方法栈溢出</li>
+<li>运行时常良池溢出</li>
+<li>方法区溢出</li>
+<li>本机直接溢出</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -112,14 +133,9 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+  <a class="article-category-link" href="/categories/JVM/">JVM</a>
 </div>
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
-  </div>
 
 </div>
 
@@ -127,7 +143,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/26/Oracle kill session/" data-title="Oracle kill session | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/12/02/Understand JVM：Java内存区域与内存溢出异常/" data-title="Understand JVM：Java内存区域与内存溢出异常 | llq`s blog" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -141,18 +157,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/" title="Oracle 11g导入DMP文件步骤">
+ <a href="/2015/12/02/Understand JVM：垃圾收集器和内存分配策略/" title="Understand JVM：Java内存区域与内存溢出异常">
   <strong>上一篇：</strong><br/>
   <span>
-  Oracle 11g导入DMP文件步骤</span>
+  Understand JVM：Java内存区域与内存溢出异常</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/"  title="HBase学习4：利用Java接口操作HBase">
+<a href="/2015/11/22/OpenStack之Horizon源码分析/"  title="OpenStack之Horizon源码分析">
  <strong>下一篇：</strong><br/> 
- <span>HBase学习4：利用Java接口操作HBase
+ <span>OpenStack之Horizon源码分析
 </span>
 </a>
 </div>
@@ -167,7 +183,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#运行时内存区域"><span class="toc-number">1.</span> <span class="toc-text">运行时内存区域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#程序计数器"><span class="toc-number">1.1.</span> <span class="toc-text">程序计数器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java虚拟机栈"><span class="toc-number">1.2.</span> <span class="toc-text">Java虚拟机栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地方法栈"><span class="toc-number">1.3.</span> <span class="toc-text">本地方法栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java堆"><span class="toc-number">1.4.</span> <span class="toc-text">Java堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法区"><span class="toc-number">1.5.</span> <span class="toc-text">方法区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行时常量池"><span class="toc-number">1.6.</span> <span class="toc-text">运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Java中对象访问是如何进行的？"><span class="toc-number">2.</span> <span class="toc-text">在Java中对象访问是如何进行的？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#句柄访问方式"><span class="toc-number">2.1.</span> <span class="toc-text">句柄访问方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接指针访问方式"><span class="toc-number">2.2.</span> <span class="toc-text">直接指针访问方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内存溢出异常（OutOfMemoryError）"><span class="toc-number">3.</span> <span class="toc-text">内存溢出异常（OutOfMemoryError）</span></a></li></ol>
  
   </div>
 
