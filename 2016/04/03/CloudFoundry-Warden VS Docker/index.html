@@ -1,0 +1,559 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>CloudFoundry-Warden VS Docker | llq`s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="longliqiang">
+    
+
+    
+    <meta name="description" content="前言Warden是现在被广泛使用在CloudFoundry中的容器技术，在CloudFoundry V3版本中，Warden被重新命名为Garden，我们暂且还是以V2版本做分析。众所周知，Docker是另一个易于使用并且很有效率的容器，所以现在CloudFoundry也支持Docker容器技术。接下来，我们就谈一谈Warden与Docker的相似和不同。
+相似都是依赖宿主操作系统内核的轻量级Co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CloudFoundry-Warden VS Docker">
+<meta property="og:url" content="http://yoursite.com/2016/04/03/CloudFoundry-Warden VS Docker/index.html">
+<meta property="og:site_name" content="llq`s blog">
+<meta property="og:description" content="前言Warden是现在被广泛使用在CloudFoundry中的容器技术，在CloudFoundry V3版本中，Warden被重新命名为Garden，我们暂且还是以V2版本做分析。众所周知，Docker是另一个易于使用并且很有效率的容器，所以现在CloudFoundry也支持Docker容器技术。接下来，我们就谈一谈Warden与Docker的相似和不同。
+相似都是依赖宿主操作系统内核的轻量级Co">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/WardenVSDocker01.png">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/WardenVSDocker02.png">
+<meta property="og:updated_time" content="2016-04-04T02:01:03.599Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CloudFoundry-Warden VS Docker">
+<meta name="twitter:description" content="前言Warden是现在被广泛使用在CloudFoundry中的容器技术，在CloudFoundry V3版本中，Warden被重新命名为Garden，我们暂且还是以V2版本做分析。众所周知，Docker是另一个易于使用并且很有效率的容器，所以现在CloudFoundry也支持Docker容器技术。接下来，我们就谈一谈Warden与Docker的相似和不同。
+相似都是依赖宿主操作系统内核的轻量级Co">
+
+    
+    <link rel="alternative" href="/atom.xml" title="llq`s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/11.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="llq`s blog" title="llq`s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="llq`s blog">llq`s blog</a></h1>
+				<h2 class="blog-motto">Summary is for a better start.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">目录</a></li>
+					
+						<li><a href="/about">简介</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/04/03/CloudFoundry-Warden VS Docker/" title="CloudFoundry-Warden VS Docker" itemprop="url">CloudFoundry-Warden VS Docker</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
+		
+  <p class="article-time">
+    <time datetime="2016-04-03T13:07:55.000Z" itemprop="datePublished"> 发表于 2016-04-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相似"><span class="toc-number">2.</span> <span class="toc-text">相似</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#都是依赖宿主操作系统内核的轻量级Container"><span class="toc-number">2.1.</span> <span class="toc-text">都是依赖宿主操作系统内核的轻量级Container</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#都是基于C/S架构的设计方案"><span class="toc-number">2.2.</span> <span class="toc-text">都是基于C/S架构的设计方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#都采用了linux内核技术实现容器隔离（namespace）和资源限制（cgroup）"><span class="toc-number">2.3.</span> <span class="toc-text">都采用了linux内核技术实现容器隔离（namespace）和资源限制（cgroup）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#都使用了aufs文件系统"><span class="toc-number">2.4.</span> <span class="toc-text">都使用了aufs文件系统</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不同"><span class="toc-number">3.</span> <span class="toc-text">不同</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用途不同"><span class="toc-number">3.1.</span> <span class="toc-text">用途不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#交互方式"><span class="toc-number">3.2.</span> <span class="toc-text">交互方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker的文件系统更复杂"><span class="toc-number">3.3.</span> <span class="toc-text">Docker的文件系统更复杂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#镜像管理方式不同"><span class="toc-number">3.4.</span> <span class="toc-text">镜像管理方式不同</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="前言">前言</h1><p>Warden是现在被广泛使用在CloudFoundry中的容器技术，在CloudFoundry V3版本中，Warden被重新命名为Garden，我们暂且还是以V2版本做分析。众所周知，Docker是另一个易于使用并且很有效率的容器，所以现在CloudFoundry也支持Docker容器技术。接下来，我们就谈一谈Warden与Docker的相似和不同。</p>
+<h1 id="相似">相似</h1><h2 id="都是依赖宿主操作系统内核的轻量级Container">都是依赖宿主操作系统内核的轻量级Container</h2><p>目前，PaaS越来越多的与Container联系在一起，Container的高资源利用率恰恰是PaaS需要的。Warden和Docker都是Container的一种，相对于虚拟机来说，Container占用的资源比较少，都是依赖于宿主操作系统内核的轻量级容器。依赖于宿主机的操作系统，这样做会带来哪些好处呢？<br>  一个虚拟机占用的资源比一个Container占用的资源多十几倍。设想一下，在一台物理机上启动100台虚拟机会是非常困难的，因为有硬件资源的限制，会出现CPU、硬盘或者内存资源用尽的情况。当相比之下，在一台物理机上启动100个Container是很简单的，因为作为Container，他会依赖于宿主机操作系统内核，仅仅在资源和服务等方面进行了隔离，启动快速，占用资源很少。现在很多大型的互联网公司都在大量地使用Container技术，Facebook一台虚机都没有，因为这些互联网公司要求充分利用计算资源。虚机起码还要再跑一个Guest系统，太耗资源。同时，在这些大公司内部并没有很多操作系统，集群只有一种操作系统，甚至连版本号都是固定的。因此，不需要虚机的异构操作系统特性。另外，在操作系统上还有Runtime Library，Container不需要重复加载，极大的节省内存占用。</p>
+<h2 id="都是基于C/S架构的设计方案">都是基于C/S架构的设计方案</h2><p> Docker是C/S的架构，分为Docker client 和 Docker daemon，client端发送命令，daemon端负责完成client发送过来的命令（如获取和存储镜像、管理容器等）。两者之间可以通过 TCP，HTTP和UNIX SOCKET来进行通信；<br>Warden也是基于C/S架构的一个设计方案。大体可以分为三个模块：Warden server、Warden client和Warden protocol，三者之间可以相互通信服务。server和client都对protocol达成理解，如果其中一端发生一些变化，另一端不需要做太多的修改即可适配。</p>
+<h2 id="都采用了linux内核技术实现容器隔离（namespace）和资源限制（cgroup）">都采用了linux内核技术实现容器隔离（namespace）和资源限制（cgroup）</h2><p>对于无论是Warden还是Docker来说，提供一个隔离的运行环境都是必要的。之所以称两者为容器，就是这个原因。Linux的内核特性namespace和cgroup提供容器隔离的功能。namespace主要负责命名空间的隔离，而cgroup主要负责资源使用的限制。<br>Linux内核实现namespace的主要目的就是为了服务于轻量级容器，实现了隔离之后，在同一个namespace之下的进程可以感知到彼此的变化。当我们启动一个容器时会经历下面几个步骤：父进程通过fork创建子进程时，使用namespace技术，实现子进程与其他进程的命名空间的隔离；子进程创建完毕之后，使用cgroup技术来处理子进程，实现进程的资源使用限制；系统在子进程所处的namespace内部，创建需要的隔离环境，如隔离的网络栈等；namespace和cgroup两种技术都使用上之后，进程所处的隔离环境在真正建立，容器才会创建完成。<br>cgroups可以实现Docker组进程并且管理它们的资源总消耗、分享可用的硬件资源给不同的容器、限制容器的内存和CPU使用（可以通过更改相应的cgroup来调整容器的大小，通过检查Linux中的/sys/fs/cgroup对照组来获取容器中的资源使用情况）、提供了一组可靠的技术容器所有进程的方法。<br>Warden使用cgroup实现对进程内存的资源隔离和限制。在Warden/Warden/lib/Warden/container/features/mem_limit.rb中的do_limit_memory函数中实现。dea可以通过接口控制Warden设置对容器内存占用的限制。do_limit_memory主要做以下两部分工作：启动oom进程，用于处理oom通知。向容器对应的cgroup目录中的memory.limit_in_bytes、memory.memsw.limit_in_bytes文件中写入内存上限值。Warden使用cgroup实现对进程cpu的资源隔离和限制。Warden在这方面都使用默认值，不向外提供控制接口。除了使用cgroup之外，Warden使用quotal和traffic control来控制memory、disk以及网络I/O。</p>
+<h2 id="都使用了aufs文件系统">都使用了aufs文件系统</h2><p>aufs是一种支持联合挂载的文件系统，支持将不同的目录挂载到同一个目录下，并实现一种layer的概念。aufs将挂载到统一虚拟文件系统下的多个目录分别设置成read-only，read-write，对于read-only目录只能是只读的，写操作只能在read-write目录中。我们在使用aufs时，一般都会使用mount命令。在挂载的过程中，mount命令按照命令行中给出的文件夹顺序挂载，若出现有同名文件的情况，则以先挂载的为主，其他的不再挂载。这也说明了的Docker镜像为什么采用增量的方式：完全是利用Aufs的特性达到节约空间的目的。<br>对于Warden来说，每一个容器都有一个私有的根文件系统，这个系统由一个只读文件系统和一个可读写文件系统堆叠而成，只读文件系统包含了ubuntu软件包的最小子集和Warden针对所有容器的定制部分。</p>
+<h1 id="不同">不同</h1><h2 id="用途不同">用途不同</h2><p>Warden是CF内部的一个轻量级的容器，只包含容器部分。在我们实际使用时，Warden大多数情况下还是存在于DEA组件中，而DEA是CloudFoundry的一个组件，也就是说，一般情况下Warden容器在CloudFoundry集群中应用很多，虽然现在Warden容器也可以单独部署，但并没有docker使用便捷。<br>相比之下，Docker更全面,Docker除了容器部分还包含镜像管理，镜像仓库，服务发现，selinux等，提供了一个独立运行Linux进程的轻量级虚拟化解决方案。 Docker的轻量级容器不仅实现了资源隔离，而且几乎可以运行在任何地方，使得部署和扩展变得非常容易，随着Docker的日趋完善，希望Docker被越来越多的公司应用到生产环境中。</p>
+<h2 id="交互方式">交互方式</h2><p>Docker提供了http的REST接口<br>Warden提供了交互的协议，通过unix socket域和外部进程（DEA）通信</p>
+<h2 id="Docker的文件系统更复杂">Docker的文件系统更复杂</h2><p>由于Warden是CloudFoundry平台一部分，所以它不需要许多文件系统的支持，它只依附于AUFS和OverlayFS。然而Docker的文件系统更为复杂，他覆盖更多的联合文件系统，比如 Btrfs, ZFS, VFS,等等。</p>
+<h2 id="镜像管理方式不同">镜像管理方式不同</h2><p>Warden与Docker最大的不同就体现在镜像的管理方式上。Warden在运行应用之前可以从buildpacks获得所需要的依赖。Warden通常情况下只需要两层layer，一个是只读文件系统，一个可读写文件系统，如下图<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/WardenVSDocker01.png" alt="Warden文件系统"><br>与Warden不同的是，Docker设计之初就是为了运行镜像，可以说镜像是Docker中最重要的一部分。对于一个应用来说，在它可以运行在Docker之前，你需要为他创建一个镜像。Docker镜像包含了许多层，这些层结合在一起形成了Docker的文件系统。当我们想基于其他的镜像来创建我们自己的镜像时，Docker就会复用这些layer。Docker镜像在启动时，在bootfs自检完成之后并不会把rootfs的read-only改为read-write，而是利用union mount将一个或者多个read-only的rootfs加载到之前的rootfs层之上。在加载了N多个层之后，他们组合成一个文件系统，这个文件系统就是Docker的镜像，我们此时还不能对其进行操作。当我们创建一个容器，也就是将Docker镜像进行实例化，系统会在一层或是多层read-only的rootfs之上分配一层空的read-write的rootfs。Docker的架构中，Docker镜像就是类似于“ubuntu操作系统发行版”，可以在任何满足要求的Linux内核之上运行。简单一点有“Debian操作系统发行版”Docker镜像、“Ubuntu操作系统发行版”Docker镜像；如果在Debian镜像中安装MySQL 5.6，那我们可以将其命名为Mysql:5.6镜像；如果在Debian镜像中安装有Golang 1.3,那我们可以将其命名为golang:1.3镜像；以此类推，大家可以根据自己安装的软件，得到任何自己想要的镜像。包含：镜像层文件和镜像json文件。如一个ubuntu:14.04镜像，包含4个镜像层，在aufs存储驱动的情况下,可以参考下面这张图：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/WardenVSDocker02.png" alt="Docker文件系统"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Docker/">Docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CloudFoundry/">CloudFoundry</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/04/03/CloudFoundry-Warden VS Docker/" data-title="CloudFoundry-Warden VS Docker | llq`s blog" data-tsina="2643661235" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/12/05/Understand JVM：类文件结构/"  title="Understand JVM：类文件结构">
+ <strong>下一篇：</strong><br/> 
+ <span>Understand JVM：类文件结构
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相似"><span class="toc-number">2.</span> <span class="toc-text">相似</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#都是依赖宿主操作系统内核的轻量级Container"><span class="toc-number">2.1.</span> <span class="toc-text">都是依赖宿主操作系统内核的轻量级Container</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#都是基于C/S架构的设计方案"><span class="toc-number">2.2.</span> <span class="toc-text">都是基于C/S架构的设计方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#都采用了linux内核技术实现容器隔离（namespace）和资源限制（cgroup）"><span class="toc-number">2.3.</span> <span class="toc-text">都采用了linux内核技术实现容器隔离（namespace）和资源限制（cgroup）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#都使用了aufs文件系统"><span class="toc-number">2.4.</span> <span class="toc-text">都使用了aufs文件系统</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不同"><span class="toc-number">3.</span> <span class="toc-text">不同</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用途不同"><span class="toc-number">3.1.</span> <span class="toc-text">用途不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#交互方式"><span class="toc-number">3.2.</span> <span class="toc-text">交互方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker的文件系统更复杂"><span class="toc-number">3.3.</span> <span class="toc-text">Docker的文件系统更复杂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#镜像管理方式不同"><span class="toc-number">3.4.</span> <span class="toc-text">镜像管理方式不同</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Docker/" title="Docker">Docker<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hadoop/" title="Hadoop">Hadoop<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JavaEE/" title="JavaEE">JavaEE<sup>15</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MapReduce/" title="MapReduce">MapReduce<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/OpenStack/" title="OpenStack">OpenStack<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Oracle/" title="Oracle">Oracle<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/struts2/" title="struts2">struts2<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HBase/" title="HBase">HBase<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hadoop/" title="Hadoop">Hadoop<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hive/" title="Hive">Hive<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JVM/" title="JVM">JVM<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/常用技巧/" title="常用技巧">常用技巧<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java注解/" title="Java注解">Java注解<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/泛型/" title="泛型">泛型<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/反射/" title="反射">反射<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Socket/" title="Socket">Socket<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CloudFoundry/" title="CloudFoundry">CloudFoundry<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/源码分析/" title="源码分析">源码分析<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/环境部署/" title="环境部署">环境部署<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HDFS/" title="HDFS">HDFS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven/" title="Maven">Maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Go语言/" title="Go语言">Go语言<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2643661235&verifier=891f03cc&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> A programmer,love basketball and fitness <br/>
+			You cannot improve your past, but you can improve your future. Once time is wasted, life is wasted.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2643661235" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:facingfuture@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="longliqiang">longliqiang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa510408beec1d1a77f68d094775e4f2b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
