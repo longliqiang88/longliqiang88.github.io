@@ -23,7 +23,7 @@
 
 无符号数属于基本的数据类型：u1、u2、u4、u8来分辨代表1个字节、2个字节、4个字节、8个字节的无符号数。
 表是由多个无符号数或其">
-<meta property="og:updated_time" content="2015-12-06T12:39:53.367Z">
+<meta property="og:updated_time" content="2016-04-04T03:33:53.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understand JVM：类文件结构">
 <meta name="twitter:description" content="Class文件是一组以8位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑的排列在Class文件之中，中间没有添加任何分隔符。根据Java虚拟机的规定，Class文件格式采用一种类似于C语言结构体的伪结构来存储，这种伪结构中只有两种数据类型：五符号数和表。
@@ -115,6 +115,7 @@
 <li>表是由多个无符号数或其他表作为数据项构成的符合数据类型。<h1 id="class文件的内部结构">class文件的内部结构</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ClassFile &#123; </span><br><span class="line">u4 magic; </span><br><span class="line">u2 minor_version; </span><br><span class="line">u2 major_version; </span><br><span class="line">u2 constant_pool_count; </span><br><span class="line">cp_info constant_pool[constant_pool_count-1]; </span><br><span class="line">u2 access_flags; </span><br><span class="line">u2 this_class; </span><br><span class="line">u2 super_class; </span><br><span class="line">u2 interfaces_count; </span><br><span class="line">u2 interfaces[interfaces_count]; </span><br><span class="line">u2 fields_count; </span><br><span class="line">field_info fields[fields_count]; </span><br><span class="line">u2 methods_count; </span><br><span class="line">method_info methods[methods_count]; </span><br><span class="line">u2 attributes_count; </span><br><span class="line">attribute_info attributes[attributes_count]; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="u4_magic">u4 magic</h2><p>u4 magic是一个固定的值，每个Class文件的头4个字节成为魔数，它的唯一作用是判断这个文件是否为为一个能被虚拟机接受的Class文件，目前值是0xCAFEBABE。</p>
 <h2 id="u2_minor_version;_u2_major_version">u2 minor_version; u2 major_version</h2><p>u2 minor_version; u2 major_version代表的是次版本号和主版本号。</p>
 <h2 id="u2_constant_pool_count;_cp_info_constant_pool[constant_pool_count-1]">u2 constant_pool_count; cp_info constant_pool[constant_pool_count-1]</h2><p>u2 constant_pool_count; cp_info constant_pool[constant_pool_count-1]; 这里面代表常量池个数以及常量池信息<br>由于常量池中的数量是不固定的，所以在常量池的入口需要放置一项u2类型的数据，代表常量池容量计数器。<br>常量池中主要存放两大类常量：字面量和符号引用。<br>字面量比较接近Java语言层面的常量的概念，如文本字符串、被声明为final的常量值；<br>符号引用则属于编译原理方面的概念，包括了下面三个类常量：</p>

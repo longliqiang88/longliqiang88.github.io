@@ -20,7 +20,7 @@ CloudFoundry云平台将">
 <meta property="og:description" content="前言当前大多数PaaS云平台只支持特定的开发框架，开发者只能部署平台支持的框架类型的应用程序。CloudFoundry云平台支持各种框架的灵活选择，这些框架包括Spring for Java，.NET，Ruby on Rails，Node.js，Grails，Scala on Lift以及更多合作伙伴提供的框架（如Python，PHP等)，大大提高了平台的灵活性。
 CloudFoundry云平台将">
 <meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/CloudFoundry01.png">
-<meta property="og:updated_time" content="2016-04-04T03:30:32.113Z">
+<meta property="og:updated_time" content="2016-04-04T03:33:47.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源PaaS云平台CloudFoundry">
 <meta name="twitter:description" content="前言当前大多数PaaS云平台只支持特定的开发框架，开发者只能部署平台支持的框架类型的应用程序。CloudFoundry云平台支持各种框架的灵活选择，这些框架包括Spring for Java，.NET，Ruby on Rails，Node.js，Grails，Scala on Lift以及更多合作伙伴提供的框架（如Python，PHP等)，大大提高了平台的灵活性。
@@ -106,7 +106,7 @@ CloudFoundry云平台将">
 		
 		<h1 id="前言">前言</h1><p>当前大多数PaaS云平台只支持特定的开发框架，开发者只能部署平台支持的框架类型的应用程序。CloudFoundry云平台支持各种框架的灵活选择，这些框架包括Spring for Java，.NET，Ruby on Rails，Node.js，Grails，Scala on Lift以及更多合作伙伴提供的框架（如Python，PHP等)，大大提高了平台的灵活性。</p>
 <p>CloudFoundry云平台将应用和应用依赖的服务相分开，通过在部署时将应用和应用依赖的服务相绑定的机制使应用和应用服务相对对立，增加了在PaaS平台上部署应用的灵活性。这些应用服务包括PostgreSQL，MySQL，SQL Server，MongoDB，Redis以及更多来自第三方和开源社区的应用服务。</p>
-<h1 id="CloudFoundry云平台架构">CloudFoundry云平台架构</h1><p>CloudFoundry是由相对独立的多个模块构成的分布式系统，每个模块单独存在和运行，各模块之间通过消息机制进行通信。CloudFoundry各模块本身是基于Ruby语言开发的，每个部分可以认为拿来即可运行，不存在编译等过程。CloudFoundry简化了应用程序的开发、交付和运行，使开发者在云环境中部署、运行和扩展应用程序的能力得以大幅提升，并支持种类最为广泛的公共云和私有云、基于行业标准的高效开发框架和应用基础架构服务。<br>VMware的CloudFoundry主要包含有几大组件：Router、DEA、Health_Manager、Cloud_Controller、Service Broker、和NATS等，对于这几大组件的认识加深，会让我们更加清楚CloudFoundry架构的特点。其架构图如下图所示：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/CloudFoundry01.png" alt="CloudFoundry架构"></p>
+<h1 id="CloudFoundry云平台架构">CloudFoundry云平台架构</h1><p>CloudFoundry是由相对独立的多个模块构成的分布式系统，每个模块单独存在和运行，各模块之间通过消息机制进行通信。CloudFoundry各模块本身是基于Ruby语言开发的，每个部分可以认为拿来即可运行，不存在编译等过程。CloudFoundry简化了应用程序的开发、交付和运行，使开发者在云环境中部署、运行和扩展应用程序的能力得以大幅提升，并支持种类最为广泛的公共云和私有云、基于行业标准的高效开发框架和应用基础架构服务。<br><a id="more"></a><br>VMware的CloudFoundry主要包含有几大组件：Router、DEA、Health_Manager、Cloud_Controller、Service Broker、和NATS等，对于这几大组件的认识加深，会让我们更加清楚CloudFoundry架构的特点。其架构图如下图所示：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/CloudFoundry01.png" alt="CloudFoundry架构"></p>
 <ol>
 <li>Router：Router组件在CloudFoundry中是对所有进来的Request进行路由。进入Router的request主要有两类：一类是来对于平台内部的管理请求，这一类请求会被Router组件路由到CloudController组件中进行处理；另一类是对于 CloudFoundry中部署的应用的请求，这一类请求会被Router组件路由到DEA组件中进行处理。所有进入CloudFoundry系统的请求都会经过Router组件，系统可以部署多个Routers共同处理进来的 requests， CloudFoundry保证了所有的 request是无状态的，所以一般在部署集群时会在Router的上层部署一个HAProxy进行负载均衡，将很多的requests均衡的分配到每一个Router上[2]。</li>
 <li>Cloud Controller：简称CC，Cloud Controller是CloudFoundry的大脑。用户把app push给Cloud Controller，Cloud Controller将其存放在Blob Store，在数据库中为该app创建一条记录，存放其meta信息，并且指定一个DEA节点来完成打包动作，产出一个droplet（是一个包含Runtime的包，在任何dea节点都可以通过warden run起来），完成打包之后，droplet回传给Cloud Controller，仍然存放在Blob Store，然后Cloud Controller根据用户要求的实例数目，调度相应的DEA节点部署运行该droplet。另外，Cloud Controller还维护了用户组织关系org、space，以及服务、服务实例等等。 </li>
