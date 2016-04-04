@@ -4,23 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Oracle kill session | longliqiang</title>
+    <title>开源PaaS云平台CloudFoundry | longliqiang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="longliqiang">
     
 
     
-    <meta name="description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
+    <meta name="description" content="前言当前大多数PaaS云平台只支持特定的开发框架，开发者只能部署平台支持的框架类型的应用程序。CloudFoundry云平台支持各种框架的灵活选择，这些框架包括Spring for Java，.NET，Ruby on Rails，Node.js，Grails，Scala on Lift以及更多合作伙伴提供的框架（如Python，PHP等)，大大提高了平台的灵活性。
+CloudFoundry云平台将">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Oracle kill session">
-<meta property="og:url" content="http://yoursite.com/2015/07/26/Oracle kill session/index.html">
+<meta property="og:title" content="开源PaaS云平台CloudFoundry">
+<meta property="og:url" content="http://yoursite.com/2016/03/03/开源PaaS云平台CloudFoundry/index.html">
 <meta property="og:site_name" content="longliqiang">
-<meta property="og:description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
-<meta property="og:updated_time" content="2015-07-26T13:32:09.577Z">
+<meta property="og:description" content="前言当前大多数PaaS云平台只支持特定的开发框架，开发者只能部署平台支持的框架类型的应用程序。CloudFoundry云平台支持各种框架的灵活选择，这些框架包括Spring for Java，.NET，Ruby on Rails，Node.js，Grails，Scala on Lift以及更多合作伙伴提供的框架（如Python，PHP等)，大大提高了平台的灵活性。
+CloudFoundry云平台将">
+<meta property="og:image" content="http://7xk9vl.com1.z0.glb.clouddn.com/CloudFoundry01.png">
+<meta property="og:updated_time" content="2016-04-04T03:30:32.113Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Oracle kill session">
-<meta name="twitter:description" content="有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。1234SEL">
+<meta name="twitter:title" content="开源PaaS云平台CloudFoundry">
+<meta name="twitter:description" content="前言当前大多数PaaS云平台只支持特定的开发框架，开发者只能部署平台支持的框架类型的应用程序。CloudFoundry云平台支持各种框架的灵活选择，这些框架包括Spring for Java，.NET，Ruby on Rails，Node.js，Grails，Scala on Lift以及更多合作伙伴提供的框架（如Python，PHP等)，大大提高了平台的灵活性。
+CloudFoundry云平台将">
 
     
     <link rel="alternative" href="/atom.xml" title="longliqiang" type="application/atom+xml">
@@ -80,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/07/26/Oracle kill session/" title="Oracle kill session" itemprop="url">Oracle kill session</a>
+      <a href="/2016/03/03/开源PaaS云平台CloudFoundry/" title="开源PaaS云平台CloudFoundry" itemprop="url">开源PaaS云平台CloudFoundry</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="longliqiang" target="_blank" itemprop="author">longliqiang</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-26T13:28:07.000Z" itemprop="datePublished"> 发表于 2015-07-26</time>
+    <time datetime="2016-03-03T13:07:55.000Z" itemprop="datePublished"> 发表于 2016-03-03</time>
     
   </p>
 </header>
@@ -96,15 +100,19 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CloudFoundry云平台架构"><span class="toc-number">2.</span> <span class="toc-text">CloudFoundry云平台架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CloudFoundry自动化部署工具BOSH"><span class="toc-number">3.</span> <span class="toc-text">CloudFoundry自动化部署工具BOSH</span></a></li></ol>
 		
 		</div>
 		
-		<p>有时，Oracle中造成一些表被死锁或者会话异常退出，如执行了更新记录操作后，既没有commit也没有rollback,网络就断开了，也会造表或记录被锁住，待到超时后才会被解开，那样都会造成应用操作被阻塞。<br>可以以Oralce管理员权限用户登录Oracle数据，查询到被锁的对象，然后杀除指定的会话。<br>用下面的语句查询被锁的对象，可以带上更多约束条件，如schemaname等更精确的匹配。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.object_id, a.session_id, b.object_name, c.*  </span><br><span class="line">  FROM v$locked_object a, dba_objects b, v$session c  </span><br><span class="line">WHERE a.object_id = b.object_id  </span><br><span class="line">   AND a.SESSION_ID = c.sid(+)</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>杀Seesion的SQL语句语法如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter system kill session 'sid, serial#'</span><br></pre></td></tr></table></figure></p>
-<p>如上面查出来的一条记录的sid是53, serial#为663,就执行以下的语句<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter system kill session '53,663'</span><br></pre></td></tr></table></figure></p>
-<p>如果要一次性杀死多个会话，一个一个填写sid和serial#十分的繁琐，应该在查询被锁对象的同时拼凑出多条的杀会话语句，以分号分隔，一起复制下来，然后就可以批量的执行了。<br>拼凑kill语句的方式如下，下面加了一个过滤条件和一个排序，杀除真正关心的表，并且着重注意超时时间过长的会话。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT'alter system kill session '''|| c.sid ||''||','|| c.serial# ||''';',a.object_id, a.session_id, b.object_name, c.*</span><br><span class="line">FROMv$locked_object a, dba_objects b, v$session c WHEREa.object_id = b.object_id ANDa.SESSION_ID = c.sid(+) ANDschemaname ='Unmi' ORDERBYlogon_time</span><br></pre></td></tr></table></figure></p>
+		<h1 id="前言">前言</h1><p>当前大多数PaaS云平台只支持特定的开发框架，开发者只能部署平台支持的框架类型的应用程序。CloudFoundry云平台支持各种框架的灵活选择，这些框架包括Spring for Java，.NET，Ruby on Rails，Node.js，Grails，Scala on Lift以及更多合作伙伴提供的框架（如Python，PHP等)，大大提高了平台的灵活性。</p>
+<p>CloudFoundry云平台将应用和应用依赖的服务相分开，通过在部署时将应用和应用依赖的服务相绑定的机制使应用和应用服务相对对立，增加了在PaaS平台上部署应用的灵活性。这些应用服务包括PostgreSQL，MySQL，SQL Server，MongoDB，Redis以及更多来自第三方和开源社区的应用服务。</p>
+<h1 id="CloudFoundry云平台架构">CloudFoundry云平台架构</h1><p>CloudFoundry是由相对独立的多个模块构成的分布式系统，每个模块单独存在和运行，各模块之间通过消息机制进行通信。CloudFoundry各模块本身是基于Ruby语言开发的，每个部分可以认为拿来即可运行，不存在编译等过程。CloudFoundry简化了应用程序的开发、交付和运行，使开发者在云环境中部署、运行和扩展应用程序的能力得以大幅提升，并支持种类最为广泛的公共云和私有云、基于行业标准的高效开发框架和应用基础架构服务。<br>VMware的CloudFoundry主要包含有几大组件：Router、DEA、Health_Manager、Cloud_Controller、Service Broker、和NATS等，对于这几大组件的认识加深，会让我们更加清楚CloudFoundry架构的特点。其架构图如下图所示：<br><img src="http://7xk9vl.com1.z0.glb.clouddn.com/CloudFoundry01.png" alt="CloudFoundry架构"></p>
+<ol>
+<li>Router：Router组件在CloudFoundry中是对所有进来的Request进行路由。进入Router的request主要有两类：一类是来对于平台内部的管理请求，这一类请求会被Router组件路由到CloudController组件中进行处理；另一类是对于 CloudFoundry中部署的应用的请求，这一类请求会被Router组件路由到DEA组件中进行处理。所有进入CloudFoundry系统的请求都会经过Router组件，系统可以部署多个Routers共同处理进来的 requests， CloudFoundry保证了所有的 request是无状态的，所以一般在部署集群时会在Router的上层部署一个HAProxy进行负载均衡，将很多的requests均衡的分配到每一个Router上[2]。</li>
+<li>Cloud Controller：简称CC，Cloud Controller是CloudFoundry的大脑。用户把app push给Cloud Controller，Cloud Controller将其存放在Blob Store，在数据库中为该app创建一条记录，存放其meta信息，并且指定一个DEA节点来完成打包动作，产出一个droplet（是一个包含Runtime的包，在任何dea节点都可以通过warden run起来），完成打包之后，droplet回传给Cloud Controller，仍然存放在Blob Store，然后Cloud Controller根据用户要求的实例数目，调度相应的DEA节点部署运行该droplet。另外，Cloud Controller还维护了用户组织关系org、space，以及服务、服务实例等等。 </li>
+<li>DEA：即Droplet Execution Agent，主要用来管理APP实例，并将状态信息广播出去。当我们创建一个APP时，创建的命令最终会下发到DEA中，DEA调用warden接口去创建容器，当用户要删除某一个APP时，命令也会被下发到DEA中，DEA调用warden结构去删除容器。<br>4、    Health Manager：现在更新为HM9000，其重要是用来监控CloudFoundry平台运行状态的基础组件。Health Manager主要完成以下工作，监控APP实际运行状态，获取APP的期望状态，对比实际状态和期望状态，如果发现状态不对会命令CC组件做出调整。</li>
+<li>NATS： NATS作为CF的神经网络，负责者组件之间的通讯和交互工作：NATS基于Topic发布者以Topic发送消息订阅者订阅特定Topic并收到这种策略下，发布者与订阅者不需要相互知道，只要按照订阅的主题进行发布，订阅者就能收到消息。<br>通过对于CloudFoundry架构的研究我们发现，CloudFoundry是完全模块化的设计，每个模块单独存在、运转，它的架构有很多可以借鉴的地方。<h1 id="CloudFoundry自动化部署工具BOSH">CloudFoundry自动化部署工具BOSH</h1>CloudFoundry是一个由多组件协同工作的平台，作为一款PaaS平台的产品，CloudFoundry的部署依托于IaaS层，一般大家刚上手学习CloudFoundry时会选择手动部署一台单节点的CloudFoundry平台。我们知道也可以使用dev_setup部署cloudfoundry，但过程中存在很多的重复工作，分机运行脚本不仅效率低下，且cloudfoundry版本不能控制。这对于大规模的生产环境来讲，部署运维的工作量非常庞大，在这种情况下极大的限制了cloudfoundry推向产品化的发展。为了解决这个问题，Vmware自己研发了BOSH作为自动化部署cloudfoundry，它能够给cloudfoundry的部署带来极大的便利。<br>官方文档给BOSH的定义是：BOSH是一个针对大规模分布式系统的部署和生命周期管理的开源工具，其基础是“a tool of release engineering”。由其定义可以看出，虽然BOSH的诞生出自cloudfoundry的部署难题，但BOSH能做的不只是部署cloudfoundry这一个产品。别的分布式系统只要提供给bosh一个release，BOSH一样可以做到系统的部署和生命周期的管理。所以，这里不要陷入一个误区。<br>对Cloudfoundry相对熟悉的读者可以发现，BOSH在整体架构上跟CF有着不少相似之处。BOSH仍使用了NATS做消息部分的处理，Director组件是BOSH的核心，其作用是负责虚拟机的创建、部署和其他软件和服务生命期的管理。如果和CloudFoundry类比的话，Director扮演的角色有点类似于CloudFoundry的Cloud_Controller。Agent运行在已经创建出的VM上，每个BOSH创建的虚拟机都一个Agent。它是BOSH在VM上的代理，通过从Director获取配置信息，使虚拟机分配不同的角色。比如，在部署CloudFoundry集群的时候，我需要添加一个DEA节点。这时BOSH先会创建并启动一个VM，其中也运行着BOSH的Agent。然后Director就会发送一个命令到VM的Agent，明确告知这个VM需要安装有关DEA的组件和软件包，以及详细的配置信息。Agent就会根据这些信息创建一个配置好的DEA节点，这样VM就分配好了角色。HealthMonitor从Agent接收状态和生命周期信息，并且可以发送警告报警。这里的Health Monitor是一个简单的事件机制，当一个组件更新时，不会产生报警。Blobstore是用来存储用户上传的Release。用户通过CLI的上传Release指令，通过Director将Release存储到Blobstore中。当你对上传的Release进行部署时，BOSH将在Blobstore中排列这些编译包和存储结果。当BOSH部署一个job到VM上时，Agent将从Blobstore中拿出指定的BOSH Jobs和相关的资源包。BOSH也使用Blobstore作为大型有效载荷的中间存储，比如日志文件，Agent处超过消息总线最大尺寸的输出。</li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -112,13 +120,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+  <a class="article-category-link" href="/categories/CloudFoundry/">CloudFoundry</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/常用技巧/">常用技巧</a>
+  <span></span> <a href="/tags/CloudFoundry/">CloudFoundry</a>
   </div>
 
 </div>
@@ -127,7 +135,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/07/26/Oracle kill session/" data-title="Oracle kill session | longliqiang" data-tsina="2643661235" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/03/03/开源PaaS云平台CloudFoundry/" data-title="开源PaaS云平台CloudFoundry | longliqiang" data-tsina="2643661235" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -141,18 +149,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/07/26/Oracle 11g导入DMP文件步骤/" title="Oracle 11g导入DMP文件步骤">
+ <a href="/2016/04/03/CloudFoundry-Warden VS Docker/" title="CloudFoundry-Warden VS Docker">
   <strong>上一篇：</strong><br/>
   <span>
-  Oracle 11g导入DMP文件步骤</span>
+  CloudFoundry-Warden VS Docker</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/07/26/HBase学习4：利用Java接口操作HBase/"  title="HBase学习4：利用Java接口操作HBase">
+<a href="/2015/12/05/Understand JVM：类文件结构/"  title="Understand JVM：类文件结构">
  <strong>下一篇：</strong><br/> 
- <span>HBase学习4：利用Java接口操作HBase
+ <span>Understand JVM：类文件结构
 </span>
 </a>
 </div>
@@ -167,7 +175,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CloudFoundry云平台架构"><span class="toc-number">2.</span> <span class="toc-text">CloudFoundry云平台架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CloudFoundry自动化部署工具BOSH"><span class="toc-number">3.</span> <span class="toc-text">CloudFoundry自动化部署工具BOSH</span></a></li></ol>
  
   </div>
 
